@@ -3,10 +3,6 @@ class ForecastsController < ApplicationController
     # Show search form
   end
 
-  def show
-    @forecast = Forecast.find(params[:id])
-    @from_cache = params[:from_cache] == 'true'
-  end
 
   def create
     address = params[:address].to_s.strip
@@ -15,12 +11,7 @@ class ForecastsController < ApplicationController
       return redirect_to forecasts_path
     end
 
-    # Add US bias for US postal codes
-    if address.match?(/^\d{5}(-\d{4})?$/)
-      geo_result = Geocoder.search(address, params: { countrycodes: 'us' }).first
-    else
-      geo_result = Geocoder.search(address).first
-    end
+    geo_result = Geocoder.search(address).first
     Rails.logger.info("Geocoder result for '#{address}': #{geo_result.inspect}")
     coords = geo_result&.coordinates
 
@@ -92,8 +83,8 @@ class ForecastsController < ApplicationController
     end
 
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to forecast_path(@forecast, from_cache: @from_cache) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('forecast-result', partial: 'forecasts/show_card', locals: { forecast: @forecast, location_name: @location_name, from_cache: @from_cache }) }
+      format.html { render :index }
     end
   end
 

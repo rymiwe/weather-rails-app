@@ -4,6 +4,6 @@
       <%= flash[:alert] %>
     </div>
   <% elsif @forecast.present? %>
-    <%= render partial: "forecasts/show_card", locals: { forecast: @forecast, from_cache: @from_cache } %>
+    <%= render partial: "forecasts/show_card", locals: { forecast: @forecast, location_name: @location_name, from_cache: @from_cache } %>
   <% end %>
 <% end %>

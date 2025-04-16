@@ -15,7 +15,11 @@
         <%= f.submit "Get Forecast", class: "w-full py-2 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition" %>
       </div>
     <% end %>
-    <div id="forecast-result"></div>
+    <turbo-frame id="forecast-result">
+      <% if @forecast %>
+        <%= render partial: 'forecasts/show_card', locals: { forecast: @forecast, location_name: @location_name, from_cache: @from_cache } %>
+      <% end %>
+    </turbo-frame>
     <div class="mt-6 text-center text-blue-700 text-xs opacity-60">
       <span>Powered by Pirate Weather & Geocoder</span>
     </div>
