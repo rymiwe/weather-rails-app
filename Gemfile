@@ -8,7 +8,7 @@ gem "propshaft"
 gem "pg", "~> 1.1"
 
 # Geocoding
-gem "geocoder"
+gem "geocoder", ">= 1.6"
 
 # HTTP client for WeatherAPI
 gem "http"
@@ -64,6 +64,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webmock"
+  gem "vcr"
 end
 
 # RSpec for testing
