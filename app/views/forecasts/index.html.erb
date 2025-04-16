@@ -8,8 +8,8 @@
     <% end %>
     <%= form_with url: forecasts_path, method: :post do |f| %>
       <div class="mb-4">
-        <%= f.label :address, "Enter an address", class: "block text-blue-900 font-semibold mb-2" %>
-        <%= f.text_field :address, class: "w-full px-4 py-2 rounded border border-blue-200 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg", autofocus: true, placeholder: "e.g. 1600 Amphitheatre Pkwy, Mountain View, CA" %>
+        <%= f.label :address, "Enter a location", class: "block text-blue-900 font-semibold mb-2" %>
+        <%= f.text_field :address, class: "w-full px-4 py-2 rounded border border-blue-200 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg", autofocus: true, placeholder: "address, city, or postal code" %>
       </div>
       <div>
         <%= f.submit "Get Forecast", class: "w-full py-2 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition" %>
