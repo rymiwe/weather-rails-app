@@ -1,9 +1,14 @@
 <%= turbo_stream.replace "forecast-result" do %>
-  <% if flash[:alert] %>
-    <div class="mb-4 p-3 rounded bg-red-100 text-red-700 text-center">
-      <%= flash[:alert] %>
-    </div>
-  <% elsif @forecast.present? %>
-    <%= render partial: "forecasts/show_card", locals: { forecast: @forecast, location_name: @location_name, from_cache: @from_cache } %>
-  <% end %>
+  <turbo-frame id="forecast-result">
+    <% if flash[:alert] %>
+      <div class="mb-4 p-3 rounded bg-red-100 text-red-700 text-center">
+        <%= flash[:alert] %>
+      </div>
+    <% elsif @forecast.present? %>
+
+      <%= render partial: "forecasts/show_card", locals: { forecast: @forecast, location_name: @location_name, from_cache: @from_cache } %>
+    <% else %>
+
+    <% end %>
+  </turbo-frame>
 <% end %>
