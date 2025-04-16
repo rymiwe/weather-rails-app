@@ -15,7 +15,8 @@ class ForecastsController < ApplicationController
       return
     end
 
-    geo_result = Geocoder.search(address).first
+    geo_results = Geocoder.search(address)
+    geo_result = geo_results.find { |r| r.country_code&.upcase == "US" } || geo_results.first
         coords = geo_result&.coordinates
     
     # Extract city, state, country for display
