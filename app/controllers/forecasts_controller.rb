@@ -15,9 +15,23 @@ class ForecastsController < ApplicationController
       return redirect_to forecasts_path
     end
 
-    geo_result = Geocoder.search(address).first
+    # Add US bias for US postal codes
+    if address.match?(/^\d{5}(-\d{4})?$/)
+      geo_result = Geocoder.search(address, params: { countrycodes: 'us' }).first
+    else
+      geo_result = Geocoder.search(address).first
+    end
     Rails.logger.info("Geocoder result for '#{address}': #{geo_result.inspect}")
     coords = geo_result&.coordinates
+
+    # Extract city, state, country for display
+    if geo_result
+      city = geo_result.city || geo_result.data["city"] || geo_result.data["town"] || geo_result.data["village"]
+      state = geo_result.state || geo_result.data["state"]
+      country = geo_result.country || geo_result.data["country"]
+      parts = [city, state, country].compact
+      @location_name = parts.join(", ") if parts.any?
+    end
     unless coords
       flash[:alert] = 'Could not geocode address.'
       respond_to do |format|

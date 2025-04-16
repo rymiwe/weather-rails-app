@@ -1,16 +1,37 @@
 <div class="mt-6">
+<% if defined?(@location_name) && @location_name.present? %>
+    <div class="text-blue-800 text-sm mb-2">
+      <%= @location_name %>
+    </div>
+  <% end %>
   <div class="font-semibold text-blue-900 mb-2">3-Day Forecast</div>
   <div class="grid grid-cols-3 gap-2">
     <% daily = forecast.data["daily"] && forecast.data["daily"]["data"] ? forecast.data["daily"]["data"] : [] %>
-    <% daily.first(3).each do |day| %>
+    <% daily.first(3).each_with_index do |day, i| %>
       <div class="bg-blue-200 rounded p-2 flex flex-col items-center">
-        <div class="text-xs text-blue-700 mb-1"><%= Time.at(day["time"]).in_time_zone(forecast.data["timezone"] || 'UTC').strftime('%a') rescue '' %></div>
+        <div class="text-xs text-blue-700 mb-1 font-bold">
+          <%= i == 0 ? 'Today' : (Time.at(day["time"]).in_time_zone(forecast.data["timezone"] || 'UTC').strftime('%a') rescue '') %>
+        </div>
         <% if day["icon"] %>
-          <img src="https://cdn.jsdelivr.net/gh/rickellis/SVG-Weather-Icons@master/DarkSky/<%= day["icon"] %>.svg" alt="<%= day["icon"] %> icon" class="w-8 h-8 mb-1" onerror="this.onerror=null;this.style.display='none';">
+          <img src="https://cdn.jsdelivr.net/gh/rickellis/SVG-Weather-Icons@master/DarkSky/<%= day["icon"] %>.svg" alt="<%= day["icon"] %> icon" class="w-14 h-14 mb-2" onerror="this.onerror=null;this.style.display='none';">
         <% else %>
           <span class="text-xs text-gray-500">No icon</span>
         <% end %>
-        <div class="text-sm text-blue-800 font-bold"><%= day["temperatureHigh"].round if day["temperatureHigh"] %>°F</div>
+        <% if i == 0 && forecast.data["currently"] && forecast.data["currently"]["temperature"] %>
+          <div class="text-base font-bold text-gray-600 mb-1">
+            <%= forecast.data["currently"]["temperature"].round %>°F now
+          </div>
+        <% end %>
+        <div class="text-sm text-blue-800">
+          <% if day["temperatureHigh"] && day["temperatureLow"] %>
+            <span class="font-bold"><%= day["temperatureLow"].round %>°F</span> /
+            <span class="font-bold text-orange-500"><%= day["temperatureHigh"].round %>°F</span>
+          <% elsif day["temperatureHigh"] %>
+            <span class="font-bold text-orange-500"><%= day["temperatureHigh"].round %>°F</span>
+          <% elsif day["temperatureLow"] %>
+            <span class="font-bold"><%= day["temperatureLow"].round %>°F</span>
+          <% end %>
+        </div>
         <div class="text-xs text-blue-600"><%= day["summary"] %></div>
       </div>
     <% end %>
