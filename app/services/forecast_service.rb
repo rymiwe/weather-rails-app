@@ -3,8 +3,9 @@
 class ForecastService
   # Returns [forecast, from_cache, error_message]
   # Accepts a geocoder: argument for dependency injection.
-  # This enables robust, isolated tests by allowing explicit Geocoder mocking in specs.
-  def self.fetch(query, refresh: false, geocoder: Geocoder)
+  # Accepts a weather_client: argument for testability.
+  # This enables robust, isolated tests by allowing explicit Geocoder and weather client mocking in specs.
+  def self.fetch(query, refresh: false, geocoder: Geocoder, weather_client: PirateWeatherClient)
     return [ nil, false, "Please enter an query." ] if query.blank?
 
     geo_data = GeocodingService.lookup(query, geocoder: geocoder)
@@ -22,7 +23,7 @@ class ForecastService
     end
 
     begin
-      client = PirateWeatherClient.new
+      client = weather_client.is_a?(Class) ? weather_client.new : weather_client
       forecast = client.fetch_forecast(lat, lon, units: units)
       if forecast.nil?
         return [ nil, false, "Could not retrieve forecast data.", location_name, units ]

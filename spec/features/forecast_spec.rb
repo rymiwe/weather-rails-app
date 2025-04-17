@@ -9,38 +9,40 @@ require 'ostruct'
 # See the comments in the spec for more details.
 
 RSpec.describe 'Weather Forecast', type: :feature, js: true do
+  let(:mock_geocoder) do
+    double('Geocoder').tap do |geo|
+      allow(geo).to receive(:search).with('Portland, OR').and_return([
+        OpenStruct.new(
+          coordinates: [ 45.5231, -122.6765 ],
+          country_code: 'US',
+          city: 'Portland',
+          state: 'Oregon',
+          country: 'United States',
+          data: {}
+        )
+      ])
+      allow(geo).to receive(:search).with('New York, NY').and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'New York',
+          country: 'United States',
+          data: {}
+        )
+      ])
+    end
+  end
+
+  before do
+    ForecastsController.test_geocoder = mock_geocoder
+  end
+
+  after do
+    ForecastsController.test_geocoder = nil
+  end
+
   it 'shows a forecast for Portland, OR and updates for New York, NY' do
-    # Set up a mock Geocoder
-    mock_geocoder = double('Geocoder')
-    allow(mock_geocoder).to receive(:search).with('Portland, OR').and_return([
-      OpenStruct.new(
-        coordinates: [ 45.5231, -122.6765 ],
-        country_code: 'US',
-        city: 'Portland',
-        state: 'Oregon',
-        country: 'United States',
-        data: {}
-      )
-    ])
-    allow(mock_geocoder).to receive(:search).with('New York, NY').and_return([
-      OpenStruct.new(
-        coordinates: [ 40.7128, -74.0060 ],
-        country_code: 'US',
-        city: 'New York',
-        state: 'New York',
-        country: 'United States',
-        data: {}
-      )
-    ])
-
-    before do
-      ForecastsController.test_geocoder = mock_geocoder
-    end
-
-    after do
-      ForecastsController.test_geocoder = nil
-    end
-
     # Stub PirateWeatherClient to always return a fake forecast
     allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return({
       "currently" => { "temperature" => 60 },
