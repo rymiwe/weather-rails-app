@@ -28,6 +28,9 @@ module WeatherRailsApp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Autoload app/constants for custom constants like WeatherIconMap
+    config.autoload_paths << Rails.root.join('app/constants')
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
