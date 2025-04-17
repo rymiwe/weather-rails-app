@@ -12,7 +12,7 @@ RSpec.describe "Forecasts", type: :request do
     before do
       allow(Geocoder).to receive(:search).and_return([
         OpenStruct.new(
-          coordinates: [40.7128, -74.0060],
+          coordinates: [ 40.7128, -74.0060 ],
           country_code: 'US',
           city: 'New York',
           state: 'NY',

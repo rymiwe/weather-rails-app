@@ -17,7 +17,7 @@ RSpec.configure do |config|
     mock_geocoder = double('Geocoder')
     allow(mock_geocoder).to receive(:search).with('Portland, OR').and_return([
       OpenStruct.new(
-        coordinates: [45.5231, -122.6765],
+        coordinates: [ 45.5231, -122.6765 ],
         country_code: 'US',
         city: 'Portland',
         state: 'Oregon',
@@ -27,7 +27,7 @@ RSpec.configure do |config|
     ])
     allow(mock_geocoder).to receive(:search).with('New York, NY').and_return([
       OpenStruct.new(
-        coordinates: [40.7128, -74.0060],
+        coordinates: [ 40.7128, -74.0060 ],
         country_code: 'US',
         city: 'New York',
         state: 'New York',
