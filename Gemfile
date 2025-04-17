@@ -1,47 +1,60 @@
 source "https://rubygems.org"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+# --- Core Framework & Database ---
 gem "rails", "~> 8.0.2"
-# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft"
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.1"           # PostgreSQL for Active Record
 
-# Geocoding
+gem "propshaft"              # Modern asset pipeline
+
+gem "solid_cache"            # Rails.cache adapter
+ gem "solid_queue"            # Active Job adapter
+
+gem "bootsnap", require: false # Caching for faster boot
+
+gem "puma", ">= 5.0"          # Web server
+
+gem "kamal", require: false    # Docker deployment
+
+gem "thruster", require: false # HTTP asset caching/compression
+
+gem "tzinfo-data", platforms: %i[ windows jruby ] # Windows timezones
+
+# --- Frontend & Styling ---
+gem "tailwindcss-rails"        # Tailwind CSS
+
+gem "importmap-rails"         # ESM import maps
+
+gem "turbo-rails"             # Hotwire Turbo
+
+gem "stimulus-rails"          # Hotwire Stimulus
+
+# --- Geocoding ---
 gem "geocoder", ">= 1.6"
 
-# Tailwind CSS for styling
-gem "tailwindcss-rails"
+# --- HTTP/External ---
+gem "faraday", "~> 2.0"         # HTTP requests (API, CDN validation)
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+# --- Development & Test ---
+group :development, :test do
+  gem "rspec-rails"                # RSpec for testing
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "brakeman", require: false   # Security analysis
+  gem "rubocop-rails-omakase", require: false # Ruby style
+end
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+group :development do
+  gem "web-console"                # Rails console in browser
+end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+group :test do
+  gem "capybara"                   # System testing
+  gem "selenium-webdriver"         # Browser driver for Capybara
+  gem "webmock"                    # HTTP stubbing
+  gem "vcr"                        # HTTP recording
+end
 
-# Use the database-backed adapters for Rails.cache and Active Job
-gem "solid_cache"
-gem "solid_queue"
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
-
-# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
-gem "faraday", "~> 2.0"
-gem "thruster", require: false
-
+# --- Optional ---
+# gem "bcrypt", "~> 3.1.7"         # For has_secure_password
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
