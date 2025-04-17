@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'ostruct'
 require_relative '../../app/services/forecast_service'
 
-RSpec.describe ForecastService do
+RSpec.describe ForecastService, type: :service do
   let(:query) { 'New York, NY' }
   let(:coordinates) { [ 40.7128, -74.0060 ] }
   let(:lat) { coordinates[0] }

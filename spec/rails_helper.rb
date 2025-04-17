@@ -75,11 +75,16 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.around(:each) do |example|
+    puts "DEBUG: Example metadata: #{example.metadata.inspect}"
+    puts "DEBUG: Example full description: #{example.full_description}"
+    puts "DEBUG: Example type: #{example.metadata[:type]}"
     type = example.metadata[:type]
     # Only use VCR for request specs or if :vcr metadata is set
     if type == :request || example.metadata[:vcr]
+      puts "DEBUG: Using VCR for example: #{example.full_description}"
       VCR.use_cassette(example.full_description) { example.run }
     else
+      puts "DEBUG: Not using VCR for example: #{example.full_description}"
       example.run
     end
   end
