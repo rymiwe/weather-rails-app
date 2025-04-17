@@ -52,7 +52,7 @@ RSpec.describe "Forecasts", type: :request do
     it "returns a forecast for a non-US location with SI units" do
       allow(Geocoder).to receive(:search).and_return([
         OpenStruct.new(
-          coordinates: [51.5074, -0.1278],
+          coordinates: [ 51.5074, -0.1278 ],
           country_code: 'GB',
           city: 'London',
           state: 'England',

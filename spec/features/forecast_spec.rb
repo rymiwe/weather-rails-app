@@ -9,13 +9,12 @@ require 'ostruct'
 # See the comments in the spec for more details.
 
 RSpec.describe 'Weather Forecast', type: :feature, js: true, vcr: { record: :new_episodes } do
-
   it 'shows a forecast for Portland, OR and updates for New York, NY' do
     # Set up a mock Geocoder
     mock_geocoder = double('Geocoder')
     allow(mock_geocoder).to receive(:search).with('Portland, OR').and_return([
       OpenStruct.new(
-        coordinates: [45.5231, -122.6765],
+        coordinates: [ 45.5231, -122.6765 ],
         country_code: 'US',
         city: 'Portland',
         state: 'Oregon',
@@ -25,7 +24,7 @@ RSpec.describe 'Weather Forecast', type: :feature, js: true, vcr: { record: :new
     ])
     allow(mock_geocoder).to receive(:search).with('New York, NY').and_return([
       OpenStruct.new(
-        coordinates: [40.7128, -74.0060],
+        coordinates: [ 40.7128, -74.0060 ],
         country_code: 'US',
         city: 'New York',
         state: 'New York',

@@ -37,11 +37,11 @@ group :development, :test do
 end  # (Only need one group :development, :test for these gems)
 
 group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'simplecov', require: false
-  gem 'vcr'
-  gem 'webmock'
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "simplecov", require: false
+  gem "vcr"
+  gem "webmock"
 end
 
 group :development do

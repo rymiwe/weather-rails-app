@@ -75,14 +75,14 @@ RSpec.describe ForecastService do
 
     it 'handles non-US geocoding results' do
       non_us_result = OpenStruct.new(
-        coordinates: [51.5074, -0.1278],
+        coordinates: [ 51.5074, -0.1278 ],
         country_code: 'GB',
         city: 'London',
         state: 'England',
         country: 'United Kingdom',
         data: {}
       )
-      allow(Geocoder).to receive(:search).and_return([non_us_result])
+      allow(Geocoder).to receive(:search).and_return([ non_us_result ])
       forecast, from_cache, error, location, units = described_class.fetch('London')
       expect(location).to include('London')
       expect(units).to eq('si')
@@ -90,7 +90,7 @@ RSpec.describe ForecastService do
 
     it 'handles ambiguous/multiple geocoding results (picks US if present)' do
       us_result = OpenStruct.new(
-        coordinates: [37.7749, -122.4194],
+        coordinates: [ 37.7749, -122.4194 ],
         country_code: 'US',
         city: 'San Francisco',
         state: 'CA',
@@ -98,14 +98,14 @@ RSpec.describe ForecastService do
         data: {}
       )
       gb_result = OpenStruct.new(
-        coordinates: [51.5074, -0.1278],
+        coordinates: [ 51.5074, -0.1278 ],
         country_code: 'GB',
         city: 'London',
         state: 'England',
         country: 'United Kingdom',
         data: {}
       )
-      allow(Geocoder).to receive(:search).and_return([gb_result, us_result])
+      allow(Geocoder).to receive(:search).and_return([ gb_result, us_result ])
       forecast, from_cache, error, location, units = described_class.fetch('Ambiguous')
       expect(location).to include('San Francisco')
       expect(units).to eq('us')
@@ -113,14 +113,14 @@ RSpec.describe ForecastService do
 
     it 'handles missing city/state/country gracefully' do
       partial_result = OpenStruct.new(
-        coordinates: [10, 10],
+        coordinates: [ 10, 10 ],
         country_code: 'US',
         city: nil,
         state: nil,
         country: nil,
         data: {}
       )
-      allow(Geocoder).to receive(:search).and_return([partial_result])
+      allow(Geocoder).to receive(:search).and_return([ partial_result ])
       forecast, from_cache, error, location, units = described_class.fetch('Nowhere')
       expect(location).to be_a(String)
     end

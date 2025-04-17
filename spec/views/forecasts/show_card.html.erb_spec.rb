@@ -4,13 +4,13 @@ RSpec.describe "forecasts/_show_card.html.erb", type: :view do
   it "renders the forecast card with summary, icon, and temperatures" do
     assign(:units, 'us')
     forecast = {
-      "daily" => { "data" => [{
+      "daily" => { "data" => [ {
         "time" => Time.now.to_i,
         "icon" => "clear-day",
         "temperatureHigh" => 75,
         "temperatureLow" => 64,
         "summary" => "Mostly sunny."
-      }] },
+      } ] },
       "currently" => { "temperature" => 70 },
       "timezone" => "America/New_York"
     }
@@ -24,12 +24,12 @@ RSpec.describe "forecasts/_show_card.html.erb", type: :view do
   it "renders gracefully with missing icon" do
     assign(:units, 'us')
     forecast = {
-      "daily" => { "data" => [{
+      "daily" => { "data" => [ {
         "time" => Time.now.to_i,
         "temperatureHigh" => 75,
         "temperatureLow" => 64,
         "summary" => "Cloudy."
-      }] },
+      } ] },
       "currently" => { "temperature" => 70 },
       "timezone" => "America/New_York"
     }
@@ -41,11 +41,11 @@ RSpec.describe "forecasts/_show_card.html.erb", type: :view do
   it "renders gracefully with missing temperature" do
     assign(:units, 'us')
     forecast = {
-      "daily" => { "data" => [{
+      "daily" => { "data" => [ {
         "time" => Time.now.to_i,
         "icon" => "clear-day",
         "summary" => "Sunny."
-      }] },
+      } ] },
       "timezone" => "America/New_York"
     }
     render partial: "forecasts/show_card", locals: { forecast: forecast, location_name: "Portland, OR", from_cache: false }
@@ -56,13 +56,13 @@ RSpec.describe "forecasts/_show_card.html.erb", type: :view do
   it "renders SI units correctly" do
     assign(:units, 'si')
     forecast = {
-      "daily" => { "data" => [{
+      "daily" => { "data" => [ {
         "time" => Time.now.to_i,
         "icon" => "clear-day",
         "temperatureHigh" => 22,
         "temperatureLow" => 17,
         "summary" => "Partly cloudy."
-      }] },
+      } ] },
       "currently" => { "temperature" => 20 },
       "timezone" => "Europe/Paris"
     }
@@ -74,13 +74,13 @@ RSpec.describe "forecasts/_show_card.html.erb", type: :view do
   it "renders gracefully with empty summary" do
     assign(:units, 'us')
     forecast = {
-      "daily" => { "data" => [{
+      "daily" => { "data" => [ {
         "time" => Time.now.to_i,
         "icon" => "clear-day",
         "temperatureHigh" => 75,
         "temperatureLow" => 64,
         "summary" => ""
-      }] },
+      } ] },
       "currently" => { "temperature" => 70 },
       "timezone" => "America/New_York"
     }

@@ -47,7 +47,7 @@ RSpec.describe ForecastsHelper, type: :helper do
 
   it "returns input if icon_name is a symbol, array, or hash" do
     expect(helper.weather_icon_filename(:clear_day)).to eq(:clear_day)
-    expect(helper.weather_icon_filename(["clear-day"])) .to eq(["clear-day"])
-    expect(helper.weather_icon_filename({icon: "clear-day"})).to eq({icon: "clear-day"})
+    expect(helper.weather_icon_filename([ "clear-day" ])) .to eq([ "clear-day" ])
+    expect(helper.weather_icon_filename({ icon: "clear-day" })).to eq({ icon: "clear-day" })
   end
 end
