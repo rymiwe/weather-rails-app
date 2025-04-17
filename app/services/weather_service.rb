@@ -3,7 +3,7 @@
 class WeatherService
   # Returns [forecast, from_cache, error_message]
   def self.fetch(query, refresh: false)
-    return [nil, false, 'Please enter an query.'] if query.blank?
+    return [nil, false, 'Please enter a location.'] if query.blank?
 
     geo_data = GeocodingService.lookup(query)
     unless geo_data
