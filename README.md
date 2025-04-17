@@ -162,7 +162,7 @@ sequenceDiagram
    - The Pirate Weather API key is securely stored in [Rails credentials](https://guides.rubyonrails.org/security.html#custom-credentials). See below for details.
 4. **Run the server**:
    ```sh
-   rails server
+   bin/dev
    ```
 5. Visit [http://localhost:3000](http://localhost:3000)
 

@@ -1,106 +1,106 @@
-  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public[0m
-  [1m[35m (82.3ms)[0m  [1m[35mCREATE DATABASE "weather_rails_app_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public[0m
+  [1m[35m (82.1ms)[0m  [1m[35mCREATE DATABASE "weather_rails_app_test" ENCODING = 'unicode'[0m
   [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog[0m
-  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "forecasts" CASCADE[0m
-  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "forecasts" ("id" bigserial primary key, "latitude" float, "longitude" float, "data" jsonb, "cached_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "forecasts" CASCADE[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "forecasts" ("id" bigserial primary key, "latitude" float, "longitude" float, "data" jsonb, "cached_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
   [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
-  [1m[36mActiveRecord::SchemaMigration Load (3.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250416080217)[0m
-  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250416080217)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
-  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-04-17 21:44:37.517702', '2025-04-17 21:44:37.517704') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-04-17 21:53:46.043548', '2025-04-17 21:53:46.043551') RETURNING "key"[0m
   [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
-  [1m[36mActiveRecord::InternalMetadata Load (2.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
-  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c00cd85406757d06b1649184eec1da608038e170', '2025-04-17 21:44:37.538608', '2025-04-17 21:44:37.538610') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c00cd85406757d06b1649184eec1da608038e170', '2025-04-17 21:53:46.064756', '2025-04-17 21:53:46.064758') RETURNING "key"[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
   [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started GET "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+Started GET "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:48 +0000
 Processing by ForecastsController#index as HTML
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
   Rendered forecasts/_alert.html.erb (Duration: 1.8ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb within layouts/application (Duration: 3.2ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 8.4ms | GC: 0.0ms)
-Completed 200 OK in 16ms (Views: 10.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+  Rendered forecasts/index.html.erb within layouts/application (Duration: 3.3ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | GC: 0.2ms)
+Completed 200 OK in 17ms (Views: 10.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.4ms)
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:48 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => "Portland, OR", "commit" => "Get Forecast"}
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
-Completed 200 OK in 11ms (Views: 1.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 9.1ms)
+  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.7ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.2ms | GC: 0.2ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
   [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started GET "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+Started GET "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:48 +0000
 Processing by ForecastsController#index as HTML
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
-  Rendered forecasts/_alert.html.erb (Duration: 0.1ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.6ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.3ms)
-Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+  Rendered forecasts/_alert.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:49 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => "New York, NY"}
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
   Rendered forecasts/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
-Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:49 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => ""}
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
-Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:49 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => "London"}
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 0.8ms | GC: 0.0ms)
-Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:49 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => "Unknown Place"}
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
+  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
   Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
-Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:49 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => "New York, NY; DROP TABLE users; --"}
   Rendering layout layouts/application.html.erb
@@ -108,10 +108,10 @@ Processing by ForecastsController#create as HTML
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
   Rendered forecasts/index.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
   Rendered layout layouts/application.html.erb (Duration: 0.8ms | GC: 0.0ms)
-Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 1.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:49 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
   Rendering layout layouts/application.html.erb
@@ -119,21 +119,37 @@ Processing by ForecastsController#create as HTML
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
   Rendered forecasts/index.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
   Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
-Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:44:40 +0000
+Started POST "/forecasts" for 127.0.0.1 at 2025-04-17 21:53:49 +0000
 Processing by ForecastsController#create as HTML
   Parameters: {"query" => "<script>alert('x')</script>"}
   Rendering layout layouts/application.html.erb
   Rendering forecasts/index.html.erb within layouts/application
   Rendered forecasts/_alert.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered forecasts/index.html.erb within layouts/application (Duration: 0.6ms | GC: 0.0ms)
   Rendered layout layouts/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
-Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
@@ -141,49 +157,33 @@ Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
   Rendering forecasts/index.html.erb
   Rendered forecasts/_alert.html.erb (Duration: 0.1ms | GC: 0.0ms)
   Rendered forecasts/_show_card.html.erb (Duration: 0.8ms | GC: 0.0ms)
-  Rendered forecasts/index.html.erb (Duration: 1.8ms | GC: 0.0ms)
+  Rendered forecasts/index.html.erb (Duration: 2.1ms | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  Rendered forecasts/_show_card.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  Rendered forecasts/_show_card.html.erb (Duration: 0.0ms | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-  Rendered forecasts/_show_card.html.erb (Duration: 0.1ms | GC: 0.0ms)
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
   Rendered forecasts/_show_card.html.erb (Duration: 0.0ms | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   Rendered forecasts/_show_card.html.erb (Duration: 0.0ms | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
   Rendered forecasts/_show_card.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
-  Rendered forecasts/_show_card.html.erb (Duration: 0.1ms | GC: 0.0ms)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
