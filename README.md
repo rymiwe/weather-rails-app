@@ -30,13 +30,16 @@ This app provides weather forecasts for user-supplied locations, with geocoding 
 
 Below are example screenshots of the UI, showcasing the forecast results for various cities:
 
-![Forecast for Anchorage](app/assets/images/anchorage.png)
+![Forecast for Anchorage](docs/screenshots/anchorage.png)
 *Forecast result for Anchorage, AK*
 
-![Forecast for Cheyenne](app/assets/images/cheyenne.png)
+![Forecast for Banff](docs/screenshots/banff.png)
+*Forecast result for Banff, AB (Canada)*
+
+![Forecast for Cheyenne](docs/screenshots/cheyenne.png)
 *Forecast result for Cheyenne, WY*
 
-![Forecast for Phoenix](app/assets/images/phoenix.png)
+![Forecast for Phoenix](docs/screenshots/phoenix.png)
 *Forecast result for Phoenix, AZ*
 
 ---
