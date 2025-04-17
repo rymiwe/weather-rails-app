@@ -102,7 +102,7 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+        run: bundle exec rspec
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
