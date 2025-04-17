@@ -13,7 +13,7 @@
           <%= i == 0 ? 'Today' : (Time.at(day["time"]).in_time_zone(forecast["timezone"] || 'UTC').strftime('%a') rescue '') %>
         </div>
         <% if day["icon"] %>
-          <img src="https://cdn.jsdelivr.net/gh/rickellis/SVG-Weather-Icons@master/DarkSky/<%= day["icon"] %>.svg" alt="<%= day["icon"] %> icon" class="w-14 h-14 mb-2" onerror="this.onerror=null;this.style.display='none';">
+          <img src="https://cdn.jsdelivr.net/gh/rickellis/SVG-Weather-Icons@master/Masters-Tempestacons/<%= day["icon"] %>.svg" alt="<%= day["icon"] %> icon" class="w-14 h-14 mb-2" onerror="this.onerror=null;this.style.display='none';">
         <% else %>
           <span class="text-xs text-gray-500">No icon</span>
         <% end %>
