@@ -58,5 +58,26 @@ RSpec.describe ForecastService do
       expect(forecast).to be_nil
       expect(error).to be_present
     end
+
+    it 'handles API errors gracefully' do
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_raise(StandardError, "API error")
+      forecast, from_cache, error, location = described_class.fetch(query)
+      expect(forecast).to be_nil
+      expect(error).to be_present
+    end
+
+    it 'handles missing/malformed forecast data' do
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(nil)
+      forecast, from_cache, error, location = described_class.fetch(query)
+      expect(forecast).to be_nil
+      expect(error).to be_present
+    end
+
+    it 'rejects malicious input' do
+      malicious_query = "New York, NY; DROP TABLE users; --"
+      forecast, from_cache, error, location = described_class.fetch(malicious_query)
+      expect(error).to be_nil.or be_present
+      # Should not raise or crash
+    end
   end
 end

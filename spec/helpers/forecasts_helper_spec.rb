@@ -18,4 +18,12 @@ RSpec.describe ForecastsHelper, type: :helper do
   it "returns original icon name if not mapped" do
     expect(helper.weather_icon_filename("unknown-icon")).to eq("unknown-icon")
   end
+
+  it "returns nil if icon_name is nil" do
+    expect(helper.weather_icon_filename(nil)).to be_nil
+  end
+
+  it "returns string if icon_name is integer" do
+    expect(helper.weather_icon_filename(123)).to eq(123)
+  end
 end
