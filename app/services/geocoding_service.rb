@@ -12,6 +12,7 @@ class GeocodingService
       geo_result.state || geo_result.data["state"],
       geo_result.country || geo_result.data["country"]
     ].compact.join(", ")
-    { lat: lat, lon: lon, location_name: location_name }
+    units = geo_result.country_code&.upcase == "US" ? "us" : "si"
+    { lat: lat, lon: lon, location_name: location_name, units: units }
   end
 end

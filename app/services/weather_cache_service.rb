@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class WeatherCacheService
-  EXPIRY = 30.minutes
+  # Cache expiry in minutes, configurable via WEATHER_CACHE_EXPIRY_MINUTES env variable (default: 30)
+  EXPIRY = (ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i).minutes
 
-  # Returns the cache key for a given lat/lon
+  # Returns the cache key for a given lat/lon and units
   def self.key_for(lat, lon)
     "weather:#{lat},#{lon}"
   end

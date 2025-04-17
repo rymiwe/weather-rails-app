@@ -19,17 +19,17 @@
         <% end %>
         <% if i == 0 && forecast["currently"] && forecast["currently"]["temperature"] %>
           <div class="text-base font-bold text-gray-600 mb-1">
-            <%= forecast["currently"]["temperature"].round %>°F now
+            <%= forecast["currently"]["temperature"].round %>°<%= @units == 'si' ? 'C' : 'F' %> now
           </div>
         <% end %>
         <div class="text-sm text-blue-800">
           <% if day["temperatureHigh"] && day["temperatureLow"] %>
-            <span class="font-bold"><%= day["temperatureLow"].round %>°F</span> /
-            <span class="font-bold text-orange-500"><%= day["temperatureHigh"].round %>°F</span>
+            <span class="font-bold"><%= format_temperature(day["temperatureLow"], @units) %></span> /
+            <span class="font-bold text-orange-500"><%= format_temperature(day["temperatureHigh"], @units) %></span>
           <% elsif day["temperatureHigh"] %>
-            <span class="font-bold text-orange-500"><%= day["temperatureHigh"].round %>°F</span>
+            <span class="font-bold text-orange-500"><%= format_temperature(day["temperatureHigh"], @units) %></span>
           <% elsif day["temperatureLow"] %>
-            <span class="font-bold"><%= day["temperatureLow"].round %>°F</span>
+            <span class="font-bold"><%= format_temperature(day["temperatureLow"], @units) %></span>
           <% end %>
         </div>
         <div class="text-xs text-blue-600"><%= day["summary"] %></div>
