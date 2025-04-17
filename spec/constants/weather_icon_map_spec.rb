@@ -17,8 +17,6 @@ RSpec.describe WeatherIconMap, :cdn do
     VCR.turn_on!
   end
 
-  CDN_BASE = 'https://cdn.jsdelivr.net/gh/rickellis/SVG-Weather-Icons@master/Masters-Tempestacons/'.freeze
-
   it 'has a valid SVG file on the CDN for every icon value in ICON_MAP', vcr: false do
     # Allow real HTTP connections for this spec
     WebMock.allow_net_connect!
