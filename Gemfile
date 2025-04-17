@@ -72,14 +72,8 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "webmock"
-  gem "vcr"
-end
-
-# RSpec for testing
-group :development, :test do
-  gem "rspec-rails"
+  gem "capybara"                   # System testing
+  gem "selenium-webdriver"         # Browser driver for Capybara
+  gem "webmock"                    # HTTP stubbing
+  gem "vcr"                        # HTTP recording
 end
