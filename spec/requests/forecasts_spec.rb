@@ -10,6 +10,26 @@ RSpec.describe "Forecasts", type: :request do
 
   describe "POST /forecasts" do
     before do
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [40.7128, -74.0060],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return({
+        "currently" => { "temperature" => 60 },
+        "daily" => {
+          "summary" => "Sunny",
+          "icon" => "clear-day",
+          "data" => [
+            { "icon" => "clear-day", "temperatureHigh" => 75, "temperatureLow" => 55 }
+          ]
+        }
+      })
       Geocoder::Lookup::Test.add_stub(
         'New York, NY', [
           {

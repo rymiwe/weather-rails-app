@@ -24,21 +24,23 @@ RSpec.describe ForecastService, type: :service do
 
   before do
     Rails.cache.clear
-    allow(Geocoder).to receive(:search).and_return([
-      OpenStruct.new(
-        coordinates: [ 40.7128, -74.0060 ],
-        country_code: 'US',
-        city: 'New York',
-        state: 'NY',
-        country: 'US',
-        data: {}
-      )
-    ])
-    allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
+    allow(Geocoder).to receive(:search).and_raise("Stubbing error: Geocoder.search not stubbed")
+    allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_raise("Stubbing error: PirateWeatherClient.fetch_forecast not stubbed")
   end
 
   describe '.fetch' do
     it 'caches the forecast for an query' do
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       expect(ForecastCacheService.read(lat, lon)).to be_nil
       forecast, from_cache, error, location = described_class.fetch(query)
 
@@ -49,6 +51,17 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'returns cached forecast on subsequent calls' do
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       described_class.fetch(query)
       forecast, from_cache, error, location = described_class.fetch(query)
       expect(forecast).to include(fake_forecast)
@@ -56,7 +69,17 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'fetches new forecast when refresh is true' do
-      described_class.fetch(query)
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       new_forecast = fake_forecast.merge("currently" => { "temperature" => 80 })
       allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(new_forecast)
       forecast, from_cache, error, location = described_class.fetch(query, refresh: true)
@@ -65,12 +88,33 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'handles blank query' do
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       forecast, from_cache, error, location = described_class.fetch('')
       expect(forecast).to be_nil
       expect(error).to be_present
     end
 
     it 'handles API errors gracefully' do
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
       allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_raise(StandardError, "API error")
       forecast, from_cache, error, location = described_class.fetch(query)
       expect(forecast).to be_nil
@@ -78,6 +122,16 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'handles missing/malformed forecast data' do
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
       allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(nil)
       forecast, from_cache, error, location = described_class.fetch(query)
       expect(forecast).to be_nil
@@ -94,6 +148,7 @@ RSpec.describe ForecastService, type: :service do
         data: {}
       )
       allow(Geocoder).to receive(:search).and_return([ non_us_result ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       forecast, from_cache, error, location, units = described_class.fetch('London')
       expect(location).to include('London')
       expect(units).to eq('si')
@@ -117,6 +172,7 @@ RSpec.describe ForecastService, type: :service do
         data: {}
       )
       allow(Geocoder).to receive(:search).and_return([ gb_result, us_result ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       forecast, from_cache, error, location, units = described_class.fetch('Ambiguous')
       expect(location).to include('San Francisco')
       expect(units).to eq('us')
@@ -132,18 +188,30 @@ RSpec.describe ForecastService, type: :service do
         data: {}
       )
       allow(Geocoder).to receive(:search).and_return([ partial_result ])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       forecast, from_cache, error, location, units = described_class.fetch('Nowhere')
       expect(location).to be_a(String)
     end
 
     it 'handles geocoder returning empty array' do
       allow(Geocoder).to receive(:search).and_return([])
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
       forecast, from_cache, error, location = described_class.fetch('Unknown Place')
       expect(forecast).to be_nil
       expect(error).to include('geocode')
     end
 
     it 'handles malformed forecast hash (missing keys)' do
+      allow(Geocoder).to receive(:search).and_return([
+        OpenStruct.new(
+          coordinates: [ 40.7128, -74.0060 ],
+          country_code: 'US',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          data: {}
+        )
+      ])
       allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return({})
       forecast, from_cache, error, location = described_class.fetch(query)
       expect(forecast).to eq({})
