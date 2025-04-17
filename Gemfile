@@ -10,9 +10,6 @@ gem "pg", "~> 1.1"
 # Geocoding
 gem "geocoder", ">= 1.6"
 
-# HTTP client for WeatherAPI
-gem "http"
-
 # Tailwind CSS for styling
 gem "tailwindcss-rails"
 
@@ -50,6 +47,7 @@ group :development, :test do
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
+  gem 'faraday'
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
