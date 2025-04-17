@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'ostruct'
 
 RSpec.describe ForecastService do
-  let(:address) { 'New York, NY' }
+  let(:query) { 'New York, NY' }
   let(:coordinates) { [40.7128, -74.0060] }
   let(:lat) { coordinates[0] }
   let(:lon) { coordinates[1] }
@@ -27,9 +27,9 @@ RSpec.describe ForecastService do
   end
 
   describe '.fetch' do
-    it 'caches the forecast for an address' do
+    it 'caches the forecast for an query' do
       expect(ForecastCacheService.read(lat, lon)).to be_nil
-      forecast, from_cache, error, location = described_class.fetch(address)
+      forecast, from_cache, error, location = described_class.fetch(query)
 
       expect(forecast).to eq(fake_forecast)
       expect(from_cache).to be_falsey
@@ -37,22 +37,22 @@ RSpec.describe ForecastService do
     end
 
     it 'returns cached forecast on subsequent calls' do
-      described_class.fetch(address)
-      forecast, from_cache, error, location = described_class.fetch(address)
+      described_class.fetch(query)
+      forecast, from_cache, error, location = described_class.fetch(query)
       expect(forecast).to eq(fake_forecast)
       expect(from_cache).to be_truthy
     end
 
     it 'fetches new forecast when refresh is true' do
-      described_class.fetch(address)
+      described_class.fetch(query)
       new_forecast = fake_forecast.merge("currently" => { "temperature" => 80 })
       allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(new_forecast)
-      forecast, from_cache, error, location = described_class.fetch(address, refresh: true)
+      forecast, from_cache, error, location = described_class.fetch(query, refresh: true)
       expect(forecast).to eq(new_forecast)
       expect(from_cache).to be_falsey
     end
 
-    it 'handles blank address' do
+    it 'handles blank query' do
       forecast, from_cache, error, location = described_class.fetch('')
       expect(forecast).to be_nil
       expect(error).to be_present

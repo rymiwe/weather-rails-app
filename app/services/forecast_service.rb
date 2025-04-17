@@ -2,12 +2,12 @@
 
 class ForecastService
   # Returns [forecast, from_cache, error_message]
-  def self.fetch(address, refresh: false)
-    return [nil, false, 'Please enter an address.'] if address.blank?
+  def self.fetch(query, refresh: false)
+    return [nil, false, 'Please enter an query.'] if query.blank?
 
-    geo_data = GeocodingService.lookup(address)
+    geo_data = GeocodingService.lookup(query)
     unless geo_data
-      return [nil, false, 'Could not geocode address.']
+      return [nil, false, 'Could not geocode query.']
     end
     lat = geo_data[:lat]
     lon = geo_data[:lon]

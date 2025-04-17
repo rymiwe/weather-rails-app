@@ -2,8 +2,8 @@
 
 class GeocodingService
   # Returns a hash: { lat:, lon:, location_name: } or nil if not found
-  def self.lookup(address)
-    geo_results = Geocoder.search(address)
+  def self.lookup(query)
+    geo_results = Geocoder.search(query)
     geo_result = geo_results.find { |r| r.country_code&.upcase == 'US' } || geo_results.first
     return nil unless geo_result&.coordinates
     lat, lon = geo_result.coordinates

@@ -5,8 +5,8 @@ class ForecastsController < ApplicationController
 
 
   def create
-    address = params[:address].to_s.strip
-    @forecast, @from_cache, error_message, @location_name = ForecastService.fetch(address, refresh: params[:refresh].present?)
+    query = params[:query].to_s.strip
+    @forecast, @from_cache, error_message, @location_name = ForecastService.fetch(query, refresh: params[:refresh].present?)
     flash[:alert] = error_message if error_message.present?
 
     respond_to do |format|
@@ -17,6 +17,6 @@ class ForecastsController < ApplicationController
 
   private
   def forecast_params
-    params.permit(:address, :refresh)
+    params.permit(:query, :refresh)
   end
 end
