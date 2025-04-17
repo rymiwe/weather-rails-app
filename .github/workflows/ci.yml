@@ -112,12 +112,29 @@ jobs:
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec
 
+      - name: Upload Rails test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rails-test-log
+          path: log/test.log
+          if-no-files-found: ignore
+
+      - name: Upload forecast debug log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forecast-debug-log
+          path: tmp/forecast_debug.log
+          if-no-files-found: ignore
+
       - name: Upload RSpec debug log
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: rspec-debug-log
           path: tmp/rspec_debug.log
+          if-no-files-found: ignore
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
