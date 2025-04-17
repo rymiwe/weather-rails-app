@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root 'forecasts#index'
-  resources :forecasts, only: [:index, :show, :create]
-  post 'forecasts/:id', to: 'forecasts#show', as: :refresh_forecast
+  root "forecasts#index"
+  resources :forecasts, only: [ :index, :show, :create ]
+  post "forecasts/:id", to: "forecasts#show", as: :refresh_forecast
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

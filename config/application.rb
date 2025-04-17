@@ -29,7 +29,7 @@ module WeatherRailsApp
     config.autoload_lib(ignore: %w[assets tasks])
 
     # Autoload app/constants for custom constants like WeatherIconMap
-    config.autoload_paths << Rails.root.join('app/constants')
+    config.autoload_paths << Rails.root.join("app/constants")
 
     # Configuration for the application, engines, and railties goes here.
     #

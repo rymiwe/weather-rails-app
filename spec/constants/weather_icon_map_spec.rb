@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 require 'faraday'
 require_relative '../../app/constants/weather_icon_map'

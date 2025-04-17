@@ -1,4 +1,4 @@
-require_relative '../constants/weather_icon_map'
+require_relative "../constants/weather_icon_map"
 
 module WeatherHelper
   def weather_icon_filename(icon_name)

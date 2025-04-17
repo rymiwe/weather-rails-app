@@ -4,18 +4,18 @@ require_relative '../../app/services/weather_service'
 
 RSpec.describe WeatherService do
   let(:query) { 'New York, NY' }
-  let(:coordinates) { [40.7128, -74.0060] }
+  let(:coordinates) { [ 40.7128, -74.0060 ] }
   let(:lat) { coordinates[0] }
   let(:lon) { coordinates[1] }
   let(:cache_key) { WeatherCacheService.key_for(lat, lon) }
 
-  let(:fake_forecast) { { "currently" => { "temperature" => 75 }, "daily" => [{ "icon" => "clear-day" }] } }
+  let(:fake_forecast) { { "currently" => { "temperature" => 75 }, "daily" => [ { "icon" => "clear-day" } ] } }
 
   before do
     Rails.cache.clear
     allow(Geocoder).to receive(:search).and_return([
       OpenStruct.new(
-        coordinates: [40.7128, -74.0060],
+        coordinates: [ 40.7128, -74.0060 ],
         country_code: 'US',
         city: 'New York',
         state: 'NY',
@@ -24,7 +24,6 @@ RSpec.describe WeatherService do
       )
     ])
     allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
-
   end
 
   describe '.fetch' do

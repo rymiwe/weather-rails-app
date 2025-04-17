@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Weather Forecast', type: :feature, js: true, vcr: { record: :new_episodes } do
