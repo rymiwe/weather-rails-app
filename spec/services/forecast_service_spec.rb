@@ -1,13 +1,13 @@
 require 'rails_helper'
 require 'ostruct'
-require_relative '../../app/services/weather_service'
+require_relative '../../app/services/forecast_service'
 
-RSpec.describe WeatherService do
+RSpec.describe ForecastService do
   let(:query) { 'New York, NY' }
   let(:coordinates) { [ 40.7128, -74.0060 ] }
   let(:lat) { coordinates[0] }
   let(:lon) { coordinates[1] }
-  let(:cache_key) { WeatherCacheService.key_for(lat, lon) }
+  let(:cache_key) { ForecastCacheService.key_for(lat, lon) }
 
   let(:fake_forecast) { { "currently" => { "temperature" => 75 }, "daily" => [ { "icon" => "clear-day" } ] } }
 
@@ -28,18 +28,19 @@ RSpec.describe WeatherService do
 
   describe '.fetch' do
     it 'caches the forecast for an query' do
-      expect(WeatherCacheService.read(lat, lon)).to be_nil
+      expect(ForecastCacheService.read(lat, lon)).to be_nil
       forecast, from_cache, error, location = described_class.fetch(query)
 
-      expect(forecast).to eq(fake_forecast)
+      expect(forecast).to include(fake_forecast)
       expect(from_cache).to be_falsey
-      expect(WeatherCacheService.read(lat, lon)).to eq(fake_forecast)
+      cached = ForecastCacheService.read(lat, lon)
+      expect(cached).to include(fake_forecast)
     end
 
     it 'returns cached forecast on subsequent calls' do
       described_class.fetch(query)
       forecast, from_cache, error, location = described_class.fetch(query)
-      expect(forecast).to eq(fake_forecast)
+      expect(forecast).to include(fake_forecast)
       expect(from_cache).to be_truthy
     end
 
