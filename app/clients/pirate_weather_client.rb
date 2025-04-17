@@ -12,7 +12,7 @@ class PirateWeatherClient
 
   # Returns parsed JSON or raises
   def fetch_forecast(lat, lon, units: 'us')
-    url = "#{API_BASE_URL}/#{@api_key}/#{lat},#{lon}?units=#{units}"
+    url = "#{API_BASE_URL}/#{@api_key}/#{lat},#{lon}?units=#{units}&icon=pirate"
     response = Faraday.get(url)
     unless response.success?
       raise "Pirate Weather API error: #{response.status}"
