@@ -8,13 +8,13 @@ if defined?(Geocoder)
   Geocoder.configure(http_adapter: :net_http, cache: nil)
 end
 
-puts "WebMock support loaded"
-puts "[DEBUG] Loaded gems: #{Gem.loaded_specs.keys.sort.join(', ')}"
+
+
 File.write("tmp/loaded_gems.txt", Gem.loaded_specs.keys.sort.join("\n"))
 
 WebMock.after_request do |request_signature, response|
   unless WebMock.registered_request?(request_signature)
-    puts "[WebMock] Unmatched request: #{request_signature.method} #{request_signature.uri}"
+    
   end
 end
 

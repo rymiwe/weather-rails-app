@@ -64,7 +64,7 @@ RSpec.describe "Forecasts", type: :request do
 
     it "shows error for extremely long/invalid input" do
       post "/forecasts", params: { query: "A" * 300 }
-      puts "[DEBUG] response.body for long input: #{response.body.inspect}"
+      
       expect(response.body).to include('Could not geocode query').or include('not found').or include('error')
     end
 

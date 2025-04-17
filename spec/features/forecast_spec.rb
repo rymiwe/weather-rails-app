@@ -16,9 +16,28 @@ RSpec.describe 'Weather Forecast', type: :feature do
         }
       ]
     )
-    # Stub Pirate Weather API for Portland coordinates
-    WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
-      to_return(status: 200, body: '{"currently":{"summary":"Clear","temperature":60},"daily":{"summary":"Sunny","icon":"clear-day","data":[{"icon":"clear-day","temperatureHigh":70,"temperatureLow":50}]}}')
+    
+    # Create a mock forecast response
+    forecast_data = {
+      "currently" => {"summary" => "Clear", "temperature" => 60},
+      "daily" => {
+        "summary" => "Sunny", 
+        "icon" => "clear-day", 
+        "data" => [{
+          "icon" => "clear-day", 
+          "temperatureHigh" => 70, 
+          "temperatureLow" => 50
+        }]
+      }
+    }
+    
+    # Create and configure a mock weather client
+    mock_client = instance_double("PirateWeatherClient")
+    allow(mock_client).to receive(:fetch_forecast).and_return(forecast_data)
+    allow(PirateWeatherClient).to receive(:new).and_return(mock_client)
+    
+    # Turn off external HTTP requests for safety
+    WebMock.disable_net_connect!(allow_localhost: true)
     visit forecasts_path
     fill_in :query, with: 'Portland, OR'
     click_button 'Get Forecast'

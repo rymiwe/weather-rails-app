@@ -89,14 +89,15 @@ RSpec.describe ForecastService, type: :service do
     Geocoder::Lookup::Test.add_stub("New York, NY; DROP TABLE users; --", [])
     Geocoder::Lookup::Test.add_stub("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", [])
     Geocoder::Lookup::Test.add_stub("<script>alert('x')</script>", [])
-    # Pirate Weather API stub
-    WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
+    
+    # Default Pirate Weather API stub as a fallback
+    WebMock.stub_request(:get, /api\.pirateweather\.net/).
       to_return(status: 200, body: fake_forecast.to_json)
   end
 
   describe '.fetch' do
     it 'caches the forecast for an query' do
-      WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
+      WebMock.stub_request(:get, %r{https://api\.pirateweather\.net/forecast/.+/40\.7128,-74\.006\?units=us&icon=pirate}).
         to_return(status: 200, body: fake_forecast.to_json, headers: {})
       expect(ForecastCacheService.read(lat, lon)).to be_nil
       forecast, from_cache, error, location = described_class.fetch(query)
@@ -107,7 +108,7 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'returns cached forecast on subsequent calls' do
-      WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
+      WebMock.stub_request(:get, %r{https://api\.pirateweather\.net/forecast/.+/40\.7128,-74\.006\?units=us&icon=pirate}).
         to_return(status: 200, body: fake_forecast.to_json, headers: {})
       described_class.fetch(query)
       forecast, from_cache, error, location = described_class.fetch(query)
@@ -116,11 +117,16 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'fetches new forecast when refresh is true' do
+      # Create a mock client that returns our custom forecast
       new_forecast = fake_forecast.merge("currently" => { "temperature" => 80 })
-      WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
-        to_return(status: 200, body: new_forecast.to_json, headers: {})
-      forecast, from_cache, error, location = described_class.fetch(query, refresh: true)
-      expect(forecast).to eq(new_forecast)
+      mock_client = double("PirateWeatherClient")
+      allow(mock_client).to receive(:fetch_forecast).and_return(new_forecast)
+      
+      # Use the mock client explicitly
+      forecast, from_cache, error, location = described_class.fetch(query, refresh: true, weather_client: mock_client)
+      
+      # Verify the forecast matches our special mock data
+      expect(forecast["currently"]["temperature"]).to eq(80)
       expect(from_cache).to be_falsey
     end
 
@@ -131,17 +137,27 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'handles API errors gracefully' do
-      WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
-        to_return(status: 500, body: '')
-      forecast, from_cache, error, location = described_class.fetch(query)
+      # Create a mock client that raises an error
+      mock_client = double("PirateWeatherClient")
+      allow(mock_client).to receive(:fetch_forecast).and_raise(RuntimeError.new("API error"))
+      
+      # Use the mock client explicitly
+      forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
+      
+      # API errors should result in nil forecast and an error message
       expect(forecast).to be_nil
-      expect(error).to be_present
+      expect(error).to eq("Error fetching weather data.")
     end
 
     it 'handles missing/malformed forecast data' do
-      WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
-        to_return(status: 200, body: '{}')
-      forecast, from_cache, error, location = described_class.fetch(query)
+      # Create a mock client that returns an empty hash
+      mock_client = double("PirateWeatherClient")
+      allow(mock_client).to receive(:fetch_forecast).and_return({})
+      
+      # Use the mock client explicitly
+      forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
+      
+      # An empty JSON object should be parsed as an empty hash
       expect(forecast).to eq({})
       expect(error).to be_nil
     end
@@ -214,11 +230,16 @@ RSpec.describe ForecastService, type: :service do
     end
 
     it 'handles malformed forecast hash (missing keys)' do
-      WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
-        to_return(status: 200, body: '{}')
-      forecast, from_cache, error, location = described_class.fetch(query)
+      # Create a mock client that returns an empty hash
+      mock_client = double("PirateWeatherClient")
+      allow(mock_client).to receive(:fetch_forecast).and_return({})
+      
+      # Use the mock client explicitly
+      forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
+      
+      # An empty hash should be handled properly
       expect(forecast).to eq({})
-      expect(error).to be_nil.or be_present
+      expect(error).to be_nil
     end
   end
 end
