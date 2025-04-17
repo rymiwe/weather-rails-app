@@ -10,7 +10,6 @@ RSpec.describe "Forecasts", type: :request do
 
   describe "POST /forecasts" do
     before do
-
       allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return({
         "currently" => { "temperature" => 60 },
         "daily" => {

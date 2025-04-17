@@ -51,4 +51,3 @@ Rails.application.configure do
 end
 
 # Ensure Geocoder always uses the test lookup in test environment
-

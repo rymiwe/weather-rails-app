@@ -16,7 +16,7 @@ class GeocodingService
       return nil
     end
     puts "[DEBUG] Geocoder.search(#{query.inspect}) returned: #{geo_results.inspect}"
-    if ["London", "Ambiguous"].include?(query)
+    if [ "London", "Ambiguous" ].include?(query)
       puts "[DEBUG] FULL geo_results for #{query}: #{geo_results.inspect}"
       geo_results.each_with_index do |r, i|
         puts "[DEBUG] geo_results[#{i}].data: #{r.respond_to?(:data) ? r.data.inspect : 'NO DATA METHOD'}"
