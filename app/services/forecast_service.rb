@@ -5,16 +5,15 @@ class ForecastService
   def self.fetch(address, refresh: false)
     return [nil, false, 'Please enter an address.'] if address.blank?
 
-    geo_results = Geocoder.search(address)
-    geo_result = geo_results.find { |r| r.country_code&.upcase == 'US' } || geo_results.first
-    unless geo_result&.coordinates
+    geo_data = GeocodingService.lookup(address)
+    unless geo_data
       return [nil, false, 'Could not geocode address.']
     end
-    lat, lon = geo_result.coordinates.map { |c| c.round(4) }
-    location_name = [geo_result.city || geo_result.data['city'] || geo_result.data['town'] || geo_result.data['village'], geo_result.state || geo_result.data['state'], geo_result.country || geo_result.data['country']].compact.join(', ')
+    lat = geo_data[:lat]
+    lon = geo_data[:lon]
+    location_name = geo_data[:location_name]
 
-    cache_key = "forecast:#{lat},#{lon}"
-    forecast = Rails.cache.read(cache_key)
+    forecast = ForecastCacheService.read(lat, lon)
     unless forecast.nil? || refresh
       return [forecast, true, nil, location_name]
     end
@@ -22,7 +21,7 @@ class ForecastService
     begin
       client = PirateWeatherClient.new
       forecast = client.fetch_forecast(lat, lon)
-      Rails.cache.write(cache_key, forecast, expires_in: 30.minutes)
+      ForecastCacheService.write(lat, lon, forecast)
       [forecast, false, nil, location_name]
     rescue => e
       [nil, false, 'Error fetching weather data.', location_name]

@@ -1,6 +1,6 @@
 class ForecastsController < ApplicationController
   def index
-    # Show search form
+    render :index
   end
 
 
