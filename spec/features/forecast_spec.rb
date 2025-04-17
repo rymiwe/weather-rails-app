@@ -8,7 +8,7 @@ require 'ostruct'
 # and ensures robust, isolated, and deterministic tests regardless of Capybara/JS process forking.
 # See the comments in the spec for more details.
 
-RSpec.describe 'Weather Forecast', type: :feature, js: true, vcr: { record: :new_episodes } do
+RSpec.describe 'Weather Forecast', type: :feature, js: true do
   it 'shows a forecast for Portland, OR and updates for New York, NY' do
     # Set up a mock Geocoder
     mock_geocoder = double('Geocoder')

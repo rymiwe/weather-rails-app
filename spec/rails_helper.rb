@@ -73,4 +73,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.around(:each) do |example|
+    if example.metadata[:type] == :service
+      example.run
+    else
+      VCR.use_cassette(example.full_description) { example.run }
+    end
+  end
 end
