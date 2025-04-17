@@ -20,12 +20,7 @@ end
 
 RSpec.configure do |config|
   config.before(:each) do
-    # Universal WebMock stubs for geocoding queries used in all specs
-    # GLOBAL CATCH-ALL STUB (for debugging: catches any HTTP request)
-    WebMock.stub_request(:any, /.*/).
-      to_return(status: 200, body: '{"features": [{"geometry": {"coordinates": [-74.0060, 40.7128]}, "properties": {"city": "New York", "state": "NY", "country": "US"}}]}')
-    # Universal Pirate Weather API stub
-    WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
-      to_return(status: 200, body: '{"currently":{"summary":"Clear","temperature":70},"daily":{"summary":"Sunny","icon":"clear-day","data":[{"icon":"clear-day","temperatureHigh":80,"temperatureLow":60}]}}')
+    # Fallback: unmatched requests return 404 or empty result (forces test to define its own stubs)
+    WebMock.stub_request(:any, /.*/).to_return(status: 404, body: '{}')
   end
 end

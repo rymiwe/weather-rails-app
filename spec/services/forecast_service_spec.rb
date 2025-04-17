@@ -23,6 +23,11 @@ RSpec.describe ForecastService, type: :service do
 
   before do
     Rails.cache.clear
+    # Default stub for 'New York, NY'
+    WebMock.stub_request(:get, /mapbox.*New%20York/).
+      to_return(status: 200, body: '{"features": [{"geometry": {"coordinates": [-74.006, 40.7128]}, "properties": {"city": "New York", "state": "NY", "country": "US"}}]}')
+    WebMock.stub_request(:get, /pirate-weather-api|pirateweather/).
+      to_return(status: 200, body: fake_forecast.to_json)
   end
 
   describe '.fetch' do
