@@ -75,10 +75,12 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.around(:each) do |example|
-    if [ :service, :feature ].include?(example.metadata[:type])
-      example.run
-    else
+    type = example.metadata[:type]
+    # Only use VCR for request specs or if :vcr metadata is set
+    if type == :request || example.metadata[:vcr]
       VCR.use_cassette(example.full_description) { example.run }
+    else
+      example.run
     end
   end
 end
