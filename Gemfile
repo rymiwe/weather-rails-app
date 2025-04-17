@@ -13,20 +13,14 @@ gem "bootsnap", require: false # Caching for faster boot
 
 gem "puma", ">= 5.0"          # Web server
 
-gem "kamal", require: false    # Docker deployment
-
 gem "thruster", require: false # HTTP asset caching/compression
-
-gem "tzinfo-data", platforms: %i[ windows jruby ] # Windows timezones
 
 # --- Frontend & Styling ---
 gem "tailwindcss-rails"        # Tailwind CSS
 
 gem "importmap-rails"         # ESM import maps
 
-gem "turbo-rails"             # Hotwire Turbo
-
-gem "stimulus-rails"          # Hotwire Stimulus
+gem "hotwire-rails"             # Hotwire Turbo
 
 # --- Geocoding ---
 gem "geocoder", ">= 1.6"
@@ -40,31 +34,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false   # Security analysis
   gem "rubocop-rails-omakase", require: false # Ruby style
-end
-
-group :development do
-  gem "web-console"                # Rails console in browser
-end
-
-group :test do
-  gem "capybara"                   # System testing
-  gem "selenium-webdriver"         # Browser driver for Capybara
-  gem "webmock"                    # HTTP stubbing
-  gem "vcr"                        # HTTP recording
-end
-
-# --- Optional ---
-# gem "bcrypt", "~> 3.1.7"         # For has_secure_password
-group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
-
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
-end
+end  # (Only need one group :development, :test for these gems)
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
@@ -72,8 +42,4 @@ group :development do
 end
 
 group :test do
-  gem "capybara"                   # System testing
-  gem "selenium-webdriver"         # Browser driver for Capybara
-  gem "webmock"                    # HTTP stubbing
-  gem "vcr"                        # HTTP recording
 end
