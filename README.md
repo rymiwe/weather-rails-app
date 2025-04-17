@@ -1,6 +1,7 @@
 # Weather Rails App
 
 A robust, modern Rails 8+ weather forecast application featuring:
+- SPA-like experience using Hotwire (Turbo/Stimulus) for seamless, reactive interactivity
 - Clean service-oriented architecture
 - Strong test isolation and dependency injection
 - Secure, user-friendly error handling
@@ -98,6 +99,7 @@ sequenceDiagram
 ---
 
 ## Key Architectural Choices
+- **SPA with Hotwire**: The app delivers a single-page application (SPA) experience using Hotwire (Turbo and Stimulus). All forecast interactions and UI updates happen seamlessly without full page reloads, resulting in a fast and modern user experience.
 - **Service Objects**: `ForecastService`, `GeocodingService`, and `ForecastCacheService` encapsulate business logic, keeping controllers thin and views simple.
 - **API Client Encapsulation**: All communication with the Pirate Weather API is handled by a dedicated `PirateWeatherClient` class. This ensures single responsibility, easy mocking for tests, and clean separation from business logic.
 - **Dependency Injection**: External services (like Geocoder) are injected into service objects, allowing for robust, isolated tests without global stubs or HTTP requests.
