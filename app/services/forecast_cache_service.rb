@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WeatherCacheService
+class ForecastCacheService
   # Cache expiry in minutes, configurable via WEATHER_CACHE_EXPIRY_MINUTES env variable (default: 30)
   EXPIRY = (ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i).minutes
 

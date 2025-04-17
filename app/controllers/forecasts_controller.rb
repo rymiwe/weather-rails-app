@@ -3,10 +3,9 @@ class ForecastsController < ApplicationController
     render :index
   end
 
-
   def create
     query = params[:query].to_s.strip
-    @forecast, @from_cache, error_message, @location_name, @units = WeatherService.fetch(query, refresh: params[:refresh].present?)
+    @forecast, @from_cache, error_message, @location_name, @units = ForecastService.fetch(query, refresh: params[:refresh].present?)
     flash[:alert] = error_message if error_message.present?
 
     respond_to do |format|

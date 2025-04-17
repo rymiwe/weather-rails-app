@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WeatherService
+class ForecastService
   # Returns [forecast, from_cache, error_message]
   def self.fetch(query, refresh: false)
     return [nil, false, 'Please enter an query.'] if query.blank?
@@ -14,7 +14,7 @@ class WeatherService
     location_name = geo_data[:location_name]
     units = geo_data[:units] || "us"
 
-    forecast = WeatherCacheService.read(lat, lon)
+    forecast = ForecastCacheService.read(lat, lon)
     unless forecast.nil? || refresh
       return [ forecast, true, nil, location_name, units ]
     end
@@ -22,7 +22,7 @@ class WeatherService
     begin
       client = PirateWeatherClient.new
       forecast = client.fetch_forecast(lat, lon, units: units)
-      WeatherCacheService.write(lat, lon, forecast)
+      ForecastCacheService.write(lat, lon, forecast)
       [ forecast, false, nil, location_name, units ]
     rescue => e
       [ nil, false, "Error fetching weather data.", location_name, units ]

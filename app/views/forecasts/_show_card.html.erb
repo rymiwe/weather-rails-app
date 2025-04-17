@@ -48,7 +48,7 @@
             <span class="font-bold"><%= format_temperature(day["temperatureLow"], @units) %></span>
           <% end %>
         </div>
-        <div class="text-xs text-blue-600"><%= day["summary"] %></div>
+        <div class="text-xs text-blue-600"><%= day["summary"]&.chomp('.') %></div>
       </div>
     <% end %>
   </div>
