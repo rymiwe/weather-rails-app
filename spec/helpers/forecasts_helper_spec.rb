@@ -11,5 +11,11 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ForecastsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "returns mapped icon filename for known icon" do
+    expect(helper.weather_icon_filename("clear-day")).to eq("day")
+  end
+
+  it "returns original icon name if not mapped" do
+    expect(helper.weather_icon_filename("unknown-icon")).to eq("unknown-icon")
+  end
 end
