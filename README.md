@@ -99,6 +99,7 @@ sequenceDiagram
 
 ## Key Architectural Choices
 - **Service Objects**: `ForecastService`, `GeocodingService`, and `ForecastCacheService` encapsulate business logic, keeping controllers thin and views simple.
+- **API Client Encapsulation**: All communication with the Pirate Weather API is handled by a dedicated `PirateWeatherClient` class. This ensures single responsibility, easy mocking for tests, and clean separation from business logic.
 - **Dependency Injection**: External services (like Geocoder) are injected into service objects, allowing for robust, isolated tests without global stubs or HTTP requests.
 - **Explicit Error Handling**: All user-facing errors are caught and displayed cleanly; no stack traces or sensitive info are ever leaked.
 - **Caching**: Forecasts are cached to minimize API calls, with cache expiry controlled via environment variable (`WEATHER_CACHE_EXPIRY_MINUTES`).
