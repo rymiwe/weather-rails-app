@@ -13,16 +13,16 @@ class ForecastService
     lat, lon = geo_result.coordinates.map { |c| c.round(4) }
     location_name = [geo_result.city || geo_result.data['city'] || geo_result.data['town'] || geo_result.data['village'], geo_result.state || geo_result.data['state'], geo_result.country || geo_result.data['country']].compact.join(', ')
 
-    forecast = Forecast.where(latitude: lat, longitude: lon).order(cached_at: :desc).first
-    cache_expiry = 30.minutes.ago
-    if forecast && forecast.cached_at > cache_expiry && !refresh
+    cache_key = "forecast:#{lat},#{lon}"
+    forecast = Rails.cache.read(cache_key)
+    unless forecast.nil? || refresh
       return [forecast, true, nil, location_name]
     end
 
     begin
       client = PirateWeatherClient.new
-      data = client.fetch_forecast(lat, lon)
-      forecast = Forecast.create!(latitude: lat, longitude: lon, data: data, cached_at: Time.current)
+      forecast = client.fetch_forecast(lat, lon)
+      Rails.cache.write(cache_key, forecast, expires_in: 30.minutes)
       [forecast, false, nil, location_name]
     rescue => e
       [nil, false, 'Error fetching weather data.', location_name]
