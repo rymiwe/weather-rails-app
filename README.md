@@ -2,6 +2,7 @@
 
 A robust, modern Rails 8+ weather forecast application featuring:
 - SPA-like experience using Hotwire (Turbo/Stimulus) for seamless, reactive interactivity
+- Multi-layer caching for both geocoding and weather forecasts, maximizing performance and minimizing API usage
 - Clean service-oriented architecture
 - Strong test isolation and dependency injection
 - Secure, user-friendly error handling
@@ -46,6 +47,13 @@ Below are example screenshots of the UI, showcasing the forecast results for var
 ---
 
 ## Caching Strategy
+
+### Multi-Layer Caching
+This application uses a two-layer caching strategy:
+- **Geocoder Cache**: All location lookups (turning a user query into coordinates) are cached via Rails.cache, as configured in `config/initializers/geocoder.rb`. This drastically reduces external geocoding API requests and speeds up repeat queries.
+- **Forecast Cache**: Weather forecasts for specific coordinates are also cached via Rails.cache, with expiry controlled by `WEATHER_CACHE_EXPIRY_MINUTES`. This minimizes calls to the Pirate Weather API and ensures fast, consistent results for users.
+
+Both caches are independent, so a hit in one does not guarantee a hit in the other. This layered approach maximizes efficiency and reliability.
 
 ### Narrative Description
 1. **User submits a location** via the UI (e.g., "Portland, OR").
@@ -100,6 +108,7 @@ sequenceDiagram
 
 ## Key Architectural Choices
 - **SPA with Hotwire**: The app delivers a single-page application (SPA) experience using Hotwire (Turbo and Stimulus). All forecast interactions and UI updates happen seamlessly without full page reloads, resulting in a fast and modern user experience.
+- **Multi-Layer Caching**: Both geocoding results and weather forecasts are cached independently using Rails.cache. This two-layer approach ensures minimal redundant API calls and optimal performance for both location and forecast lookups.
 - **Service Objects**: `ForecastService`, `GeocodingService`, and `ForecastCacheService` encapsulate business logic, keeping controllers thin and views simple.
 - **API Client Encapsulation**: All communication with the Pirate Weather API is handled by a dedicated `PirateWeatherClient` class. This ensures single responsibility, easy mocking for tests, and clean separation from business logic.
 - **Dependency Injection**: External services (like Geocoder) are injected into service objects, allowing for robust, isolated tests without global stubs or HTTP requests.
