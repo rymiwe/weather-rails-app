@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'ostruct'
+require_relative '../../app/services/weather_service'
 
 RSpec.describe WeatherService do
   let(:query) { 'New York, NY' }
