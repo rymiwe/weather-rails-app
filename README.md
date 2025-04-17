@@ -138,17 +138,17 @@ sequenceDiagram
 ## Running the App
 1. **Install dependencies** (from WSL terminal, as required):
    ```sh
-   wsl -u rymiwe -e bash -ic 'cd /mnt/c/Users/rymiw/CascadeProjects/weather_rails_app && bundle install'
+   bundle install
    ```
 2. **Set up the database**:
    ```sh
-   wsl -u rymiwe -e bash -ic 'cd /mnt/c/Users/rymiw/CascadeProjects/weather_rails_app && rails db:setup'
+   rails db:setup
    ```
 3. **Configure environment variables**:
    - Copy `.env.example` to `.env` and fill in secrets (API keys, etc.).
 4. **Run the server**:
    ```sh
-   wsl -u rymiwe -e bash -ic 'cd /mnt/c/Users/rymiw/CascadeProjects/weather_rails_app && rails server'
+   rails server
    ```
 5. Visit [http://localhost:3000](http://localhost:3000)
 
@@ -157,7 +157,7 @@ sequenceDiagram
 ## Testing
 - **Run all specs**:
   ```sh
-  wsl -u rymiwe -e bash -ic 'cd /mnt/c/Users/rymiw/CascadeProjects/weather_rails_app && bundle exec rspec'
+  bundle exec rspec
   ```
 - **Coverage**: SimpleCov will generate a report in `coverage/`.
 - **Test Isolation**: All external dependencies are mocked or injected. No real HTTP requests are made in tests. Geocoder is always stubbed.
