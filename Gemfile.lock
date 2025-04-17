@@ -396,7 +396,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
-  faraday
+  faraday (~> 2.0)
   geocoder (>= 1.6)
   importmap-rails
   kamal
