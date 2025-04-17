@@ -40,6 +40,12 @@ RSpec.describe 'Weather Forecast', type: :feature, js: true, vcr: { record: :new
       m.call(*args, **kwargs)
     end
 
+    # Stub PirateWeatherClient to always return a fake forecast
+    allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return({
+      "currently" => { "temperature" => 60 },
+      "daily" => [ { "icon" => "clear-day" } ]
+    })
+
     visit forecasts_path
     expect(page).to have_selector('#forecast-result')
 
