@@ -9,7 +9,18 @@ RSpec.describe ForecastService, type: :service do
   let(:lon) { coordinates[1] }
   let(:cache_key) { ForecastCacheService.key_for(lat, lon) }
 
-  let(:fake_forecast) { { "currently" => { "temperature" => 75 }, "daily" => [ { "icon" => "clear-day" } ] } }
+  let(:fake_forecast) do
+    {
+      "currently" => { "temperature" => 75 },
+      "daily" => {
+        "summary" => "Sunny",
+        "icon" => "clear-day",
+        "data" => [
+          { "icon" => "clear-day", "temperatureHigh" => 80, "temperatureLow" => 60 }
+        ]
+      }
+    }
+  end
 
   before do
     Rails.cache.clear
