@@ -1,255 +1,255 @@
-﻿2025-04-17T21:53:46.0889860Z ##[group]Run bundle exec rspec
-2025-04-17T21:53:46.0890357Z [36;1mbundle exec rspec[0m
-2025-04-17T21:53:46.0958064Z shell: /usr/bin/bash -e {0}
-2025-04-17T21:53:46.0958453Z env:
-2025-04-17T21:53:46.0958751Z   RAILS_ENV: test
-2025-04-17T21:53:46.0959469Z   DATABASE_URL: ***localhost:5432
-2025-04-17T21:53:46.0959888Z ##[endgroup]
-2025-04-17T21:53:48.9612626Z WebMock support loaded
-2025-04-17T21:53:48.9619396Z [DEBUG] Loaded gems: actioncable, actionmailbox, actionmailer, actionpack, actiontext, actionview, activejob, activemodel, activerecord, activestorage, activesupport, addressable, ast, base64, benchmark, bigdecimal, bindex, bootsnap, brakeman, builder, bundler, capybara, concurrent-ruby, connection_pool, crack, crass, csv, date, debug, did_you_mean, diff-lcs, docile, drb, error_highlight, erubi, et-orbi, faraday, faraday-net_http, fugit, geocoder, globalid, hashdiff, hotwire-rails, i18n, importmap-rails, io-console, irb, json, language_server-protocol, lint_roller, logger, loofah, mail, marcel, matrix, mini_mime, minitest, msgpack, net-http, net-imap, net-pop, net-protocol, net-smtp, nio4r, nokogiri, parallel, parser, pathname, pg, pp, prettyprint, prism, propshaft, psych, public_suffix, puma, raabro, racc, rack, rack-session, rack-test, rackup, rails, rails-dom-testing, rails-html-sanitizer, railties, rainbow, rake, rdoc, regexp_parser, reline, rexml, rspec-core, rspec-expectations, rspec-mocks, rspec-rails, rspec-support, rubocop, rubocop-ast, rubocop-performance, rubocop-rails, rubocop-rails-omakase, ruby-progressbar, rubyzip, securerandom, selenium-webdriver, simplecov, simplecov-html, simplecov_json_formatter, solid_cache, solid_queue, stimulus-rails, stringio, syntax_suggest, tailwindcss-rails, tailwindcss-ruby, thor, thruster, timeout, turbo-rails, tzinfo, unicode-display_width, unicode-emoji, uri, useragent, vcr, web-console, webmock, websocket, websocket-driver, websocket-extensions, xpath, zeitwerk
-2025-04-17T21:53:48.9626552Z Run options: exclude {cdn: true}
-2025-04-17T21:53:48.9626961Z [DEBUG] GeocodingService.lookup called with query: "Portland, OR" and geocoder: Geocoder
-2025-04-17T21:53:48.9627373Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:48.9631794Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=nil>
-2025-04-17T21:53:48.9632323Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Portland, OR"
-2025-04-17T21:53:48.9633278Z [DEBUG] Geocoder.search("Portland, OR") returned: [#<Geocoder::Result::Test:0x00007f646bfb44e8 @data={"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:48.9635342Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f646bfb44e8 @data={"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:48.9636950Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f646bfb44e8 @data={"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:48.9638009Z [DEBUG] geo_result.data: {"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:48.9638757Z [DEBUG] geo_result fields: city=Portland, state=OR, country=US, country_code=US, address=Portland, OR, USA
-2025-04-17T21:53:48.9639255Z [DEBUG] FINAL location_name for "Portland, OR": "Portland, OR, US"
-2025-04-17T21:53:48.9639685Z [DEBUG] Returning: lat: 45.5152, lon: -122.6784, location_name: Portland, OR, US, units: us
-2025-04-17T21:53:49.0049017Z F.......[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.0050453Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0053464Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0055863Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.0056960Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f646bfd6480 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0058922Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f646bfd6480 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0060770Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f646bfd6480 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0062016Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0062863Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.0063439Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.0063938Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.0190288Z ..[DEBUG] GeocodingService.lookup called with query: "London" and geocoder: Geocoder
-2025-04-17T21:53:49.0191000Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0193345Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0196021Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "London"
-2025-04-17T21:53:49.0197236Z [DEBUG] Geocoder.search("London") returned: [#<Geocoder::Result::Test:0x00007f647012bb88 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0199105Z [DEBUG] FULL geo_results for London: [#<Geocoder::Result::Test:0x00007f647012bb88 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0200663Z [DEBUG] geo_results[0].data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0202844Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f647012bb88 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>, data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0205531Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f647012bb88 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>
-2025-04-17T21:53:49.0206964Z [DEBUG] geo_result.data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0207873Z [DEBUG] geo_result fields: city=London, state=England, country=United Kingdom, country_code=GB, address=London, England, United Kingdom
-2025-04-17T21:53:49.0208488Z [DEBUG] FINAL location_name for "London": "London, England, United Kingdom"
-2025-04-17T21:53:49.0208999Z [DEBUG] Returning: lat: 51.5074, lon: -0.1278, location_name: London, England, United Kingdom, units: si
-2025-04-17T21:53:49.0259549Z .[DEBUG] GeocodingService.lookup called with query: "Unknown Place" and geocoder: Geocoder
-2025-04-17T21:53:49.0260451Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0262163Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0263952Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Unknown Place"
-2025-04-17T21:53:49.0264566Z [DEBUG] Geocoder.search("Unknown Place") returned: []
-2025-04-17T21:53:49.0313430Z .[DEBUG] GeocodingService.lookup called with query: "New York, NY; DROP TABLE users; --" and geocoder: Geocoder
-2025-04-17T21:53:49.0314472Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0316123Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0317999Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY; DROP TABLE users; --"
-2025-04-17T21:53:49.0318604Z [DEBUG] Geocoder.search("New York, NY; DROP TABLE users; --") returned: []
-2025-04-17T21:53:49.0362477Z .[DEBUG] GeocodingService.lookup called with query: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" and geocoder: Geocoder
-2025-04-17T21:53:49.0365422Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0366931Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0370799Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-2025-04-17T21:53:49.0376105Z [DEBUG] Geocoder raised ArgumentError: unknown stub request AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-2025-04-17T21:53:49.0389654Z [DEBUG] response.body for long input: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Weather</title>\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n    <meta name=\"mobile-web-app-capable\" content=\"yes\">\n    \n    \n\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/assets/favicon-37d7d545.ico\" />\n    \n\n\n    <link rel=\"icon\" href=\"/icon.png\" type=\"image/png\">\n    <link rel=\"icon\" href=\"/icon.svg\" type=\"image/svg+xml\">\n    <link rel=\"apple-touch-icon\" href=\"/icon.png\">\n\n    <link rel=\"stylesheet\" href=\"/assets/application-8b441ae0.css\" data-turbo-track=\"reload\" />\n    <script type=\"importmap\" data-turbo-track=\"reload\">{\n  \"imports\": {\n    \"application\": \"/assets/application-bfcdf840.js\",\n    \"@hotwired/turbo-rails\": \"/assets/turbo.min-1262d735.js\",\n    \"@hotwired/stimulus\": \"/assets/stimulus.min-4b1e420e.js\",\n    \"@hotwired/stimulus-loading\": \"/assets/stimulus-loading-1fc53fe7.js\",\n    \"controllers/application\": \"/assets/controllers/application-3affb389.js\",\n    \"controllers/clear_form_controller\": \"/assets/controllers/clear_form_controller-0b549570.js\",\n    \"controllers\": \"/assets/controllers/index-ee64e1f1.js\"\n  }\n}</script>\n<link rel=\"modulepreload\" href=\"/assets/application-bfcdf840.js\">\n<link rel=\"modulepreload\" href=\"/assets/turbo.min-1262d735.js\">\n<link rel=\"modulepreload\" href=\"/assets/stimulus.min-4b1e420e.js\">\n<link rel=\"modulepreload\" href=\"/assets/stimulus-loading-1fc53fe7.js\">\n<link rel=\"modulepreload\" href=\"/assets/controllers/application-3affb389.js\">\n<link rel=\"modulepreload\" href=\"/assets/controllers/clear_form_controller-0b549570.js\">\n<link rel=\"modulepreload\" href=\"/assets/controllers/index-ee64e1f1.js\">\n<script type=\"module\">import \"application\"</script>\n  </head>\n\n  <body>\n    <main class=\"container mx-auto mt-28 px-5 flex\">\n      <div class=\"fixed inset-0 min-h-screen w-screen bg-gradient-to-br from-blue-200 via-blue-400 to-blue-700 flex items-center justify-center\">\n  <div class=\"w-full max-w-md md:max-w-xl lg:max-w-3xl bg-white/80 rounded-xl shadow-lg p-8\">\n    <h1 class=\"text-3xl font-bold text-center mb-4 text-blue-900 tracking-tight\">Weather Forecast</h1>\n      <div class=\"mb-4 p-3 rounded bg-red-100 text-red-700 text-center\">\n    Could not geocode query.\n  </div>\n\n    <form data-controller=\"clear-form\" data-action=\"turbo:submit-end-&gt;clear-form#reset\" action=\"/forecasts\" accept-charset=\"UTF-8\" method=\"post\">\n      <div class=\"mb-4\">\n        <label class=\"block text-blue-900 font-semibold mb-2\" for=\"query\">Enter a location</label>\n        <input class=\"w-full px-4 py-2 rounded border border-blue-200 bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg\" autofocus=\"autofocus\" placeholder=\"address, city, or postal code\" type=\"text\" name=\"query\" id=\"query\" />\n      </div>\n      <div>\n        <input type=\"submit\" name=\"commit\" value=\"Get Forecast\" class=\"w-full py-2 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition\" data-disable-with=\"Get Forecast\" />\n      </div>\n</form>    <turbo-frame id=\"forecast-result\">\n    </turbo-frame>\n    <div class=\"mt-6 text-center text-blue-700 text-xs opacity-60\">\n      <span>Powered by Pirate Weather & Geocoder</span>\n    </div>\n  </div>\n</div>\n\n    </main>\n  </body>\n</html>\n"
-2025-04-17T21:53:49.0433808Z .[DEBUG] GeocodingService.lookup called with query: "<script>alert('x')</script>" and geocoder: Geocoder
-2025-04-17T21:53:49.0434916Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0436661Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0438692Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "<script>alert('x')</script>"
-2025-04-17T21:53:49.0439271Z [DEBUG] Geocoder.search("<script>alert('x')</script>") returned: []
-2025-04-17T21:53:49.0664487Z .......[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.0665309Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0667721Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0670437Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.0672115Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f6472206f88 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0674854Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6472206f88 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0676497Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6472206f88 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0677525Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0678255Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.0678746Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.0679167Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.0703531Z F[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.0704433Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0706723Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0709223Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.0710755Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f64722262c0 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0713673Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f64722262c0 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0715742Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f64722262c0 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0716794Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0717519Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.0717995Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.0718415Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.0718905Z [DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.0719307Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0720709Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0722214Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.0723171Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f6472222f80 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0724992Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6472222f80 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0726526Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6472222f80 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0727739Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0728448Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.0728927Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.0729347Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.0730401Z F[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.0731090Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0733373Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0735507Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.0736373Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f6472274f10 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0738064Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6472274f10 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0739822Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6472274f10 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0740832Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0741530Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.0742005Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.0742534Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.0768804Z F.[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.0769497Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0771134Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0772638Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.0773633Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f6470dff058 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0775305Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6470dff058 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0776917Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6470dff058 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0777909Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0778599Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.0779373Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.0779794Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.0786802Z .[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.0787490Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0789690Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0791213Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.0792207Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f6471124f30 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0793856Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6471124f30 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0795551Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6471124f30 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0796566Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0797375Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.0797978Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.0798402Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.0808966Z F[DEBUG] GeocodingService.lookup called with query: "London" and geocoder: Geocoder
-2025-04-17T21:53:49.0809610Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0811445Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0812823Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "London"
-2025-04-17T21:53:49.0813775Z [DEBUG] Geocoder.search("London") returned: [#<Geocoder::Result::Test:0x00007f6471204ea0 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0816049Z [DEBUG] FULL geo_results for London: [#<Geocoder::Result::Test:0x00007f6471204ea0 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0817315Z [DEBUG] geo_results[0].data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0819279Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6471204ea0 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>, data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0821695Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6471204ea0 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>
-2025-04-17T21:53:49.0823229Z [DEBUG] geo_result.data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0824547Z [DEBUG] geo_result fields: city=London, state=England, country=United Kingdom, country_code=GB, address=London, England, United Kingdom
-2025-04-17T21:53:49.0825356Z [DEBUG] FINAL location_name for "London": "London, England, United Kingdom"
-2025-04-17T21:53:49.0826128Z [DEBUG] Returning: lat: 51.5074, lon: -0.1278, location_name: London, England, United Kingdom, units: si
-2025-04-17T21:53:49.0831644Z .[DEBUG] GeocodingService.lookup called with query: "Ambiguous" and geocoder: Geocoder
-2025-04-17T21:53:49.0832216Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0834677Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0836104Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Ambiguous"
-2025-04-17T21:53:49.0838138Z [DEBUG] Geocoder.search("Ambiguous") returned: [#<Geocoder::Result::Test:0x00007f6472fdc590 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, #<Geocoder::Result::Test:0x00007f6472fdb9d8 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0840866Z [DEBUG] FULL geo_results for Ambiguous: [#<Geocoder::Result::Test:0x00007f6472fdc590 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, #<Geocoder::Result::Test:0x00007f6472fdb9d8 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0842616Z [DEBUG] geo_results[0].data: {"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0843614Z [DEBUG] geo_results[1].data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0845357Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6472fdc590 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0848306Z [DEBUG] geo_results[1]: #<Geocoder::Result::Test:0x00007f6472fdb9d8 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>, data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
-2025-04-17T21:53:49.0850806Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6472fdc590 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0852113Z [DEBUG] geo_result.data: {"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.0852897Z [DEBUG] geo_result fields: city=San Francisco, state=CA, country=US, country_code=US, address=San Francisco, CA, USA
-2025-04-17T21:53:49.0853432Z [DEBUG] FINAL location_name for "Ambiguous": "San Francisco, CA, US"
-2025-04-17T21:53:49.0853883Z [DEBUG] Returning: lat: 37.7749, lon: -122.4194, location_name: San Francisco, CA, US, units: us
-2025-04-17T21:53:49.0984829Z .[DEBUG] GeocodingService.lookup called with query: "Nowhere" and geocoder: Geocoder
-2025-04-17T21:53:49.0985383Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.0987540Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.0989279Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Nowhere"
-2025-04-17T21:53:49.0990309Z [DEBUG] Geocoder.search("Nowhere") returned: [#<Geocoder::Result::Test:0x00007f6472c2e7e0 @data={"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.0992146Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6472c2e7e0 @data={"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}
-2025-04-17T21:53:49.0993860Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6472c2e7e0 @data={"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.0995290Z [DEBUG] geo_result.data: {"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}
-2025-04-17T21:53:49.0995910Z [DEBUG] geo_result fields: city=, state=, country=, country_code=US, address=Nowhere
-2025-04-17T21:53:49.0996297Z [DEBUG] FINAL location_name for "Nowhere": "Nowhere"
-2025-04-17T21:53:49.0996651Z [DEBUG] Returning: lat: 10.0, lon: 10.0, location_name: Nowhere, units: us
-2025-04-17T21:53:49.1024702Z .[DEBUG] GeocodingService.lookup called with query: "Unknown Place" and geocoder: Geocoder
-2025-04-17T21:53:49.1025398Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.1027085Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.1029202Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Unknown Place"
-2025-04-17T21:53:49.1029607Z [DEBUG] Geocoder.search("Unknown Place") returned: []
-2025-04-17T21:53:49.1045398Z .[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
-2025-04-17T21:53:49.1046174Z [DEBUG] Geocoder Lookup: :test
-2025-04-17T21:53:49.1048450Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f646bfb4e98 @cache=#<Geocoder::Cache:0x00007f646bfb39d0 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f646bfb3890 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
-2025-04-17T21:53:49.1051019Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
-2025-04-17T21:53:49.1052472Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f6473367868 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
-2025-04-17T21:53:49.1055185Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f6473367868 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.1057535Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f6473367868 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
-2025-04-17T21:53:49.1059178Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
-2025-04-17T21:53:49.1060338Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
-2025-04-17T21:53:49.1061127Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
-2025-04-17T21:53:49.1061787Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
-2025-04-17T21:53:49.1306962Z F......
-2025-04-17T21:53:49.1759721Z 
-2025-04-17T21:53:49.1760194Z Failures:
-2025-04-17T21:53:49.1760431Z 
-2025-04-17T21:53:49.1760674Z   1) Weather Forecast shows a forecast for a location
-2025-04-17T21:53:49.1761133Z      Failure/Error: expect(page).to have_content('Portland')
-2025-04-17T21:53:49.1761926Z        expected to find text "Portland" in "Weather Forecast\nError fetching weather data.\nEnter a location\nPowered by Pirate Weather & Geocoder"
-2025-04-17T21:53:49.1762781Z      # ./spec/features/forecast_spec.rb:15:in 'block (2 levels) in <top (required)>'
-2025-04-17T21:53:49.1763365Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
-2025-04-17T21:53:49.1763679Z 
-2025-04-17T21:53:49.1763863Z   2) ForecastService.fetch caches the forecast for an query
-2025-04-17T21:53:49.1764613Z      Failure/Error: expect(forecast).to include(fake_forecast)
-2025-04-17T21:53:49.1765678Z        expected nil to include {"currently" => {"temperature" => 75}, "daily" => {"summary" => "Sunny", "icon" => "clear-day", "data" => [{"icon" => "clear-day", "temperatureHigh" => 80, "temperatureLow" => 60}]}}, but it does not respond to `include?`
-2025-04-17T21:53:49.1767361Z      # ./spec/services/forecast_service_spec.rb:39:in 'block (3 levels) in <top (required)>'
-2025-04-17T21:53:49.1767968Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
-2025-04-17T21:53:49.1768284Z 
-2025-04-17T21:53:49.1768514Z   3) ForecastService.fetch returns cached forecast on subsequent calls
-2025-04-17T21:53:49.1769025Z      Failure/Error: expect(forecast).to include(fake_forecast)
-2025-04-17T21:53:49.1770558Z        expected nil to include {"currently" => {"temperature" => 75}, "daily" => {"summary" => "Sunny", "icon" => "clear-day", "data" => [{"icon" => "clear-day", "temperatureHigh" => 80, "temperatureLow" => 60}]}}, but it does not respond to `include?`
-2025-04-17T21:53:49.1772220Z      # ./spec/services/forecast_service_spec.rb:50:in 'block (3 levels) in <top (required)>'
-2025-04-17T21:53:49.1773246Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
-2025-04-17T21:53:49.1773897Z 
-2025-04-17T21:53:49.1774390Z   4) ForecastService.fetch fetches new forecast when refresh is true
-2025-04-17T21:53:49.1775145Z      Failure/Error: expect(forecast).to eq(new_forecast)
-2025-04-17T21:53:49.1775591Z 
-2025-04-17T21:53:49.1776407Z        expected: {"currently" => {"temperature" => 80}, "daily" => {"data" => [{"icon" => "clear-day", "temperatureHigh" => 80, "temperatureLow" => 60}], "icon" => "clear-day", "summary" => "Sunny"}}
-2025-04-17T21:53:49.1777536Z             got: nil
-2025-04-17T21:53:49.1777727Z 
-2025-04-17T21:53:49.1777857Z        (compared using ==)
-2025-04-17T21:53:49.1778474Z      # ./spec/services/forecast_service_spec.rb:59:in 'block (3 levels) in <top (required)>'
-2025-04-17T21:53:49.1779294Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
-2025-04-17T21:53:49.1779719Z 
-2025-04-17T21:53:49.1779974Z   5) ForecastService.fetch handles missing/malformed forecast data
-2025-04-17T21:53:49.1780534Z      Failure/Error: expect(forecast).to eq({})
-2025-04-17T21:53:49.1780853Z 
-2025-04-17T21:53:49.1780974Z        expected: {}
-2025-04-17T21:53:49.1781271Z             got: nil
-2025-04-17T21:53:49.1781457Z 
-2025-04-17T21:53:49.1781581Z        (compared using ==)
-2025-04-17T21:53:49.1782180Z      # ./spec/services/forecast_service_spec.rb:81:in 'block (3 levels) in <top (required)>'
-2025-04-17T21:53:49.1782982Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
-2025-04-17T21:53:49.1783452Z 
-2025-04-17T21:53:49.1783785Z   6) ForecastService.fetch handles malformed forecast hash (missing keys)
-2025-04-17T21:53:49.1784667Z      Failure/Error: expect(forecast).to eq({})
-2025-04-17T21:53:49.1784994Z 
-2025-04-17T21:53:49.1785129Z        expected: {}
-2025-04-17T21:53:49.1785428Z             got: nil
-2025-04-17T21:53:49.1785624Z 
-2025-04-17T21:53:49.1785763Z        (compared using ==)
-2025-04-17T21:53:49.1786379Z      # ./spec/services/forecast_service_spec.rb:156:in 'block (3 levels) in <top (required)>'
-2025-04-17T21:53:49.1787263Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
-2025-04-17T21:53:49.1788474Z 
-2025-04-17T21:53:49.1788780Z Finished in 0.21256 seconds (files took 2.59 seconds to load)
-2025-04-17T21:53:49.1789307Z 38 examples, 6 failures
-2025-04-17T21:53:49.1789530Z 
-2025-04-17T21:53:49.1789662Z Failed examples:
-2025-04-17T21:53:49.1789851Z 
-2025-04-17T21:53:49.1790270Z rspec ./spec/features/forecast_spec.rb:4 # Weather Forecast shows a forecast for a location
-2025-04-17T21:53:49.1791379Z rspec ./spec/services/forecast_service_spec.rb:34 # ForecastService.fetch caches the forecast for an query
-2025-04-17T21:53:49.1792615Z rspec ./spec/services/forecast_service_spec.rb:45 # ForecastService.fetch returns cached forecast on subsequent calls
-2025-04-17T21:53:49.1793921Z rspec ./spec/services/forecast_service_spec.rb:54 # ForecastService.fetch fetches new forecast when refresh is true
-2025-04-17T21:53:49.1795412Z rspec ./spec/services/forecast_service_spec.rb:77 # ForecastService.fetch handles missing/malformed forecast data
-2025-04-17T21:53:49.1797067Z rspec ./spec/services/forecast_service_spec.rb:152 # ForecastService.fetch handles malformed forecast hash (missing keys)
-2025-04-17T21:53:49.1797857Z 
-2025-04-17T21:53:49.2961286Z Stopped processing SimpleCov as a previous error not related to SimpleCov has been detected
-2025-04-17T21:53:49.2962182Z Coverage report generated for RSpec to /home/runner/work/weather-rails-app/weather-rails-app/coverage.
-2025-04-17T21:53:49.2963050Z Line Coverage: 88.89% (96 / 108)
-2025-04-17T21:53:49.3225151Z ##[error]Process completed with exit code 1.
+﻿2025-04-17T22:15:42.2182385Z ##[group]Run bundle exec rspec
+2025-04-17T22:15:42.2182681Z [36;1mbundle exec rspec[0m
+2025-04-17T22:15:42.2229609Z shell: /usr/bin/bash -e {0}
+2025-04-17T22:15:42.2229825Z env:
+2025-04-17T22:15:42.2229987Z   RAILS_ENV: test
+2025-04-17T22:15:42.2230409Z   DATABASE_URL: ***localhost:5432
+2025-04-17T22:15:42.2230641Z ##[endgroup]
+2025-04-17T22:15:44.7744542Z WebMock support loaded
+2025-04-17T22:15:44.7753009Z [DEBUG] Loaded gems: actioncable, actionmailbox, actionmailer, actionpack, actiontext, actionview, activejob, activemodel, activerecord, activestorage, activesupport, addressable, ast, base64, benchmark, bigdecimal, bindex, bootsnap, brakeman, builder, bundler, capybara, concurrent-ruby, connection_pool, crack, crass, csv, date, debug, did_you_mean, diff-lcs, docile, drb, error_highlight, erubi, et-orbi, faraday, faraday-net_http, fugit, geocoder, globalid, hashdiff, hotwire-rails, i18n, importmap-rails, io-console, irb, json, language_server-protocol, lint_roller, logger, loofah, mail, marcel, matrix, mini_mime, minitest, msgpack, net-http, net-imap, net-pop, net-protocol, net-smtp, nio4r, nokogiri, parallel, parser, pathname, pg, pp, prettyprint, prism, propshaft, psych, public_suffix, puma, raabro, racc, rack, rack-session, rack-test, rackup, rails, rails-dom-testing, rails-html-sanitizer, railties, rainbow, rake, rdoc, regexp_parser, reline, rexml, rspec-core, rspec-expectations, rspec-mocks, rspec-rails, rspec-support, rubocop, rubocop-ast, rubocop-performance, rubocop-rails, rubocop-rails-omakase, ruby-progressbar, rubyzip, securerandom, selenium-webdriver, simplecov, simplecov-html, simplecov_json_formatter, solid_cache, solid_queue, stimulus-rails, stringio, syntax_suggest, tailwindcss-rails, tailwindcss-ruby, thor, thruster, timeout, turbo-rails, tzinfo, unicode-display_width, unicode-emoji, uri, useragent, vcr, web-console, webmock, websocket, websocket-driver, websocket-extensions, xpath, zeitwerk
+2025-04-17T22:15:44.7759563Z Run options: exclude {cdn: true}
+2025-04-17T22:15:44.7760010Z [DEBUG] GeocodingService.lookup called with query: "Portland, OR" and geocoder: Geocoder
+2025-04-17T22:15:44.7760475Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.7765361Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=nil>
+2025-04-17T22:15:44.7765873Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Portland, OR"
+2025-04-17T22:15:44.7766855Z [DEBUG] Geocoder.search("Portland, OR") returned: [#<Geocoder::Result::Test:0x00007f05fcf71bc0 @data={"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.7768572Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fcf71bc0 @data={"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.7770164Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fcf71bc0 @data={"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.7771229Z [DEBUG] geo_result.data: {"latitude" => 45.5152, "longitude" => -122.6784, "address" => "Portland, OR, USA", "city" => "Portland", "state" => "OR", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.7771999Z [DEBUG] geo_result fields: city=Portland, state=OR, country=US, country_code=US, address=Portland, OR, USA
+2025-04-17T22:15:44.7772500Z [DEBUG] FINAL location_name for "Portland, OR": "Portland, OR, US"
+2025-04-17T22:15:44.7772938Z [DEBUG] Returning: lat: 45.5152, lon: -122.6784, location_name: Portland, OR, US, units: us
+2025-04-17T22:15:44.8129712Z F.......[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8131087Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8133015Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8135005Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8136211Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05fcbe3c10 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8138046Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fcbe3c10 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8139843Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fcbe3c10 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8141033Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8141842Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8142395Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8142869Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.8243194Z ..[DEBUG] GeocodingService.lookup called with query: "London" and geocoder: Geocoder
+2025-04-17T22:15:44.8244031Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8245931Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8247402Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "London"
+2025-04-17T22:15:44.8248412Z [DEBUG] Geocoder.search("London") returned: [#<Geocoder::Result::Test:0x00007f05fcf59548 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8249970Z [DEBUG] FULL geo_results for London: [#<Geocoder::Result::Test:0x00007f05fcf59548 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8251267Z [DEBUG] geo_results[0].data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8252988Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fcf59548 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>, data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8255302Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fcf59548 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>
+2025-04-17T22:15:44.8256570Z [DEBUG] geo_result.data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8257614Z [DEBUG] geo_result fields: city=London, state=England, country=United Kingdom, country_code=GB, address=London, England, United Kingdom
+2025-04-17T22:15:44.8258233Z [DEBUG] FINAL location_name for "London": "London, England, United Kingdom"
+2025-04-17T22:15:44.8258744Z [DEBUG] Returning: lat: 51.5074, lon: -0.1278, location_name: London, England, United Kingdom, units: si
+2025-04-17T22:15:44.8301726Z .[DEBUG] GeocodingService.lookup called with query: "Unknown Place" and geocoder: Geocoder
+2025-04-17T22:15:44.8302445Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8304281Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8306090Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Unknown Place"
+2025-04-17T22:15:44.8306566Z [DEBUG] Geocoder.search("Unknown Place") returned: []
+2025-04-17T22:15:44.8351957Z .[DEBUG] GeocodingService.lookup called with query: "New York, NY; DROP TABLE users; --" and geocoder: Geocoder
+2025-04-17T22:15:44.8352757Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8355537Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8357401Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY; DROP TABLE users; --"
+2025-04-17T22:15:44.8358026Z [DEBUG] Geocoder.search("New York, NY; DROP TABLE users; --") returned: []
+2025-04-17T22:15:44.8401329Z .[DEBUG] GeocodingService.lookup called with query: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" and geocoder: Geocoder
+2025-04-17T22:15:44.8403648Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8405176Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8408313Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+2025-04-17T22:15:44.8412421Z [DEBUG] Geocoder raised ArgumentError: unknown stub request AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2025-04-17T22:15:44.8428381Z [DEBUG] response.body for long input: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Weather</title>\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n    <meta name=\"mobile-web-app-capable\" content=\"yes\">\n    \n    \n\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/assets/favicon-37d7d545.ico\" />\n    \n\n\n    <link rel=\"icon\" href=\"/icon.png\" type=\"image/png\">\n    <link rel=\"icon\" href=\"/icon.svg\" type=\"image/svg+xml\">\n    <link rel=\"apple-touch-icon\" href=\"/icon.png\">\n\n    <link rel=\"stylesheet\" href=\"/assets/application-8b441ae0.css\" data-turbo-track=\"reload\" />\n    <script type=\"importmap\" data-turbo-track=\"reload\">{\n  \"imports\": {\n    \"application\": \"/assets/application-bfcdf840.js\",\n    \"@hotwired/turbo-rails\": \"/assets/turbo.min-1262d735.js\",\n    \"@hotwired/stimulus\": \"/assets/stimulus.min-4b1e420e.js\",\n    \"@hotwired/stimulus-loading\": \"/assets/stimulus-loading-1fc53fe7.js\",\n    \"controllers/application\": \"/assets/controllers/application-3affb389.js\",\n    \"controllers/clear_form_controller\": \"/assets/controllers/clear_form_controller-0b549570.js\",\n    \"controllers\": \"/assets/controllers/index-ee64e1f1.js\"\n  }\n}</script>\n<link rel=\"modulepreload\" href=\"/assets/application-bfcdf840.js\">\n<link rel=\"modulepreload\" href=\"/assets/turbo.min-1262d735.js\">\n<link rel=\"modulepreload\" href=\"/assets/stimulus.min-4b1e420e.js\">\n<link rel=\"modulepreload\" href=\"/assets/stimulus-loading-1fc53fe7.js\">\n<link rel=\"modulepreload\" href=\"/assets/controllers/application-3affb389.js\">\n<link rel=\"modulepreload\" href=\"/assets/controllers/clear_form_controller-0b549570.js\">\n<link rel=\"modulepreload\" href=\"/assets/controllers/index-ee64e1f1.js\">\n<script type=\"module\">import \"application\"</script>\n  </head>\n\n  <body>\n    <main class=\"container mx-auto mt-28 px-5 flex\">\n      <div class=\"fixed inset-0 min-h-screen w-screen bg-gradient-to-br from-blue-200 via-blue-400 to-blue-700 flex items-center justify-center\">\n  <div class=\"w-full max-w-md md:max-w-xl lg:max-w-3xl bg-white/80 rounded-xl shadow-lg p-8\">\n    <h1 class=\"text-3xl font-bold text-center mb-4 text-blue-900 tracking-tight\">Weather Forecast</h1>\n      <div class=\"mb-4 p-3 rounded bg-red-100 text-red-700 text-center\">\n    Could not geocode query.\n  </div>\n\n    <form data-controller=\"clear-form\" data-action=\"turbo:submit-end-&gt;clear-form#reset\" action=\"/forecasts\" accept-charset=\"UTF-8\" method=\"post\">\n      <div class=\"mb-4\">\n        <label class=\"block text-blue-900 font-semibold mb-2\" for=\"query\">Enter a location</label>\n        <input class=\"w-full px-4 py-2 rounded border border-blue-200 bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg\" autofocus=\"autofocus\" placeholder=\"address, city, or postal code\" type=\"text\" name=\"query\" id=\"query\" />\n      </div>\n      <div>\n        <input type=\"submit\" name=\"commit\" value=\"Get Forecast\" class=\"w-full py-2 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition\" data-disable-with=\"Get Forecast\" />\n      </div>\n</form>    <turbo-frame id=\"forecast-result\">\n    </turbo-frame>\n    <div class=\"mt-6 text-center text-blue-700 text-xs opacity-60\">\n      <span>Powered by Pirate Weather & Geocoder</span>\n    </div>\n  </div>\n</div>\n\n    </main>\n  </body>\n</html>\n"
+2025-04-17T22:15:44.8470114Z .[DEBUG] GeocodingService.lookup called with query: "<script>alert('x')</script>" and geocoder: Geocoder
+2025-04-17T22:15:44.8471069Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8474098Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8475598Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "<script>alert('x')</script>"
+2025-04-17T22:15:44.8476216Z [DEBUG] Geocoder.search("<script>alert('x')</script>") returned: []
+2025-04-17T22:15:44.8681507Z .......[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8682226Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8684674Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8686828Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8687821Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05fd5a2210 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8689635Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fd5a2210 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8691469Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fd5a2210 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8692778Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8693889Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8694485Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8694972Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.8709028Z F[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8709726Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8712008Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8714618Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8716159Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05fd99b060 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8718294Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fd99b060 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8719838Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fd99b060 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8720985Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8721701Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8722175Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8722596Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.8723085Z [DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8723476Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8725137Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8726678Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8727732Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05fd993bf8 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8729395Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fd993bf8 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8731009Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fd993bf8 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8732018Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8733097Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8734062Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8734784Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.8735683Z F[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8736368Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8738366Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8739910Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8740771Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05fef76b78 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8742710Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fef76b78 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8744399Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fef76b78 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8745413Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8746109Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8746586Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8746996Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.8774096Z F.[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8774890Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8777221Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8779868Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8781479Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05feff2f48 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8784550Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05feff2f48 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8787400Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05feff2f48 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8789326Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8790645Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8791740Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8792517Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.8795897Z .[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8796648Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8799009Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8801944Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8803577Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05ff006728 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8806702Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05ff006728 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8809524Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05ff006728 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8811363Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8812648Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8813550Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8814470Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.8820472Z F[DEBUG] GeocodingService.lookup called with query: "London" and geocoder: Geocoder
+2025-04-17T22:15:44.8821208Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8823584Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8826328Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "London"
+2025-04-17T22:15:44.8828088Z [DEBUG] Geocoder.search("London") returned: [#<Geocoder::Result::Test:0x00007f05ff053320 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8830863Z [DEBUG] FULL geo_results for London: [#<Geocoder::Result::Test:0x00007f05ff053320 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8833168Z [DEBUG] geo_results[0].data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8836679Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05ff053320 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>, data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8840188Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05ff053320 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>
+2025-04-17T22:15:44.8842577Z [DEBUG] geo_result.data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8844471Z [DEBUG] geo_result fields: city=London, state=England, country=United Kingdom, country_code=GB, address=London, England, United Kingdom
+2025-04-17T22:15:44.8845599Z [DEBUG] FINAL location_name for "London": "London, England, United Kingdom"
+2025-04-17T22:15:44.8846650Z [DEBUG] Returning: lat: 51.5074, lon: -0.1278, location_name: London, England, United Kingdom, units: si
+2025-04-17T22:15:44.8847668Z .[DEBUG] GeocodingService.lookup called with query: "Ambiguous" and geocoder: Geocoder
+2025-04-17T22:15:44.8848391Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8850732Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8853363Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Ambiguous"
+2025-04-17T22:15:44.8856335Z [DEBUG] Geocoder.search("Ambiguous") returned: [#<Geocoder::Result::Test:0x00007f05ff0601d8 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, #<Geocoder::Result::Test:0x00007f05fdb9f9d8 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8861169Z [DEBUG] FULL geo_results for Ambiguous: [#<Geocoder::Result::Test:0x00007f05ff0601d8 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, #<Geocoder::Result::Test:0x00007f05fdb9f9d8 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8864675Z [DEBUG] geo_results[0].data: {"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8866623Z [DEBUG] geo_results[1].data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8869523Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05ff0601d8 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8873926Z [DEBUG] geo_results[1]: #<Geocoder::Result::Test:0x00007f05fdb9f9d8 @data={"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}, @cache_hit=nil>, data: {"latitude" => 51.5074, "longitude" => -0.1278, "address" => "London, England, United Kingdom", "city" => "London", "state" => "England", "country" => "United Kingdom", "country_code" => "GB"}
+2025-04-17T22:15:44.8877495Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05ff0601d8 @data={"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8879588Z [DEBUG] geo_result.data: {"latitude" => 37.7749, "longitude" => -122.4194, "address" => "San Francisco, CA, USA", "city" => "San Francisco", "state" => "CA", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8881036Z [DEBUG] geo_result fields: city=San Francisco, state=CA, country=US, country_code=US, address=San Francisco, CA, USA
+2025-04-17T22:15:44.8882012Z [DEBUG] FINAL location_name for "Ambiguous": "San Francisco, CA, US"
+2025-04-17T22:15:44.8882848Z [DEBUG] Returning: lat: 37.7749, lon: -122.4194, location_name: San Francisco, CA, US, units: us
+2025-04-17T22:15:44.8884005Z .[DEBUG] GeocodingService.lookup called with query: "Nowhere" and geocoder: Geocoder
+2025-04-17T22:15:44.8884729Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8887131Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8889695Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Nowhere"
+2025-04-17T22:15:44.8891211Z [DEBUG] Geocoder.search("Nowhere") returned: [#<Geocoder::Result::Test:0x00007f05fdbb19a8 @data={"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8894196Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fdbb19a8 @data={"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}
+2025-04-17T22:15:44.8896842Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fdbb19a8 @data={"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8898604Z [DEBUG] geo_result.data: {"latitude" => 10.0, "longitude" => 10.0, "address" => "Nowhere", "city" => nil, "state" => nil, "country" => nil, "country_code" => "US"}
+2025-04-17T22:15:44.8899735Z [DEBUG] geo_result fields: city=, state=, country=, country_code=US, address=Nowhere
+2025-04-17T22:15:44.8900457Z [DEBUG] FINAL location_name for "Nowhere": "Nowhere"
+2025-04-17T22:15:44.8901109Z [DEBUG] Returning: lat: 10.0, lon: 10.0, location_name: Nowhere, units: us
+2025-04-17T22:15:44.8914227Z .[DEBUG] GeocodingService.lookup called with query: "Unknown Place" and geocoder: Geocoder
+2025-04-17T22:15:44.8914995Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8917207Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8919786Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "Unknown Place"
+2025-04-17T22:15:44.8920492Z [DEBUG] Geocoder.search("Unknown Place") returned: []
+2025-04-17T22:15:44.8931833Z .[DEBUG] GeocodingService.lookup called with query: "New York, NY" and geocoder: Geocoder
+2025-04-17T22:15:44.8932840Z [DEBUG] Geocoder Lookup: :test
+2025-04-17T22:15:44.8935380Z [DEBUG] Geocoder Lookup Class: #<Geocoder::Lookup::Test:0x00007f05fcf72570 @cache=#<Geocoder::Cache:0x00007f05fcf710a8 @class=Geocoder::CacheStore::Generic, @store_service=#<Geocoder::CacheStore::Generic:0x00007f05fcf70f68 @store=#<ActiveSupport::Cache::MemoryStore entries=0, size=0, options={compress: false, compress_threshold: 1024}>, @config={prefix: "geocoder:", expiration: nil}, @prefix="geocoder:">>>
+2025-04-17T22:15:44.8937662Z [DEBUG] [STUB CHECK] Geocoder.search called with query: "New York, NY"
+2025-04-17T22:15:44.8939244Z [DEBUG] Geocoder.search("New York, NY") returned: [#<Geocoder::Result::Test:0x00007f05fe06e590 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>]
+2025-04-17T22:15:44.8942148Z [DEBUG] geo_results[0]: #<Geocoder::Result::Test:0x00007f05fe06e590 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>, data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8945085Z [DEBUG] Picked geo_result: #<Geocoder::Result::Test:0x00007f05fe06e590 @data={"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}, @cache_hit=nil>
+2025-04-17T22:15:44.8947041Z [DEBUG] geo_result.data: {"latitude" => 40.7128, "longitude" => -74.006, "address" => "New York, NY, USA", "city" => "New York", "state" => "NY", "country" => "US", "country_code" => "US"}
+2025-04-17T22:15:44.8948330Z [DEBUG] geo_result fields: city=New York, state=NY, country=US, country_code=US, address=New York, NY, USA
+2025-04-17T22:15:44.8949245Z [DEBUG] FINAL location_name for "New York, NY": "New York, NY, US"
+2025-04-17T22:15:44.8950011Z [DEBUG] Returning: lat: 40.7128, lon: -74.006, location_name: New York, NY, US, units: us
+2025-04-17T22:15:44.9267784Z F......
+2025-04-17T22:15:44.9877409Z 
+2025-04-17T22:15:44.9877866Z Failures:
+2025-04-17T22:15:44.9878111Z 
+2025-04-17T22:15:44.9878349Z   1) Weather Forecast shows a forecast for a location
+2025-04-17T22:15:44.9878976Z      Failure/Error: expect(page).to have_content('Portland')
+2025-04-17T22:15:44.9880071Z        expected to find text "Portland" in "Weather Forecast\nError fetching weather data.\nEnter a location\nPowered by Pirate Weather & Geocoder"
+2025-04-17T22:15:44.9881259Z      # ./spec/features/forecast_spec.rb:26:in 'block (2 levels) in <top (required)>'
+2025-04-17T22:15:44.9882055Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
+2025-04-17T22:15:44.9882490Z 
+2025-04-17T22:15:44.9882747Z   2) ForecastService.fetch caches the forecast for an query
+2025-04-17T22:15:44.9883396Z      Failure/Error: expect(forecast).to include(fake_forecast)
+2025-04-17T22:15:44.9885077Z        expected nil to include {"currently" => {"temperature" => 75}, "daily" => {"summary" => "Sunny", "icon" => "clear-day", "data" => [{"icon" => "clear-day", "temperatureHigh" => 80, "temperatureLow" => 60}]}}, but it does not respond to `include?`
+2025-04-17T22:15:44.9887062Z      # ./spec/services/forecast_service_spec.rb:103:in 'block (3 levels) in <top (required)>'
+2025-04-17T22:15:44.9887914Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
+2025-04-17T22:15:44.9888350Z 
+2025-04-17T22:15:44.9888668Z   3) ForecastService.fetch returns cached forecast on subsequent calls
+2025-04-17T22:15:44.9889377Z      Failure/Error: expect(forecast).to include(fake_forecast)
+2025-04-17T22:15:44.9890756Z        expected nil to include {"currently" => {"temperature" => 75}, "daily" => {"summary" => "Sunny", "icon" => "clear-day", "data" => [{"icon" => "clear-day", "temperatureHigh" => 80, "temperatureLow" => 60}]}}, but it does not respond to `include?`
+2025-04-17T22:15:44.9892543Z      # ./spec/services/forecast_service_spec.rb:114:in 'block (3 levels) in <top (required)>'
+2025-04-17T22:15:44.9893327Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
+2025-04-17T22:15:44.9894009Z 
+2025-04-17T22:15:44.9894305Z   4) ForecastService.fetch fetches new forecast when refresh is true
+2025-04-17T22:15:44.9894937Z      Failure/Error: expect(forecast).to eq(new_forecast)
+2025-04-17T22:15:44.9895310Z 
+2025-04-17T22:15:44.9896028Z        expected: {"currently" => {"temperature" => 80}, "daily" => {"data" => [{"icon" => "clear-day", "temperatureHigh" => 80, "temperatureLow" => 60}], "icon" => "clear-day", "summary" => "Sunny"}}
+2025-04-17T22:15:44.9896929Z             got: nil
+2025-04-17T22:15:44.9897100Z 
+2025-04-17T22:15:44.9897209Z        (compared using ==)
+2025-04-17T22:15:44.9897768Z      # ./spec/services/forecast_service_spec.rb:123:in 'block (3 levels) in <top (required)>'
+2025-04-17T22:15:44.9898489Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
+2025-04-17T22:15:44.9898897Z 
+2025-04-17T22:15:44.9899168Z   5) ForecastService.fetch handles missing/malformed forecast data
+2025-04-17T22:15:44.9899742Z      Failure/Error: expect(forecast).to eq({})
+2025-04-17T22:15:44.9900060Z 
+2025-04-17T22:15:44.9900171Z        expected: {}
+2025-04-17T22:15:44.9900460Z             got: nil
+2025-04-17T22:15:44.9900650Z 
+2025-04-17T22:15:44.9900769Z        (compared using ==)
+2025-04-17T22:15:44.9901335Z      # ./spec/services/forecast_service_spec.rb:145:in 'block (3 levels) in <top (required)>'
+2025-04-17T22:15:44.9902088Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
+2025-04-17T22:15:44.9902481Z 
+2025-04-17T22:15:44.9902782Z   6) ForecastService.fetch handles malformed forecast hash (missing keys)
+2025-04-17T22:15:44.9903397Z      Failure/Error: expect(forecast).to eq({})
+2025-04-17T22:15:44.9903887Z 
+2025-04-17T22:15:44.9904011Z        expected: {}
+2025-04-17T22:15:44.9904306Z             got: nil
+2025-04-17T22:15:44.9904488Z 
+2025-04-17T22:15:44.9904609Z        (compared using ==)
+2025-04-17T22:15:44.9905198Z      # ./spec/services/forecast_service_spec.rb:220:in 'block (3 levels) in <top (required)>'
+2025-04-17T22:15:44.9905964Z      # ./spec/rails_helper.rb:88:in 'block (2 levels) in <top (required)>'
+2025-04-17T22:15:44.9906382Z 
+2025-04-17T22:15:44.9906608Z Finished in 0.19232 seconds (files took 2.29 seconds to load)
+2025-04-17T22:15:44.9907096Z 38 examples, 6 failures
+2025-04-17T22:15:44.9907299Z 
+2025-04-17T22:15:44.9907411Z Failed examples:
+2025-04-17T22:15:44.9907608Z 
+2025-04-17T22:15:44.9908020Z rspec ./spec/features/forecast_spec.rb:4 # Weather Forecast shows a forecast for a location
+2025-04-17T22:15:44.9909045Z rspec ./spec/services/forecast_service_spec.rb:98 # ForecastService.fetch caches the forecast for an query
+2025-04-17T22:15:44.9910202Z rspec ./spec/services/forecast_service_spec.rb:109 # ForecastService.fetch returns cached forecast on subsequent calls
+2025-04-17T22:15:44.9911416Z rspec ./spec/services/forecast_service_spec.rb:118 # ForecastService.fetch fetches new forecast when refresh is true
+2025-04-17T22:15:44.9912534Z rspec ./spec/services/forecast_service_spec.rb:141 # ForecastService.fetch handles missing/malformed forecast data
+2025-04-17T22:15:44.9914069Z rspec ./spec/services/forecast_service_spec.rb:216 # ForecastService.fetch handles malformed forecast hash (missing keys)
+2025-04-17T22:15:44.9914721Z 
+2025-04-17T22:15:45.0880775Z Stopped processing SimpleCov as a previous error not related to SimpleCov has been detected
+2025-04-17T22:15:45.0881841Z Coverage report generated for RSpec to /home/runner/work/weather-rails-app/weather-rails-app/coverage.
+2025-04-17T22:15:45.0882578Z Line Coverage: 88.89% (96 / 108)
+2025-04-17T22:15:45.1129029Z ##[error]Process completed with exit code 1.
