@@ -22,8 +22,25 @@ RSpec.describe ForecastCacheService do
   it 'expires cache after expiry time' do
     ForecastCacheService.write(lat, lon, weather)
     key = ForecastCacheService.key_for(lat, lon)
+    # Simulate expiry by deleting the cache entry
     Rails.cache.delete(key)
     expect(ForecastCacheService.read(lat, lon)).to be_nil
+  end
+
+  it 'does not overwrite cache for different lat/lon' do
+    ForecastCacheService.write(lat, lon, weather)
+    other_lat, other_lon = lat + 1, lon + 1
+    other_weather = { 'currently' => { 'temperature' => 90 } }
+    ForecastCacheService.write(other_lat, other_lon, other_weather)
+    expect(ForecastCacheService.read(lat, lon)).to include('currently')
+    other_cached = ForecastCacheService.read(other_lat, other_lon)
+    expect(other_cached['currently']).to eq(other_weather['currently'])
+    expect { Time.parse(other_cached['cached_at']) }.not_to raise_error
+  end
+
+  it 'handles nil/empty weather data' do
+    ForecastCacheService.write(lat, lon, nil)
+    expect(ForecastCacheService.read(lat, lon)).to be_nil.or be_empty
   end
 
   it 'deletes cache' do

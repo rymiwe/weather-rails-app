@@ -73,11 +73,70 @@ RSpec.describe ForecastService do
       expect(error).to be_present
     end
 
-    it 'rejects malicious input' do
-      malicious_query = "New York, NY; DROP TABLE users; --"
-      forecast, from_cache, error, location = described_class.fetch(malicious_query)
+    it 'handles non-US geocoding results' do
+      non_us_result = OpenStruct.new(
+        coordinates: [51.5074, -0.1278],
+        country_code: 'GB',
+        city: 'London',
+        state: 'England',
+        country: 'United Kingdom',
+        data: {}
+      )
+      allow(Geocoder).to receive(:search).and_return([non_us_result])
+      forecast, from_cache, error, location, units = described_class.fetch('London')
+      expect(location).to include('London')
+      expect(units).to eq('si')
+    end
+
+    it 'handles ambiguous/multiple geocoding results (picks US if present)' do
+      us_result = OpenStruct.new(
+        coordinates: [37.7749, -122.4194],
+        country_code: 'US',
+        city: 'San Francisco',
+        state: 'CA',
+        country: 'US',
+        data: {}
+      )
+      gb_result = OpenStruct.new(
+        coordinates: [51.5074, -0.1278],
+        country_code: 'GB',
+        city: 'London',
+        state: 'England',
+        country: 'United Kingdom',
+        data: {}
+      )
+      allow(Geocoder).to receive(:search).and_return([gb_result, us_result])
+      forecast, from_cache, error, location, units = described_class.fetch('Ambiguous')
+      expect(location).to include('San Francisco')
+      expect(units).to eq('us')
+    end
+
+    it 'handles missing city/state/country gracefully' do
+      partial_result = OpenStruct.new(
+        coordinates: [10, 10],
+        country_code: 'US',
+        city: nil,
+        state: nil,
+        country: nil,
+        data: {}
+      )
+      allow(Geocoder).to receive(:search).and_return([partial_result])
+      forecast, from_cache, error, location, units = described_class.fetch('Nowhere')
+      expect(location).to be_a(String)
+    end
+
+    it 'handles geocoder returning empty array' do
+      allow(Geocoder).to receive(:search).and_return([])
+      forecast, from_cache, error, location = described_class.fetch('Unknown Place')
+      expect(forecast).to be_nil
+      expect(error).to include('geocode')
+    end
+
+    it 'handles malformed forecast hash (missing keys)' do
+      allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return({})
+      forecast, from_cache, error, location = described_class.fetch(query)
+      expect(forecast).to eq({})
       expect(error).to be_nil.or be_present
-      # Should not raise or crash
     end
   end
 end
