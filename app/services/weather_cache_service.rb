@@ -4,7 +4,7 @@ class WeatherCacheService
   # Cache expiry in minutes, configurable via WEATHER_CACHE_EXPIRY_MINUTES env variable (default: 30)
   EXPIRY = (ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i).minutes
 
-  # Returns the cache key for a given lat/lon and units
+  # Returns the cache key for a given lat/lon
   def self.key_for(lat, lon)
     "weather:#{lat},#{lon}"
   end
@@ -16,6 +16,9 @@ class WeatherCacheService
 
   # Writes weather data to cache
   def self.write(lat, lon, weather)
+    if weather.is_a?(Hash)
+      weather = weather.merge("cached_at" => Time.current.iso8601)
+    end
     Rails.cache.write(key_for(lat, lon), weather, expires_in: EXPIRY)
   end
 
