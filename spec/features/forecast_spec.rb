@@ -33,11 +33,12 @@ RSpec.describe 'Weather Forecast', type: :feature, js: true do
       )
     ])
 
-    # Inject the mock geocoder into ForecastService via controller (if controller supports it)
-    # If not, you may need to stub ForecastService.fetch to always use this mock_geocoder.
-    allow(ForecastService).to receive(:fetch).and_wrap_original do |m, *args, **kwargs|
-      kwargs[:geocoder] = mock_geocoder
-      m.call(*args, **kwargs)
+    before do
+      ForecastsController.test_geocoder = mock_geocoder
+    end
+
+    after do
+      ForecastsController.test_geocoder = nil
     end
 
     # Stub PirateWeatherClient to always return a fake forecast
