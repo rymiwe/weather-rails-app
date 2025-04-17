@@ -83,7 +83,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config google-chrome-stable
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config google-chrome-stable libnss3 libgconf-2-4 libxi6 libxss1 libappindicator3-1 fonts-liberation
 
       - name: Checkout code
         uses: actions/checkout@v4
