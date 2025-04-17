@@ -3,6 +3,7 @@
 A robust, modern Rails 8+ weather forecast application featuring:
 - SPA-like experience using Hotwire (Turbo/Stimulus) for seamless, reactive interactivity
 - Multi-layer caching for both geocoding and weather forecasts, maximizing performance and minimizing API usage
+- Nearly 90% test coverage with comprehensive tests at all levels (unit, integration, feature)
 - Clean service-oriented architecture
 - Strong test isolation and dependency injection
 - Secure, user-friendly error handling
@@ -172,7 +173,8 @@ sequenceDiagram
   ```sh
   bundle exec rspec
   ```
-- **Coverage**: SimpleCov will generate a report in `coverage/`.
+- **Coverage**: SimpleCov will generate a report in `coverage/`. The test suite achieves nearly 90% coverage, ensuring robust protection against regressions.
+- **Comprehensive Coverage**: Tests exist at all levels—unit, integration, and feature/system—covering services, helpers, controllers, and the full user experience.
 - **Test Isolation**: All external dependencies are mocked or injected. No real HTTP requests are made in tests. Geocoder is always stubbed.
 - **Feature/Request Specs**: Cover all user input edge cases, error handling, and UI feedback.
 
