@@ -146,7 +146,8 @@ sequenceDiagram
    rails db:setup
    ```
 3. **Configure environment variables**:
-   - Copy `.env.example` to `.env` and fill in secrets (API keys, etc.).
+   - Copy `.env.example` to `.env` and set `WEATHER_CACHE_EXPIRY_MINUTES` as needed. (No API keys are stored here.)
+   - The Pirate Weather API key is securely stored in [Rails credentials](https://guides.rubyonrails.org/security.html#custom-credentials). See below for details.
 4. **Run the server**:
    ```sh
    rails server
