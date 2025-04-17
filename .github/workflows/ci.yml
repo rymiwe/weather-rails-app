@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Ensure binstubs are executable
+        run: chmod +x bin/*
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -29,6 +32,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Ensure binstubs are executable
+        run: chmod +x bin/*
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -43,6 +49,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Ensure binstubs are executable
+        run: chmod +x bin/*
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -79,6 +88,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Ensure binstubs are executable
+        run: chmod +x bin/*
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -91,6 +103,12 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test test:system
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/.resultset.json
+          fail_ci_if_error: true
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
