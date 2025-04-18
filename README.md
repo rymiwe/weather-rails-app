@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/rymiwe/weather_rails_app/branch/main/graph/badge.svg)](https://codecov.io/gh/rymiwe/weather_rails_app)
+[![codecov](https://codecov.io/gh/rymiwe/weather-rails-app/branch/main/graph/badge.svg)](https://codecov.io/gh/rymiwe/weather-rails-app)
 
 # Weather Rails App
 
