@@ -5,7 +5,7 @@
 A robust, modern Rails 8+ weather forecast application featuring:
 - SPA-like experience using Hotwire (Turbo/Stimulus) for seamless, reactive interactivity
 - Multi-layer caching for both geocoding and weather forecasts, maximizing performance and minimizing API usage
-- Nearly 90% test coverage with comprehensive tests at all levels (unit, integration, feature)
+- Nearly 100% test coverage with comprehensive tests at all levels (unit, integration, feature)
 - Clean service-oriented architecture
 - Strong test isolation and dependency injection
 - Secure, user-friendly error handling
