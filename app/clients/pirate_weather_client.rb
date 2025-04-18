@@ -6,7 +6,7 @@ class PirateWeatherClient
   API_BASE_URL = "https://api.pirateweather.net/forecast"
 
   def initialize(api_key: nil)
-    @api_key = api_key || ENV['PIRATE_WEATHER_API_KEY'] || Rails.application.credentials.dig(:weather, :pirate_api_key)
+    @api_key = api_key || ENV["PIRATE_WEATHER_API_KEY"] || Rails.application.credentials.dig(:weather, :pirate_api_key)
     raise ArgumentError, "Pirate Weather API key missing" if @api_key.nil? || @api_key.empty?
   end
 

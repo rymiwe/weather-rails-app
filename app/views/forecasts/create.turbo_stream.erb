@@ -1,6 +1,5 @@
 <%= turbo_stream.replace "forecast-result" do %>
   <turbo-frame id="forecast-result">
-    <%= render 'alert' %>
     <% if @forecast.present? %>
       <%= render partial: "forecasts/show_card", locals: { forecast: @forecast, location_name: @location_name, from_cache: @from_cache } %>
     <% end %>
