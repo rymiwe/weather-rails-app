@@ -44,12 +44,11 @@ This app provides weather forecasts for user-supplied locations, with geocoding 
 - **Code Coverage:** Test coverage is measured with SimpleCov and reported to [Codecov.io](https://codecov.io/gh/rymiwe/weather-rails-app) (see badge above).
 - **Deployment:** The app is automatically deployed to Heroku on pushes to `main`. No asset precompilation is needed; Tailwind CSS and importmap handle frontend assets.
 
+---
+
 ## Live Demo
 
 [View the deployed app on Heroku](https://weather-rails-app-9087a4c3e26a.herokuapp.com/)
-
-## Overview
-This app provides weather forecasts for user-supplied locations, with geocoding and weather data fetched from external APIs. It is built for reliability, testability, and developer clarity, following modern Rails conventions and best practices.
 
 ---
 
