@@ -35,7 +35,7 @@
         <% end %>
         <% if i == 0 && forecast["currently"] && forecast["currently"]["temperature"] %>
           <div class="text-base font-bold text-gray-600 mb-1">
-            <%= forecast["currently"]["temperature"].round %>°<%= @units == 'si' ? 'C' : 'F' %> now
+            <%= format_temperature(forecast["currently"]["temperature"], @units) %> now
           </div>
         <% end %>
         <div class="text-sm text-blue-800">
