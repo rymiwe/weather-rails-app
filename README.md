@@ -28,6 +28,12 @@ A Rails 8+ weather forecast application featuring:
 
 ---
 
+## CI, Coverage, and Deployment
+
+- **Continuous Integration:** All commits and pull requests are tested automatically using GitHub Actions. The workflow includes linting, security scans, and a full test suite run.
+- **Code Coverage:** Test coverage is measured with SimpleCov and reported to [Codecov.io](https://codecov.io/gh/rymiwe/weather-rails-app) (see badge above).
+- **Deployment:** The app is automatically deployed to Heroku on pushes to `main`, with production assets built in CI.
+
 ## Overview
 This app provides weather forecasts for user-supplied locations, with geocoding and weather data fetched from external APIs. It is built for reliability, testability, and developer clarity, following modern Rails conventions and best practices.
 
