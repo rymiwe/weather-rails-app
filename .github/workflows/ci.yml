@@ -115,6 +115,7 @@ jobs:
       - name: Precompile assets
         env:
           RAILS_ENV: production
+          SECRET_KEY_BASE: dummy_key_for_ci
         run: |
           rm -rf public/assets
           bundle exec rails assets:precompile
