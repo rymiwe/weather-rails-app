@@ -17,8 +17,8 @@ A Rails 8+ weather forecast application featuring:
 
 ## Table of Contents
 - [Overview](#overview)
-- [CI, Coverage, and Deployment](#ci-coverage-and-deployment)
 - [Live Demo](#live-demo)
+- [CI, Coverage, and Deployment](#ci-coverage-and-deployment)
 - [Screenshots](#screenshots)
 - [Caching Strategy](#caching-strategy)
 - [Key Architectural Choices](#key-architectural-choices)
@@ -38,17 +38,17 @@ This app provides weather forecasts for user-supplied locations, with geocoding 
 
 ---
 
+## Live Demo
+
+[View the deployed app on Heroku](https://weather-rails-app-9087a4c3e26a.herokuapp.com/)
+
+---
+
 ## CI, Coverage, and Deployment
 
 - **Continuous Integration:** All commits and pull requests are tested automatically using GitHub Actions. The workflow includes linting, security scans, and a full test suite run.
 - **Code Coverage:** Test coverage is measured with SimpleCov and reported to [Codecov.io](https://codecov.io/gh/rymiwe/weather-rails-app) (see badge above).
 - **Deployment:** The app is automatically deployed to Heroku on pushes to `main`. No asset precompilation is needed; Tailwind CSS and importmap handle frontend assets.
-
----
-
-## Live Demo
-
-[View the deployed app on Heroku](https://weather-rails-app-9087a4c3e26a.herokuapp.com/)
 
 ---
 
