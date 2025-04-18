@@ -2,14 +2,16 @@
 
 # Weather Rails App
 
-A robust, modern Rails 8+ weather forecast application featuring:
+A Rails 8+ weather forecast application featuring:
 - SPA-like experience using Hotwire (Turbo/Stimulus) for seamless, reactive interactivity
 - Multi-layer caching for both geocoding and weather forecasts, maximizing performance and minimizing API usage
-- Nearly 100% test coverage with comprehensive tests at all levels (unit, integration, feature)
-- Clean service-oriented architecture
-- Strong test isolation and dependency injection
-- Secure, user-friendly error handling
-- Extensible, maintainable design
+- Nearly 100% code coverage with comprehensive tests at all levels (unit, integration, feature)
+- Service-oriented architecture for clarity and maintainability
+- Tests are isolated and avoid global stubs
+
+**Flexible location input:**
+- Accepts any format of location (partial or full address, city/state/country/zip). Geocoder disambiguates and the resolved location is shown to the user.
+- Temperature units are determined by what is standard for the geocoded location.
 
 ---
 
@@ -39,10 +41,10 @@ Below are example screenshots of the UI, showcasing the forecast results for var
 *Forecast result for Anchorage, AK*
 
 ![Forecast for Banff](docs/screenshots/banff.png)
-*Forecast result for Banff, AB (Canada)*
+*Forecast result for Banff, AB (Canada) — result is cached, showing expiration time*
 
 ![Forecast for Cheyenne](docs/screenshots/cheyenne.png)
-*Forecast result for Cheyenne, WY*
+*Forecast result for Cheyenne, WY — result is cached, showing expiration time*
 
 ![Forecast for Phoenix](docs/screenshots/phoenix.png)
 *Forecast result for Phoenix, AZ*
@@ -63,7 +65,7 @@ Both caches are independent, so a hit in one does not guarantee a hit in the oth
 2. **Controller** calls `ForecastService.fetch(query)`.
 3. **ForecastService**:
    - Calls `GeocodingService.lookup(query)` to get coordinates.
-   - Computes a cache key using the coordinates.
+   - Constructs a cache key from the coordinates.
    - Checks `ForecastCacheService.read(lat, lon)`:
      - If a valid, unexpired forecast is cached, returns it immediately.
      - If not, calls `PirateWeatherClient` to fetch a fresh forecast.
@@ -124,10 +126,8 @@ sequenceDiagram
 ## Gem Dependencies
 - **rails**: Modern Rails 8+ framework
 - **pg**: PostgreSQL database
-- **propshaft**: Asset pipeline
 - **solid_cache**: Rails.cache adapter
 - **solid_queue**: ActiveJob adapter
-- **bootsnap**: Fast booting
 - **puma**: Web server
 - **tailwindcss-rails**: CSS utility framework
 - **importmap-rails**: ESM asset management
@@ -162,10 +162,11 @@ sequenceDiagram
 3. **Configure environment variables**:
    - Copy `.env.example` to `.env` and set `WEATHER_CACHE_EXPIRY_MINUTES` as needed. (No API keys are stored here.)
    - The Pirate Weather API key is securely stored in [Rails credentials](https://guides.rubyonrails.org/security.html#custom-credentials). See below for details.
-4. **Run the server**:
+4. **Start the development server** (required for Tailwind assets):
    ```sh
    bin/dev
    ```
+   This ensures Tailwind and other assets are built and live-reloaded during development.
 5. Visit [http://localhost:3000](http://localhost:3000)
 
 ---
@@ -206,9 +207,13 @@ This project adopted explicit dependency injection and targeted mocking after en
   ```sh
   bundle exec rspec
   ```
-- **Coverage**: SimpleCov will generate a report in `coverage/`. The test suite achieves nearly 90% coverage, ensuring robust protection against regressions.
+- **Coverage**: SimpleCov will generate a report in `coverage/`. The test suite achieves nearly 100% coverage, ensuring robust protection against regressions.
 - **Comprehensive Coverage**: Tests exist at all levels—unit, integration, and feature/system—covering services, helpers, controllers, and the full user experience.
 - **Test Isolation**: All external dependencies are mocked or injected. No real HTTP requests are made in tests. Geocoder is always stubbed.
+
+---
+
+*Note: This project initially adopted dependency injection and targeted mocking to address issues with Geocoder’s internal caching and HTTP adapter logic. The current approach aims for reliable, deterministic tests without relying on global HTTP stubs.*
 - **Feature/Request Specs**: Cover all user input edge cases, error handling, and UI feedback.
 
 ---
@@ -216,7 +221,8 @@ This project adopted explicit dependency injection and targeted mocking after en
 ## Best Practices & Noteworthy Patterns
 - **Strict Test Isolation**: No global stubs or VCR cassettes required; all dependencies are injected or mocked at the spec level.
 - **Service-Oriented**: Business logic is never in controllers or views.
-- **Centralized Constants**: All icon mappings and similar logic are in a single location.
+- **Centralized Constants & Icon Mapping**: All weather condition mappings from Pirate Weather are handled in a single location and mapped to a weather icon set hosted on a CDN for efficient display.
+
 - **Security**: No sensitive info is ever leaked. Brakeman is included for static analysis.
 - **Accessibility**: UI is designed to be accessible and clear for all users.
 - **Scalable Caching**: Easily switch to Redis for production by changing Rails.cache backend.
