@@ -16,7 +16,11 @@ A Rails 8+ weather forecast application featuring:
 ---
 
 ## Table of Contents
+- [CI, Coverage, and Deployment](#ci-coverage-and-deployment)
+- [Live Demo](#live-demo)
 - [Overview](#overview)
+- [Screenshots](#screenshots)
+- [Caching Strategy](#caching-strategy)
 - [Key Architectural Choices](#key-architectural-choices)
 - [Gem Dependencies](#gem-dependencies)
 - [Configuration & Environment](#configuration--environment)
@@ -25,6 +29,7 @@ A Rails 8+ weather forecast application featuring:
 - [Best Practices & Noteworthy Patterns](#best-practices--noteworthy-patterns)
 - [Scalability & Extensibility](#scalability--extensibility)
 - [License](#license)
+
 
 ---
 
