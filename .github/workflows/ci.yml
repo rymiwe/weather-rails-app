@@ -112,6 +112,19 @@ jobs:
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec
 
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
+
+      - name: Deploy to Netlify
+        if: success()
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: ./public
+          production-deploy: true
+          deploy-message: "Deploy from GitHub Actions CI"
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+
       - name: Upload Rails test log
         if: always()
         uses: actions/upload-artifact@v4
