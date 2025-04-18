@@ -100,18 +100,18 @@ RSpec.describe ForecastService, type: :service do
       # Create a mock client that returns our test forecast
       mock_client = double("PirateWeatherClient")
       allow(mock_client).to receive(:fetch_forecast).and_return(fake_forecast)
-      
+
       # Clear the cache and verify it's empty
       Rails.cache.clear
       expect(ForecastCacheService.read(lat, lon)).to be_nil
-      
+
       # First fetch should use the mock client and store in cache
       forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
-      
+
       # Verify forecast matches and wasn't from cache
       expect(forecast).to eq(fake_forecast)
       expect(from_cache).to be_falsey
-      
+
       # Verify forecast was stored in cache
       cached = ForecastCacheService.read(lat, lon)
       expect(cached).to be_a(Hash)
@@ -123,15 +123,15 @@ RSpec.describe ForecastService, type: :service do
       # Create a mock client that returns our test forecast
       mock_client = double("PirateWeatherClient")
       allow(mock_client).to receive(:fetch_forecast).and_return(fake_forecast)
-      
+
       # Clear the cache and make first call to populate cache
       Rails.cache.clear
       described_class.fetch(query, weather_client: mock_client)
-      
+
       # Verify the mock isn't called for the second fetch - should get cached version
       expect(mock_client).not_to receive(:fetch_forecast)
       forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
-      
+
       # Verify forecast was returned from cache
       expect(forecast).to be_a(Hash)
       expect(forecast["currently"]).to eq(fake_forecast["currently"])
