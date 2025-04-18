@@ -8,10 +8,11 @@ RSpec.describe 'Weather Forecast', type: :feature do
         {
           'latitude'     => 45.5152,
           'longitude'    => -122.6784,
-          'address'      => 'Portland, OR, USA',
-          'city'         => 'Portland',
-          'state'        => 'OR',
-          'country'      => 'US',
+          'address'      => {
+            'city'    => 'Portland',
+            'state'   => 'OR',
+            'country' => 'US'
+          },
           'country_code' => 'US'
         }
       ]

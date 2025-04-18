@@ -29,10 +29,11 @@ RSpec.describe ForecastService, type: :service do
         {
           'latitude'     => 40.7128,
           'longitude'    => -74.006,
-          'address'      => 'New York, NY, USA',
-          'city'         => 'New York',
-          'state'        => 'NY',
-          'country'      => 'US',
+          'address'      => {
+            'city'    => 'New York',
+            'state'   => 'NY',
+            'country' => 'US'
+          },
           'country_code' => 'US'
         }
       ]
@@ -42,10 +43,11 @@ RSpec.describe ForecastService, type: :service do
         {
           'latitude'     => 51.5074,
           'longitude'    => -0.1278,
-          'address'      => 'London, England, United Kingdom',
-          'city'         => 'London',
-          'state'        => 'England',
-          'country'      => 'United Kingdom',
+          'address'      => {
+            'city'    => 'London',
+            'state'   => 'England',
+            'country' => 'United Kingdom'
+          },
           'country_code' => 'GB'
         }
       ]
@@ -55,19 +57,21 @@ RSpec.describe ForecastService, type: :service do
         {
           'latitude'     => 37.7749,
           'longitude'    => -122.4194,
-          'address'      => 'San Francisco, CA, USA',
-          'city'         => 'San Francisco',
-          'state'        => 'CA',
-          'country'      => 'US',
+          'address'      => {
+            'city'    => 'San Francisco',
+            'state'   => 'CA',
+            'country' => 'US'
+          },
           'country_code' => 'US'
         },
         {
           'latitude'     => 51.5074,
           'longitude'    => -0.1278,
-          'address'      => 'London, England, United Kingdom',
-          'city'         => 'London',
-          'state'        => 'England',
-          'country'      => 'United Kingdom',
+          'address'      => {
+            'city'    => 'London',
+            'state'   => 'England',
+            'country' => 'United Kingdom'
+          },
           'country_code' => 'GB'
         }
       ]
@@ -77,10 +81,11 @@ RSpec.describe ForecastService, type: :service do
         {
           'latitude'     => 10.0,
           'longitude'    => 10.0,
-          'address'      => 'Nowhere',
-          'city'         => nil,
-          'state'        => nil,
-          'country'      => nil,
+          'address'      => {
+            'city'    => nil,
+            'state'   => nil,
+            'country' => nil
+          },
           'country_code' => 'US'
         }
       ]
