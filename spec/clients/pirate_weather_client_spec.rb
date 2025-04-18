@@ -39,18 +39,18 @@ RSpec.describe PirateWeatherClient do
         expect(result).to be_a(Hash)
         expect(result['currently']['summary']).to eq('Clear')
       end
-      
+
       it 'uses the correct units parameter in the API request' do
         # Test with US units (Fahrenheit)
         stub_request(:get, "https://api.pirateweather.net/forecast/#{api_key}/#{lat},#{lon}?units=us&icon=pirate")
           .to_return(status: 200, body: '{"currently":{"temperature":75}}', headers: {})
         client.fetch_forecast(lat, lon, units: 'us')
-        
+
         # Test with SI units (Celsius)
         stub_request(:get, "https://api.pirateweather.net/forecast/#{api_key}/#{lat},#{lon}?units=si&icon=pirate")
           .to_return(status: 200, body: '{"currently":{"temperature":24}}', headers: {})
         client.fetch_forecast(lat, lon, units: 'si')
-        
+
         # Verify both requests were made with correct parameters
         expect(WebMock).to have_requested(:get, "https://api.pirateweather.net/forecast/#{api_key}/#{lat},#{lon}?units=us&icon=pirate")
         expect(WebMock).to have_requested(:get, "https://api.pirateweather.net/forecast/#{api_key}/#{lat},#{lon}?units=si&icon=pirate")
