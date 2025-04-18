@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/rymiwe/weather_rails_app/branch/main/graph/badge.svg)](https://codecov.io/gh/rymiwe/weather_rails_app)
+
 # Weather Rails App
 
 A robust, modern Rails 8+ weather forecast application featuring:

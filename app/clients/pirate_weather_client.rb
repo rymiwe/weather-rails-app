@@ -7,7 +7,7 @@ class PirateWeatherClient
 
   def initialize(api_key: nil)
     @api_key = api_key || Rails.application.credentials.dig(:weather, :pirate_api_key)
-    raise ArgumentError, "Pirate Weather API key missing" if @api_key.blank?
+    raise ArgumentError, "Pirate Weather API key missing" if @api_key.nil? || @api_key.empty?
   end
 
   # Returns parsed JSON or raises
