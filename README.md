@@ -38,22 +38,6 @@ This app provides weather forecasts for user-supplied locations, with geocoding 
 
 ---
 
-- [Overview](#overview)
-- [CI, Coverage, and Deployment](#ci-coverage-and-deployment)
-- [Live Demo](#live-demo)
-- [Screenshots](#screenshots)
-- [Caching Strategy](#caching-strategy)
-- [Key Architectural Choices](#key-architectural-choices)
-- [Gem Dependencies](#gem-dependencies)
-- [Configuration & Environment](#configuration--environment)
-- [Running the App](#running-the-app)
-- [Testing](#testing)
-- [Best Practices & Noteworthy Patterns](#best-practices--noteworthy-patterns)
-- [Scalability & Extensibility](#scalability--extensibility)
-- [License](#license)
-
----
-
 ## CI, Coverage, and Deployment
 
 - **Continuous Integration:** All commits and pull requests are tested automatically using GitHub Actions. The workflow includes linting, security scans, and a full test suite run.
