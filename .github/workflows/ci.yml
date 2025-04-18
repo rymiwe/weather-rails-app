@@ -125,9 +125,13 @@ jobs:
 
       - name: Deploy to Heroku
         if: success()
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-          git push heroku main --force
+          # Use Heroku container deployment which is more reliable for CI
+          heroku container:login
+          heroku container:push web -a ${{ secrets.HEROKU_APP_NAME }}
+          heroku container:release web -a ${{ secrets.HEROKU_APP_NAME }}
 
 
       - name: Upload Rails test log
