@@ -4,14 +4,14 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2"
 gem "pg", "~> 1.1"           # PostgreSQL for Active Record
 
-
 gem "solid_cache"            # Rails.cache adapter
  gem "solid_queue"            # Active Job adapter
+
+gem "propshaft"              # Modern asset pipeline
 
 gem "bootsnap", require: false # Caching for faster boot
 
 gem "puma", ">= 5.0"          # Web server
-
 
 # --- Frontend & Styling ---
 gem "tailwindcss-rails"        # Tailwind CSS

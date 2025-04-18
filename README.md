@@ -32,7 +32,7 @@ A Rails 8+ weather forecast application featuring:
 
 - **Continuous Integration:** All commits and pull requests are tested automatically using GitHub Actions. The workflow includes linting, security scans, and a full test suite run.
 - **Code Coverage:** Test coverage is measured with SimpleCov and reported to [Codecov.io](https://codecov.io/gh/rymiwe/weather-rails-app) (see badge above).
-- **Deployment:** The app is automatically deployed to Heroku on pushes to `main`, with production assets built in CI.
+- **Deployment:** The app is automatically deployed to Heroku on pushes to `main`. No asset precompilation is needed; Tailwind CSS and importmap handle frontend assets.
 
 ## Overview
 This app provides weather forecasts for user-supplied locations, with geocoding and weather data fetched from external APIs. It is built for reliability, testability, and developer clarity, following modern Rails conventions and best practices.
@@ -168,11 +168,11 @@ sequenceDiagram
 3. **Configure environment variables**:
    - Copy `.env.example` to `.env` and set `WEATHER_CACHE_EXPIRY_MINUTES` as needed. (No API keys are stored here.)
    - The Pirate Weather API key is securely stored in [Rails credentials](https://guides.rubyonrails.org/security.html#custom-credentials). See below for details.
-4. **Start the development server** (required for Tailwind assets):
+4. **Start the development server** (required for Tailwind CSS):
    ```sh
    bin/dev
    ```
-   This ensures Tailwind and other assets are built and live-reloaded during development.
+   This ensures Tailwind CSS is built and live-reloaded during development.
 5. Visit [http://localhost:3000](http://localhost:3000)
 
 ---
