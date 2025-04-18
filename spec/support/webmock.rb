@@ -14,7 +14,7 @@ File.write("tmp/loaded_gems.txt", Gem.loaded_specs.keys.sort.join("\n"))
 
 WebMock.after_request do |request_signature, response|
   unless WebMock.registered_request?(request_signature)
-    
+
   end
 end
 
