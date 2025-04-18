@@ -15,13 +15,29 @@ A Rails 8+ weather forecast application featuring:
 
 ---
 
+## Table of Contents
+- [Overview](#overview)
+- [CI, Coverage, and Deployment](#ci-coverage-and-deployment)
+- [Live Demo](#live-demo)
+- [Screenshots](#screenshots)
+- [Caching Strategy](#caching-strategy)
+- [Key Architectural Choices](#key-architectural-choices)
+- [Gem Dependencies](#gem-dependencies)
+- [Configuration & Environment](#configuration--environment)
+- [Running the App](#running-the-app)
+- [Testing](#testing)
+- [Best Practices & Noteworthy Patterns](#best-practices--noteworthy-patterns)
+- [Scalability & Extensibility](#scalability--extensibility)
+- [License](#license)
+
+---
+
 ## Overview
 
 This app provides weather forecasts for user-supplied locations, with geocoding and weather data fetched from external APIs. It is built for reliability, testability, and developer clarity, following modern Rails conventions and best practices.
 
 ---
 
-## Table of Contents
 - [Overview](#overview)
 - [CI, Coverage, and Deployment](#ci-coverage-and-deployment)
 - [Live Demo](#live-demo)
