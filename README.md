@@ -183,36 +183,6 @@ sequenceDiagram
 
 ## Testing
 
-### Dependency Injection and Mocking
-
-This project uses **explicit dependency injection** and targeted mocking to ensure tests are reliable, isolated, and easy to maintain.
-
-- **Dependency Injection**: Service classes (like `ForecastService` and `GeocodingService`) accept dependencies (e.g., API clients, geocoders) as method arguments. This allows tests to inject mock objects directly, avoiding reliance on global state or configuration.
-  
-  _Example:_
-  ```ruby
-  mock_client = instance_double(PirateWeatherClient)
-  allow(mock_client).to receive(:fetch_forecast).and_return({"currently"=>{"summary"=>"Clear"}})
-  ForecastService.fetch(query, weather_client: mock_client)
-  ```
-
-- **Targeted Mocking**: Instead of globally stubbing all HTTP requests (which can hide bugs and make tests brittle), tests explicitly mock only the dependencies they use. While RSpec's `allow(SomeClass).to receive(:method)` is convenient, we prefer passing explicit mock objects as dependencies. This avoids stubbing methods globally (which can cause test bleed and make tests less explicit), and ensures each test controls exactly what gets called for the code under test.
-
-  _Why not just use RSpec’s `allow`/`expect` on classes?_
-  > Stubbing methods directly on classes or singletons can lead to state leaking between tests and brittle tests. Passing explicit mocks as dependencies maximizes isolation, clarity, and reliability—especially in larger codebases or CI environments.
-
-- **Fallback Stubbing**: The test suite configures WebMock to return a 404 for any unmatched HTTP request, forcing tests to define their own mocks for all external calls.
-
-**Why this approach?**
-This project adopted explicit dependency injection and targeted mocking after encountering subtle issues with the Geocoder gem’s internal caching and HTTP adapter logic. Geocoder’s use of its own cache and varying HTTP adapters sometimes caused global HTTP stubs (like WebMock) to be bypassed or to interact unpredictably, leading to unreliable and non-deterministic tests. By injecting mock geocoders and clients directly, we ensure that tests are always isolated, deterministic, and unaffected by the internal state of third-party libraries.
-
-**Benefits:**
-- Prevents test bleed and unexpected side effects
-- Improves reliability and CI consistency
-- Makes tests easier to reason about and maintain
-
-**FAQ: Is this a Rails convention?**
-> While classic Rails relies on global state, explicit dependency injection is a modern, widely supported best practice for service objects and POROs. It is recommended by many experienced Rails developers for its testability and maintainability advantages.
 - **Run all specs**:
   ```sh
   bundle exec rspec
@@ -220,10 +190,6 @@ This project adopted explicit dependency injection and targeted mocking after en
 - **Coverage**: SimpleCov will generate a report in `coverage/`. The test suite achieves nearly 100% coverage, ensuring robust protection against regressions.
 - **Comprehensive Coverage**: Tests exist at all levels—unit, integration, and feature/system—covering services, helpers, controllers, and the full user experience.
 - **Test Isolation**: All external dependencies are mocked or injected. No real HTTP requests are made in tests. Geocoder is always stubbed.
-
----
-
-*Note: This project initially adopted dependency injection and targeted mocking to address issues with Geocoder’s internal caching and HTTP adapter logic. The current approach aims for reliable, deterministic tests without relying on global HTTP stubs.*
 - **Feature/Request Specs**: Cover all user input edge cases, error handling, and UI feedback.
 
 ---
