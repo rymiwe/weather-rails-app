@@ -43,17 +43,6 @@ class GeocodingService
   # Simple rule: If it's a US location or query, use US units (Fahrenheit)
   units = (us_query || us_result) ? "us" : "si"
 
-  # DEBUGGING: Check what's happening with units detection
-  Rails.logger.info "*** UNITS DETECTION ***"
-  Rails.logger.info "Query: #{query}"
-  Rails.logger.info "Location: #{location_name}"
-  Rails.logger.info "Country code: #{geo_result.data['country_code']}"
-  Rails.logger.info "Country: #{country}"
-  Rails.logger.info "State: #{state}"
-  Rails.logger.info "Is US query? #{us_query}"
-  Rails.logger.info "Is US result? #{us_result}"
-  Rails.logger.info "Using units: #{units}"
-
   # Always log API calls in development for debugging
   if Rails.env.development?
     puts "\n*** GEOCODING RESULT ***"
