@@ -20,7 +20,8 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-  config.cache_store = :memory_store
+  # Use Redis for caching in test environment
+  config.cache_store = :redis_cache_store, { url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } }
   config.action_controller.perform_caching = true
 
   # Render exception templates for rescuable exceptions and raise for other exceptions.

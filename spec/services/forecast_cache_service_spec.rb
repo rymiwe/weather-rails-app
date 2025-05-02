@@ -4,8 +4,15 @@ RSpec.describe ForecastCacheService do
   let(:lat) { 45.5231 }
   let(:lon) { -122.6765 }
   let(:weather) { { "currently" => { "temperature" => 70 } } }
-
-  before { Rails.cache.clear }
+  
+  # Clear Redis cache keys before each test
+  before do
+    clear_test_cache
+    # Verify our Redis connection is working
+    test_key = "test:#{Time.now.to_i}"
+    Rails.cache.write(test_key, "test_value")
+    expect(Rails.cache.read(test_key)).to eq("test_value")
+  end
 
   it 'writes and reads cache' do
     ForecastCacheService.write(lat, lon, weather)

@@ -2,10 +2,9 @@ source "https://rubygems.org"
 
 # --- Core Framework & Database ---
 gem "rails", "~> 8.0.2"
-gem "pg", "~> 1.1"           # PostgreSQL for Active Record
+gem "redis", "~> 5.0"          # Redis for caching
 
-gem "solid_cache"            # Rails.cache adapter
- gem "solid_queue"            # Active Job adapter
+# Using Redis directly for caching, no ActiveRecord adapters needed
 
 gem "propshaft"              # Modern asset pipeline
 

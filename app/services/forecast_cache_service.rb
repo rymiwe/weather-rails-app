@@ -2,7 +2,8 @@
 
 class ForecastCacheService
   # Cache expiry in minutes, configurable via WEATHER_CACHE_EXPIRY_MINUTES env variable (default: 30)
-  EXPIRY = (ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i).minutes
+  # Explicitly convert to seconds to avoid ActiveSupport dependency
+  EXPIRY = ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i * 60 # seconds
 
   # Returns the cache key for a given lat/lon
   def self.key_for(lat, lon)

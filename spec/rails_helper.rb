@@ -26,28 +26,20 @@ require 'rspec/rails'
 require Rails.root.join('spec/support/geocoder_stubs.rb') unless ENV['SKIP_GEOCODER_STUBS']
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
-# Checks for pending migrations and applies them before tests are run.
-# If you are not using ActiveRecord, you can remove these lines.
-begin
-  ActiveRecord::Migration.maintain_test_schema!
-rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
-end
+# This application uses Redis as a cache store, but no relational database with ActiveRecord.
+# Therefore, ActiveRecord migration checks are removed as they're not applicable.
 
 
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_paths = [
-    Rails.root.join('spec/fixtures')
-  ]
+  # Not using ActiveRecord, so fixtures are not needed
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  # config.use_transactional_fixtures = false
 
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
+  # Explicitly disable ActiveRecord support since we're not using it
+  config.use_active_record = false
 
   # RSpec Rails uses metadata to mix in different behaviours to your tests,
   # for example enabling you to call `get` and `post` in request specs. e.g.:
@@ -71,20 +63,11 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # Simplified VCR configuration to avoid ActiveRecord dependencies
   config.around(:each) do |example|
-    debug_log_path = Rails.root.join('tmp/rspec_debug.log')
-    File.open(debug_log_path, 'a') do |f|
-      f.puts "DEBUG: Example metadata: #{example.metadata.inspect}"
-      f.puts "DEBUG: Example full description: #{example.full_description}"
-      f.puts "DEBUG: Example type: #{example.metadata[:type]}"
-    end
-    type = example.metadata[:type]
-    # Only use VCR for request specs or if :vcr metadata is set
-    if type == :request || example.metadata[:vcr]
-      File.open(debug_log_path, 'a') { |f| f.puts "DEBUG: Using VCR for example: #{example.full_description}" }
-      VCR.use_cassette(example.full_description) { example.run }
+    if example.metadata[:type] == :request || example.metadata[:vcr]
+      VCR.use_cassette(example.metadata[:description]) { example.run }
     else
-      File.open(debug_log_path, 'a') { |f| f.puts "DEBUG: Not using VCR for example: #{example.full_description}" }
       example.run
     end
   end

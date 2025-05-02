@@ -132,7 +132,7 @@ sequenceDiagram
 
 ## Key Architectural Choices
 - **SPA with Hotwire**: The app delivers a single-page application (SPA) experience using Hotwire (Turbo and Stimulus). All forecast interactions and UI updates happen seamlessly without full page reloads, resulting in a fast and modern user experience.
-- **Multi-Layer Caching**: Both geocoding results and weather forecasts are cached independently using Rails.cache. This two-layer approach ensures minimal redundant API calls and optimal performance for both location and forecast lookups.
+- **Multi-Layer Caching with Redis**: Both geocoding results and weather forecasts are cached independently using Redis via Rails.cache. This two-layer approach ensures minimal redundant API calls and optimal performance for both location and forecast lookups.
 - **Service Objects**: `ForecastService`, `GeocodingService`, and `ForecastCacheService` encapsulate business logic, keeping controllers thin and views simple.
 - **API Client Encapsulation**: All communication with the Pirate Weather API is handled by a dedicated `PirateWeatherClient` class. This ensures single responsibility, easy mocking for tests, and clean separation from business logic.
 - **Dependency Injection**: External services (like Geocoder) are injected into service objects, allowing for robust, isolated tests without global stubs or HTTP requests.
@@ -144,9 +144,7 @@ sequenceDiagram
 
 ## Gem Dependencies
 - **rails**: Modern Rails 8+ framework
-- **pg**: PostgreSQL database
-- **solid_cache**: Rails.cache adapter
-- **solid_queue**: ActiveJob adapter
+- **redis**: Redis for caching across all environments
 - **puma**: Web server
 - **tailwindcss-rails**: CSS utility framework
 - **importmap-rails**: ESM asset management
@@ -170,22 +168,35 @@ sequenceDiagram
 ---
 
 ## Running the App
-1. **Install dependencies** (from WSL terminal, as required):
+1. **Install dependencies** (using WSL as required):
    ```sh
-   bundle install
+   wsl -u rymiwe -e bash -ic "bundle install"
    ```
-2. **Set up the database**:
+
+2. **Install and start Redis** (required for caching in all environments):
    ```sh
-   rails db:setup
+   # Install Redis in WSL if not already installed
+   wsl -u rymiwe -e bash -ic "sudo apt-get update && sudo apt-get install -y redis-server"
+   
+   # Start the Redis server
+   wsl -u rymiwe -e bash -ic "sudo service redis-server start"
+   
+   # Verify Redis is running
+   wsl -u rymiwe -e bash -ic "redis-cli ping"
+   # Should return "PONG"
    ```
+
 3. **Configure environment variables**:
-   - Copy `.env.example` to `.env` and set `WEATHER_CACHE_EXPIRY_MINUTES` as needed. (No API keys are stored here.)
-   - The Pirate Weather API key is securely stored in [Rails credentials](https://guides.rubyonrails.org/security.html#custom-credentials). See below for details.
+   - Copy `.env.example` to `.env` and set `WEATHER_CACHE_EXPIRY_MINUTES` as needed (default is 30 minutes).
+   - Set `REDIS_URL` to `redis://localhost:6379/1` if you want to use a different Redis instance.
+   - The Pirate Weather API key is securely stored in environment variables. Set `PIRATE_WEATHER_API_KEY` in your environment.
+
 4. **Start the development server** (required for Tailwind CSS):
    ```sh
-   bin/dev
+   wsl -u rymiwe -e bash -ic "bin/dev"
    ```
    This ensures Tailwind CSS is built and live-reloaded during development.
+
 5. Visit [http://localhost:3000](http://localhost:3000)
 
 ---
@@ -210,7 +221,7 @@ sequenceDiagram
 
 - **Security**: No sensitive info is ever leaked. Brakeman is included for static analysis.
 - **Accessibility**: UI is designed to be accessible and clear for all users.
-- **Scalable Caching**: Easily switch to Redis for production by changing Rails.cache backend.
+- **Redis-Based Caching**: Uses Redis for caching in all environments (development, test, production) for consistent behavior and scalability.
 
 ---
 
