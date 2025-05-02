@@ -1,24 +1,32 @@
 <div class="mt-6">
+<% cache_info = nil %>
+<% if defined?(@from_cache) && @from_cache %>
+  <% expiry_minutes = ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i %>
+  <% # Default to a recent timestamp if cached_at is not present %>
+  <% cached_at = forecast.raw_data&.dig("cached_at") || (Time.current - 1.minute).iso8601 %>
+  <% minutes_elapsed = ((Time.current - Time.parse(cached_at)) / 60).floor %>
+  <% minutes_left = [expiry_minutes - minutes_elapsed, 0].max %>
+  <% cache_info = {minutes_left: minutes_left} %>
+<% end %>
+
 <% if defined?(@location_name) && @location_name.present? %>
   <div class="flex items-center justify-between mb-2">
     <div class="font-semibold text-blue-900 flex items-center gap-1">
       <%= @location_name %>
     </div>
-    <% if defined?(@from_cache) && @from_cache && forecast.raw_data && forecast.raw_data["cached_at"] %>
-      <% expiry_minutes = ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i %>
-      <% minutes_elapsed = ((Time.current - Time.parse(forecast.raw_data["cached_at"])) / 60).floor %>
-      <% minutes_left = [expiry_minutes - minutes_elapsed, 0].max %>
-
+    <% if cache_info %>
+      <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full font-medium">
+        <i class="fas fa-database mr-1"></i>Cached
+      </span>
     <% end %>
   </div>
 <% end %>
   <div class="flex items-center justify-between mb-2">
     <div class="font-semibold text-blue-900">3-Day Forecast</div>
-    <% if defined?(@from_cache) && @from_cache && forecast.raw_data && forecast.raw_data["cached_at"] %>
-      <% expiry_minutes = ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i %>
-      <% minutes_elapsed = ((Time.current - Time.parse(forecast.raw_data["cached_at"])) / 60).floor %>
-      <% minutes_left = [expiry_minutes - minutes_elapsed, 0].max %>
-      <span class="text-xs text-blue-700 opacity-60 ml-2">Cached result (expires in <%= minutes_left %> minute<%= 's' unless minutes_left == 1 %>)</span>
+    <% if cache_info %>
+      <span class="text-xs text-blue-700 ml-2">
+        (expires in <%= cache_info[:minutes_left] %> minute<%= 's' unless cache_info[:minutes_left] == 1 %>)
+      </span>
     <% end %>
   </div>
   <div class="grid grid-cols-3 gap-2">

@@ -31,15 +31,20 @@ class ForecastCacheService
 
   # Reads weather data from cache
   def read(lat, lon)
-    Rails.cache.read(key_for(lat, lon))
+    key = key_for(lat, lon)
+    result = Rails.cache.read(key)
+    Rails.logger.debug("CACHE READ: Key #{key}, Hit: #{!!result}")
+    result
   end
 
   # Writes weather data to cache
   def write(lat, lon, weather)
+    key = key_for(lat, lon)
     if weather.is_a?(Hash)
       weather = weather.merge("cached_at" => Time.current.iso8601)
     end
-    Rails.cache.write(key_for(lat, lon), weather, expires_in: EXPIRY)
+    Rails.logger.debug("CACHE WRITE: Key #{key}, Type: #{weather.class.name}")
+    Rails.cache.write(key, weather, expires_in: EXPIRY)
   end
 
   # Optionally, expose delete/clear helpers if needed
