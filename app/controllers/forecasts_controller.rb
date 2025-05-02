@@ -10,10 +10,14 @@ class ForecastsController < ApplicationController
     geocoder = self.class.test_geocoder || Geocoder
     weather_client = self.class.test_weather_client || PirateWeatherClient
 
-
-    @forecast, @from_cache, error_message, @location_name, @units =
-      ForecastService.fetch(query, refresh: params[:refresh].present?, geocoder: geocoder, weather_client: weather_client)
-    flash[:alert] = error_message if error_message.present?
+    result = ForecastService.fetch(query, refresh: params[:refresh].present?, geocoder: geocoder, weather_client: weather_client)
+    
+    # Extract values from the result object
+    @forecast = result.forecast
+    @from_cache = result.from_cache
+    @location_name = result.location_name
+    @units = result.units
+    flash[:alert] = result.error_message if result.error?
 
     respond_to do |format|
       format.turbo_stream { render :create }
