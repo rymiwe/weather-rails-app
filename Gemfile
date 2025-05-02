@@ -4,7 +4,8 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2"
 gem "redis", "~> 5.0"          # Redis for caching
 
-# Using Redis directly for caching, no ActiveRecord adapters needed
+# Using Redis directly for caching, no traditional database needed
+gem "activerecord-nulldb-adapter" # Prevent database creation in CI environments
 
 gem "propshaft"              # Modern asset pipeline
 
@@ -45,6 +46,5 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
-  # AI context retrieval for development
-  gem "tidewave", github: "tidewave-ai/tidewave_rails"
+  gem "tidewave"
 end

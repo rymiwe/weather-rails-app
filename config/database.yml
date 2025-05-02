@@ -1,82 +1,24 @@
-# This application does not use a database.
-# Instead, it uses Redis for caching weather data.
-# The following is a minimal SQLite configuration to satisfy Rails' expectations.
+# IMPORTANT: This application does not use a database.
+# It uses Redis exclusively for caching weather data.
+# This is a null configuration to prevent database creation in CI environments.
 
+# Define an adapter that won't attempt to connect to any database
 default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: nulldb
+  encoding: unicode
+  pool: 5
   timeout: 5000
-
 
 development:
   <<: *default
-  database: weather_rails_app_development
+  database: non_existent_db
 
-  # The specified database role being used to connect to PostgreSQL.
-  # To create additional roles in PostgreSQL see `$ createuser --help`.
-  # When left blank, PostgreSQL will use the default role. This is
-  # the same name as the operating system user running Rails.
-  #username: weather_rails_app
-
-  # The password associated with the PostgreSQL role (username).
-  #password:
-
-  # Connect on a TCP socket. Omitted by default since the client uses a
-  # domain socket that doesn't need configuration. Windows does not have
-  # domain sockets, so uncomment these lines.
-  #host: localhost
-
-  # The TCP port the server listens on. Defaults to 5432.
-  # If your server runs on a different port number, change accordingly.
-  #port: 5432
-
-  # Schema search path. The server defaults to $user,public
-  #schema_search_path: myapp,sharedapp,public
-
-  # Minimum log levels, in increasing order:
-  #   debug5, debug4, debug3, debug2, debug1,
-  #   log, notice, warning, error, fatal, and panic
-  # Defaults to warning.
-  #min_messages: notice
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+# Used for running tests - no actual database is created
 test:
   <<: *default
-  database: weather_rails_app_test
+  database: non_existent_db
 
-# As with config/credentials.yml, you never want to store sensitive information,
-# like your database password, in your source code. If your source code is
-# ever seen by anyone, they now have access to your database.
-#
-# Instead, provide the password or a full connection URL as an environment
-# variable when you boot the app. For example:
-#
-#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
-#
-# If the connection URL is provided in the special DATABASE_URL environment
-# variable, Rails will automatically merge its configuration values on top of
-# the values provided in this file. Alternatively, you can specify a connection
-# URL environment variable explicitly:
-#
-#   production:
-#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
-#
-# Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
-# for a full overview on how database connection configuration can be specified.
-#
+# Production also doesn't use a database
 production:
-  primary: &primary_production
-    <<: *default
-    database: weather_rails_app_production
-    username: weather_rails_app
-    password: <%= ENV["WEATHER_RAILS_APP_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: weather_rails_app_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: weather_rails_app_production_queue
-    migrations_paths: db/queue_migrate
+  <<: *default
+  database: non_existent_db
