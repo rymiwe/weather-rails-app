@@ -4,9 +4,10 @@
 
 A Rails 8+ weather forecast application featuring:
 - SPA-like experience using Hotwire (Turbo/Stimulus) for seamless, reactive interactivity
-- Multi-layer caching for both geocoding and weather forecasts, maximizing performance and minimizing API usage
+- Redis-based caching for both geocoding and weather forecasts, maximizing performance and minimizing API usage
+- Database-free architecture using Redis exclusively for data persistence
 - Nearly 100% code coverage with comprehensive tests at all levels (unit, integration, feature)
-- Service-oriented architecture for clarity and maintainability
+- Service-oriented architecture with instance methods for improved testability
 - Tests are isolated and avoid global stubs
 
 **Flexible location input:**
@@ -72,12 +73,24 @@ Below are example screenshots of the UI, showcasing the forecast results for var
 
 ## Caching Strategy
 
-### Multi-Layer Caching
-This application uses a two-layer caching strategy:
-- **Geocoder Cache**: All location lookups (turning a user query into coordinates) are cached via Rails.cache, as configured in `config/initializers/geocoder.rb`. This drastically reduces external geocoding API requests and speeds up repeat queries.
-- **Forecast Cache**: Weather forecasts for specific coordinates are also cached via Rails.cache, with expiry controlled by `WEATHER_CACHE_EXPIRY_MINUTES`. This minimizes calls to the Pirate Weather API and ensures fast, consistent results for users.
+### Redis-Based Caching
+This application uses Redis for all data persistence, with a two-layer caching strategy:
+- **Geocoder Cache**: All location lookups (turning a user query into coordinates) are cached via Rails.cache using Redis, as configured in `config/initializers/geocoder.rb`. This drastically reduces external geocoding API requests and speeds up repeat queries.
+- **Forecast Cache**: Weather forecasts for specific coordinates are cached in Redis via Rails.cache, with expiry controlled by `WEATHER_CACHE_EXPIRY_MINUTES`. This minimizes calls to the Pirate Weather API and ensures fast, consistent results for users.
 
 Both caches are independent, so a hit in one does not guarantee a hit in the other. This layered approach maximizes efficiency and reliability.
+
+### Forecast Serialization
+The `Forecast` class implements `marshal_dump` and `marshal_load` methods to ensure proper serialization when storing in Redis. This approach maintains object integrity while allowing efficient storage and retrieval.
+
+### Result Wrapper Pattern
+We use a `ForecastResult` wrapper object that encapsulates:
+- The actual `Forecast` object (when available)
+- Cache status flag (`from_cache: true/false`)
+- Any error messages
+- Location name and units information
+
+This pattern provides a clean API between services and controllers, making it clear what data is available and from where.
 
 ### Narrative Description
 1. **User submits a location** via the UI (e.g., "Portland, OR").
@@ -86,16 +99,17 @@ Both caches are independent, so a hit in one does not guarantee a hit in the oth
    - Calls `GeocodingService.lookup(query)` to get coordinates.
    - Constructs a cache key from the coordinates.
    - Checks `ForecastCacheService.read(lat, lon)`:
-     - If a valid, unexpired forecast is cached, returns it immediately.
+     - If a valid, unexpired forecast is cached, returns a `ForecastResult` with `from_cache: true`.
      - If not, calls `PirateWeatherClient` to fetch a fresh forecast.
    - Saves the new forecast to the cache with an expiry (`WEATHER_CACHE_EXPIRY_MINUTES`).
-   - Returns the forecast and location info to the controller.
-4. **Controller** renders the result or error to the user.
+   - Returns a `ForecastResult` object to the controller.
+4. **Controller** extracts data from the `ForecastResult` and renders to the user, showing a cache indicator when applicable.
 
 - **Cache Expiry**: Controlled by `WEATHER_CACHE_EXPIRY_MINUTES` in `.env`.
-- **Cache Backend**: Uses Rails.cache (SolidCache by default, easily swappable for Redis in production).
+- **Cache Backend**: Uses Redis exclusively for all environments.
 - **Keying**: Cache keys are based on latitude/longitude, ensuring unique entries per location.
 - **Security**: No sensitive info is ever cached or exposed.
+- **UI Indication**: The UI clearly shows when results come from cache with a badge and expiry countdown.
 
 ### Sequence Diagram
 ```mermaid
@@ -112,32 +126,38 @@ sequenceDiagram
   UI->>Controller: POST /forecasts
   Controller->>ForecastService: fetch(query)
   ForecastService->>GeocodingService: lookup(query)
-  GeocodingService-->>ForecastService: coordinates (lat, lon)
+  GeocodingService-->>ForecastService: coordinates (lat, lon, location_name, units)
   ForecastService->>ForecastCacheService: read(lat, lon)
   alt Cache hit
-    ForecastCacheService-->>ForecastService: cached forecast
-    ForecastService-->>Controller: forecast (from cache)
+    ForecastCacheService-->>ForecastService: cached Forecast object
+    ForecastService-->>Controller: ForecastResult(forecast, from_cache: true)
   else Cache miss
     ForecastCacheService-->>ForecastService: nil
-    ForecastService->>PirateWeatherClient: fetch_forecast(lat, lon)
-    PirateWeatherClient-->>ForecastService: forecast data
+    ForecastService->>PirateWeatherClient: fetch_forecast(lat, lon, units)
+    PirateWeatherClient-->>ForecastService: raw forecast data
+    ForecastService->>Note: Create Forecast object
     ForecastService->>ForecastCacheService: write(lat, lon, forecast)
     ForecastCacheService-->>ForecastService: OK
-    ForecastService-->>Controller: forecast (fresh)
+    ForecastService-->>Controller: ForecastResult(forecast, from_cache: false)
   end
-  Controller-->>UI: Render forecast or error
+  Controller->>Note: Extract data from ForecastResult
+  Controller-->>UI: Render forecast with cache indicator if applicable
+  UI-->>User: Display forecast with cache badge if cached
 ```
 
 ---
 
 ## Key Architectural Choices
 - **SPA with Hotwire**: The app delivers a single-page application (SPA) experience using Hotwire (Turbo and Stimulus). All forecast interactions and UI updates happen seamlessly without full page reloads, resulting in a fast and modern user experience.
-- **Multi-Layer Caching with Redis**: Both geocoding results and weather forecasts are cached independently using Redis via Rails.cache. This two-layer approach ensures minimal redundant API calls and optimal performance for both location and forecast lookups.
-- **Service Objects**: `ForecastService`, `GeocodingService`, and `ForecastCacheService` encapsulate business logic, keeping controllers thin and views simple.
-- **API Client Encapsulation**: All communication with the Pirate Weather API is handled by a dedicated `PirateWeatherClient` class. This ensures single responsibility, easy mocking for tests, and clean separation from business logic.
-- **Dependency Injection**: External services (like Geocoder) are injected into service objects, allowing for robust, isolated tests without global stubs or HTTP requests.
+- **Database-Free Architecture**: The application operates entirely without a relational database, using Redis exclusively for caching and data persistence, simplifying deployment and operations.
+- **Redis-Based Caching**: Both geocoding results and weather forecasts are cached independently using Redis. This two-layer approach ensures minimal redundant API calls and optimal performance.
+- **Result Wrapper Pattern**: Uses a `ForecastResult` object to wrap the actual `Forecast` data along with metadata about the operation (from cache, errors, etc.), providing a clean and consistent API between services and controllers.
+- **Service Objects with Instance Methods**: `ForecastService`, `GeocodingService`, and `ForecastCacheService` use instance methods with class delegators, improving testability and maintainability.
+- **Serialization Support**: The `Forecast` class implements custom Marshal methods to ensure proper serialization when storing in Redis.
+- **Visual Cache Indicators**: The UI clearly shows when results come from cache with a badge and expiry countdown, improving transparency.
+- **API Client Encapsulation**: All communication with the Pirate Weather API is handled by a dedicated `PirateWeatherClient` class, ensuring single responsibility.
+- **Dependency Injection**: External services are injected into service objects, allowing for robust, isolated tests without global stubs or HTTP requests.
 - **Explicit Error Handling**: All user-facing errors are caught and displayed cleanly; no stack traces or sensitive info are ever leaked.
-- **Caching**: Forecasts are cached to minimize API calls, with cache expiry controlled via environment variable (`WEATHER_CACHE_EXPIRY_MINUTES`).
 - **Constants Module**: Icon mapping and similar logic are centralized in `app/constants` for maintainability.
 
 ---
