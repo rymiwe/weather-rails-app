@@ -115,4 +115,56 @@ RSpec.describe "forecasts/_show_card.html.erb", type: :view do
     render partial: "forecasts/show_card", locals: { forecast: forecast, location_name: "Portland, OR", from_cache: false }
     expect(rendered).not_to include("..")
   end
+
+  it "shows cache badge when result is from cache" do
+    assign(:units, 'us')
+    forecast = Forecast.new(
+      temperature: 70,
+      summary: "Sunny.",
+      icon: "clear-day",
+      units: "us",
+      location: "Portland, OR",
+      raw_data: {
+        "daily" => { "data" => [ {
+          "time" => Time.now.to_i,
+          "icon" => "clear-day",
+          "temperatureHigh" => 75,
+          "temperatureLow" => 64,
+          "summary" => "Sunny."
+        } ] },
+        "currently" => { "temperature" => 70 },
+        "timezone" => "America/New_York",
+        "cached_at" => Time.current.iso8601
+      }
+    )
+
+    render partial: "forecasts/show_card", locals: { forecast: forecast, location_name: "Portland, OR", from_cache: true }
+    expect(rendered).to include("Cached")
+    expect(rendered).to include("expires in")
+  end
+
+  it "hides cache badge when result is not from cache" do
+    assign(:units, 'us')
+    forecast = Forecast.new(
+      temperature: 70,
+      summary: "Sunny.",
+      icon: "clear-day",
+      units: "us",
+      location: "Portland, OR",
+      raw_data: {
+        "daily" => { "data" => [ {
+          "time" => Time.now.to_i,
+          "icon" => "clear-day",
+          "temperatureHigh" => 75,
+          "temperatureLow" => 64,
+          "summary" => "Sunny."
+        } ] },
+        "currently" => { "temperature" => 70 },
+        "timezone" => "America/New_York"
+      }
+    )
+
+    render partial: "forecasts/show_card", locals: { forecast: forecast, location_name: "Portland, OR", from_cache: false }
+    expect(rendered).not_to include("Cached")
+  end
 end

@@ -4,7 +4,7 @@
 # This is a value object, not an ActiveRecord model.
 class Forecast
   include GlobalID::Identification if defined?(GlobalID)
-  
+
   attr_reader :temperature, :summary, :icon, :units, :location, :raw_data
 
   # @param temperature [Numeric] The temperature value
@@ -29,7 +29,7 @@ class Forecast
   def celsius?
     units == "si"
   end
-  
+
   # Support for Marshal serialization
   def marshal_dump
     {
@@ -41,7 +41,7 @@ class Forecast
       raw_data: @raw_data
     }
   end
-  
+
   def marshal_load(data)
     @temperature = data[:temperature]
     @summary = data[:summary]

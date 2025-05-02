@@ -63,7 +63,7 @@ class ForecastService
 
       forecast = build_forecast(raw, location_name, units)
       ForecastCacheService.write(lat, lon, forecast)
-      
+
       ForecastResult.new(
         forecast: forecast,
         from_cache: false,
