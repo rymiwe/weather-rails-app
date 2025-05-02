@@ -11,7 +11,7 @@ class ForecastsController < ApplicationController
     weather_client = self.class.test_weather_client || PirateWeatherClient
 
     result = ForecastService.fetch(query, refresh: params[:refresh].present?, geocoder: geocoder, weather_client: weather_client)
-    
+
     # Extract values from the result object
     @forecast = result.forecast
     @from_cache = result.from_cache

@@ -4,7 +4,7 @@ RSpec.describe ForecastCacheService do
   let(:lat) { 45.5231 }
   let(:lon) { -122.6765 }
   let(:weather) { { "currently" => { "temperature" => 70 } } }
-  
+
   # Clear Redis cache keys before each test
   before do
     clear_test_cache

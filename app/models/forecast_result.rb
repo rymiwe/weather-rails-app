@@ -10,7 +10,7 @@ class ForecastResult
   # @param error_message [String, nil] Error message if fetch failed
   # @param location_name [String] Name of the location
   # @param units [String] Units used ('us' or 'si')
-  def initialize(forecast: nil, from_cache: false, error_message: nil, location_name: nil, units: 'us')
+  def initialize(forecast: nil, from_cache: false, error_message: nil, location_name: nil, units: "us")
     @forecast = forecast
     @from_cache = from_cache
     @error_message = error_message

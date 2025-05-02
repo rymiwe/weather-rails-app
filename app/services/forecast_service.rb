@@ -46,14 +46,14 @@ class ForecastService
         raw_data: raw
       )
       ForecastCacheService.write(lat, lon, forecast)
-      return ForecastResult.new(
+      ForecastResult.new(
         forecast: forecast,
         from_cache: false,
         location_name: location_name,
         units: units
       )
     rescue => e
-      return ForecastResult.new(
+      ForecastResult.new(
         error_message: "Error fetching weather data.",
         location_name: location_name,
         units: units

@@ -21,11 +21,11 @@ class Forecast
   end
 
   def fahrenheit?
-    units == 'us'
+    units == "us"
   end
 
   def celsius?
-    units == 'si'
+    units == "si"
   end
 
   # Add more helper methods as needed

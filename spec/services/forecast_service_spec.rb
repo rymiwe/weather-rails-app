@@ -117,7 +117,7 @@ RSpec.describe ForecastService, type: :service do
       expect(result).to be_a(ForecastResult)
       expect(result.forecast).to be_a(Forecast)
 expect(result.forecast.temperature).to eq(75)
-# Add more attribute checks as needed
+      # Add more attribute checks as needed
       expect(result.from_cache).to be_falsey
 
       # Verify forecast was stored in cache
