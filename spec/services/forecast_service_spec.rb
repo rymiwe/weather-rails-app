@@ -114,14 +114,16 @@ RSpec.describe ForecastService, type: :service do
       forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
 
       # Verify forecast matches and wasn't from cache
-      expect(forecast).to eq(fake_forecast)
+      expect(forecast).to be_a(Forecast)
+expect(forecast.temperature).to eq(75)
+# Add more attribute checks as needed
       expect(from_cache).to be_falsey
 
       # Verify forecast was stored in cache
       cached = ForecastCacheService.read(lat, lon)
-      expect(cached).to be_a(Hash)
-      expect(cached["currently"]).to eq(fake_forecast["currently"])
-      expect(cached["daily"]).to eq(fake_forecast["daily"])
+      expect(cached).to be_a(Forecast)
+      expect(cached.raw_data["currently"]).to eq(fake_forecast["currently"])
+      expect(cached.raw_data["daily"]).to eq(fake_forecast["daily"])
     end
 
     it 'returns cached forecast on subsequent calls' do
@@ -138,9 +140,9 @@ RSpec.describe ForecastService, type: :service do
       forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
 
       # Verify forecast was returned from cache
-      expect(forecast).to be_a(Hash)
-      expect(forecast["currently"]).to eq(fake_forecast["currently"])
-      expect(forecast["daily"]).to eq(fake_forecast["daily"])
+      expect(forecast).to be_a(Forecast)
+      expect(forecast.raw_data["currently"]).to eq(fake_forecast["currently"])
+      expect(forecast.raw_data["daily"]).to eq(fake_forecast["daily"])
       expect(from_cache).to be_truthy
     end
 
@@ -154,7 +156,7 @@ RSpec.describe ForecastService, type: :service do
       forecast, from_cache, error, location = described_class.fetch(query, refresh: true, weather_client: mock_client)
 
       # Verify the forecast matches our special mock data
-      expect(forecast["currently"]["temperature"]).to eq(80)
+      expect(forecast.raw_data["currently"]["temperature"]).to eq(80)
       expect(from_cache).to be_falsey
     end
 
@@ -186,7 +188,9 @@ RSpec.describe ForecastService, type: :service do
       forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
 
       # An empty JSON object should be parsed as an empty hash
-      expect(forecast).to eq({})
+      expect(forecast).to be_a(Forecast)
+      expect(forecast.temperature).to be_nil
+      expect(forecast.raw_data).to eq({})
       expect(error).to be_nil
     end
 
@@ -266,7 +270,9 @@ RSpec.describe ForecastService, type: :service do
       forecast, from_cache, error, location = described_class.fetch(query, weather_client: mock_client)
 
       # An empty hash should be handled properly
-      expect(forecast).to eq({})
+      expect(forecast).to be_a(Forecast)
+      expect(forecast.temperature).to be_nil
+      expect(forecast.raw_data).to eq({})
       expect(error).to be_nil
     end
   end
