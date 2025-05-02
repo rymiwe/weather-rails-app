@@ -1,35 +1,58 @@
 # frozen_string_literal: true
 
 class ForecastService
+  class << self
+    # Class method that delegates to instance method
+    def fetch(query, refresh: false, geocoder: Geocoder, weather_client: PirateWeatherClient)
+      new(geocoder, weather_client).fetch(query, refresh: refresh)
+    end
+  end
+
+  attr_reader :geocoder, :weather_client
+
+  def initialize(geocoder = Geocoder, weather_client = PirateWeatherClient)
+    @geocoder = geocoder
+    @weather_client = weather_client
+  end
+
   # Returns a ForecastResult object
-  # Accepts a geocoder: argument for dependency injection.
-  # Accepts a weather_client: argument for testability.
-  # This enables robust, isolated tests by allowing explicit Geocoder and weather client mocking in specs.
-  def self.fetch(query, refresh: false, geocoder: Geocoder, weather_client: PirateWeatherClient)
+  def fetch(query, refresh: false)
     return ForecastResult.new(error_message: "Please enter an query.") if query.blank?
 
     geo_data = GeocodingService.lookup(query, geocoder: geocoder)
-    unless geo_data
-      return ForecastResult.new(error_message: "Could not geocode query.")
-    end
+    return ForecastResult.new(error_message: "Could not geocode query.") unless geo_data
+
     lat = geo_data[:lat]
     lon = geo_data[:lon]
     location_name = geo_data[:location_name]
     units = geo_data[:units] || "us"
 
+    # Try to fetch from cache first if not refreshing
     cached = ForecastCacheService.read(lat, lon)
     if cached.is_a?(Forecast) && !refresh
-      return ForecastResult.new(
-        forecast: cached,
-        from_cache: true,
-        location_name: location_name,
-        units: units
-      )
+      return create_result_from_cache(cached, location_name, units)
     end
 
+    # Fetch fresh data from API
+    fetch_fresh_forecast(lat, lon, location_name, units)
+  end
+
+  private
+
+  def create_result_from_cache(cached_forecast, location_name, units)
+    ForecastResult.new(
+      forecast: cached_forecast,
+      from_cache: true,
+      location_name: location_name,
+      units: units
+    )
+  end
+
+  def fetch_fresh_forecast(lat, lon, location_name, units)
     begin
-      client = weather_client.is_a?(Class) ? weather_client.new : weather_client
+      client = initialize_weather_client
       raw = client.fetch_forecast(lat, lon, units: units)
+
       if raw.nil?
         return ForecastResult.new(
           error_message: "Could not retrieve forecast data.",
@@ -37,15 +60,10 @@ class ForecastService
           units: units
         )
       end
-      forecast = Forecast.new(
-        temperature: raw.dig("currently", "temperature"),
-        summary: raw.dig("currently", "summary"),
-        icon: raw.dig("currently", "icon"),
-        units: units,
-        location: location_name,
-        raw_data: raw
-      )
+
+      forecast = build_forecast(raw, location_name, units)
       ForecastCacheService.write(lat, lon, forecast)
+      
       ForecastResult.new(
         forecast: forecast,
         from_cache: false,
@@ -53,11 +71,27 @@ class ForecastService
         units: units
       )
     rescue => e
+      Rails.logger.error("Error fetching weather data: #{e.message}")
       ForecastResult.new(
         error_message: "Error fetching weather data.",
         location_name: location_name,
         units: units
       )
     end
+  end
+
+  def initialize_weather_client
+    weather_client.is_a?(Class) ? weather_client.new : weather_client
+  end
+
+  def build_forecast(raw_data, location_name, units)
+    Forecast.new(
+      temperature: raw_data.dig("currently", "temperature"),
+      summary: raw_data.dig("currently", "summary"),
+      icon: raw_data.dig("currently", "icon"),
+      units: units,
+      location: location_name,
+      raw_data: raw_data
+    )
   end
 end
