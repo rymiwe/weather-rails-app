@@ -101,7 +101,7 @@ RSpec.describe ForecastService, "error handling", type: :service do
 
       # Verify the result has an error
       expect(result.error?).to be true
-      
+
       # Verify no cache entry was created
       expect(ForecastCacheService.read(lat, lon)).to be_nil
     end

@@ -71,7 +71,7 @@ RSpec.configure do |config|
       example.run
     end
   end
-  
+
   # System tests configuration
   config.before(:each, type: :system) do
     # Clear Redis cache before each test
