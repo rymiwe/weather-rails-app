@@ -30,17 +30,17 @@ class ForecastCacheService
   # Writes weather data to cache
   def write(lat, lon, weather)
     key = key_for(lat, lon)
-    
+
     # Add timestamp to forecast object's raw_data
     if weather.is_a?(Forecast) && weather.raw_data.is_a?(Hash)
       weather.raw_data["cached_at"] = Time.current.iso8601
     elsif weather.is_a?(Hash)
       weather = weather.merge("cached_at" => Time.current.iso8601)
     end
-    
+
     # Log in all environments, not just development
     Rails.logger.info("CACHE WRITE: Key #{key}, Type: #{weather.class.name}")
-    
+
     # Cache the data
     Rails.cache.write(key, weather, expires_in: EXPIRY)
   end
