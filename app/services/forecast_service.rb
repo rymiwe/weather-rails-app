@@ -17,7 +17,7 @@ class ForecastService
 
   # Returns a ForecastResult object
   def fetch(query, refresh: false)
-    return ForecastResult.new(error_message: "Please enter an query.") if query.blank?
+    return ForecastResult.new(error_message: "Please enter a query.") if query.blank?
 
     geo_data = GeocodingService.lookup(query, geocoder: geocoder)
     return ForecastResult.new(error_message: "Could not geocode query.") unless geo_data
@@ -50,7 +50,7 @@ class ForecastService
 
   def fetch_fresh_forecast(lat, lon, location_name, units)
     begin
-      client = initialize_weather_client
+      client = weather_client.is_a?(Class) ? weather_client.new : weather_client
       raw = client.fetch_forecast(lat, lon, units: units)
 
       if raw.nil?
@@ -78,10 +78,6 @@ class ForecastService
         units: units
       )
     end
-  end
-
-  def initialize_weather_client
-    weather_client.is_a?(Class) ? weather_client.new : weather_client
   end
 
   def build_forecast(raw_data, location_name, units)

@@ -2,7 +2,7 @@
 
 class GeocodingService
   class << self
-    # Class method that delegates to instance method
+    # Use Rails' built-in delegation instead of manually defining the class method
     def lookup(query, geocoder: Geocoder)
       new(geocoder).lookup(query)
     end
@@ -75,7 +75,6 @@ class GeocodingService
 
   def determine_units(query, geo_result)
     # FORCE 'us' units for any location in the US
-    # Note: We check the query itself as well as the result in case the API doesn't return correct country codes
     address = geo_result.data["address"] || {}
     country = address["country"]
 
@@ -87,10 +86,14 @@ class GeocodingService
   end
 
   def log_result(query, location_name, units, coordinates)
-    puts "\n*** GEOCODING RESULT ***"
-    puts "Query: #{query}"
-    puts "Location: #{location_name}"
-    puts "Units: #{units} (#{units == 'us' ? 'Fahrenheit' : 'Celsius'})"
-    puts "Lat/Lon: #{coordinates[:lat]}, #{coordinates[:lon]}"
+    Rails.logger.debug do
+      [
+        "*** GEOCODING RESULT ***",
+        "Query: #{query}",
+        "Location: #{location_name}",
+        "Units: #{units} (#{units == 'us' ? 'Fahrenheit' : 'Celsius'})",
+        "Lat/Lon: #{coordinates[:lat]}, #{coordinates[:lon]}"
+      ].join("\n")
+    end
   end
 end

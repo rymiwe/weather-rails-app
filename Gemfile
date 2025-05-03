@@ -1,49 +1,38 @@
 source "https://rubygems.org"
 
-# --- Core Framework & Database ---
-gem "rails", "~> 8.0.2"
+# --- Core Framework ---
+gem "rails", "~> 8.0.2"         # Rails framework
 gem "redis", "~> 5.0"          # Redis for caching
-
-# Using Redis directly for caching, no traditional database or ActiveRecord needed
-
-gem "propshaft"              # Modern asset pipeline
-
-gem "bootsnap", require: false # Caching for faster boot
-
 gem "puma", ">= 5.0"          # Web server
+gem "bootsnap", require: false # Speed up boot time
 
-# --- Frontend & Styling ---
-gem "tailwindcss-rails"        # Tailwind CSS
+# --- Frontend & UI ---
+gem "propshaft"               # Modern asset pipeline
+gem "tailwindcss-rails"       # Tailwind CSS framework
+gem "importmap-rails"         # JS imports without bundling
+gem "hotwire-rails"           # Modern, HTML-driven frontend
 
-gem "importmap-rails"         # ESM import maps
+# --- API & Services ---
+gem "geocoder", ">= 1.6"      # Geocoding service integration
+gem "faraday", "~> 2.0"       # HTTP client for API requests
 
-gem "hotwire-rails"             # Hotwire Turbo
-
-# --- Geocoding ---
-gem "geocoder", ">= 1.6"
-
-# --- HTTP/External ---
-gem "faraday", "~> 2.0"         # HTTP requests (API, CDN validation)
-
-# --- Development & Test ---
+# --- Development & Test Groups ---
 group :development, :test do
-  gem "rspec-rails"                # RSpec for testing
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-  gem "brakeman", require: false   # Security analysis
-  gem "rubocop-rails-omakase", require: false # Ruby style
-end  # (Only need one group :development, :test for these gems)
+  gem "rspec-rails"            # Testing framework
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude" # Debugging
+  gem "brakeman", require: false # Security analysis
+  gem "rubocop-rails-omakase", require: false # Code style & quality
+end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "simplecov", require: false
-  gem "vcr"
-  gem "webmock"
+  gem "simplecov", require: false # Test coverage reports
+  gem "vcr"                      # Record HTTP interactions for tests
+  gem "webmock"                  # Mock HTTP requests in tests
+  gem "capybara"                 # Browser testing framework
+  gem "selenium-webdriver"       # WebDriver for browser automation
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-
-  gem "tidewave"
+  gem "web-console"             # Console in browser for debugging
+  gem "tidewave"                # For MCP context
 end

@@ -10,7 +10,10 @@ class ForecastsController < ApplicationController
     geocoder = self.class.test_geocoder || Geocoder
     weather_client = self.class.test_weather_client || PirateWeatherClient
 
-    result = ForecastService.fetch(query, refresh: params[:refresh].present?, geocoder: geocoder, weather_client: weather_client)
+    result = ForecastService.fetch(query,
+                                   refresh: params[:refresh].present?,
+                                   geocoder: geocoder,
+                                   weather_client: weather_client)
 
     # Extract values from the result object
     @forecast = result.forecast
@@ -23,10 +26,5 @@ class ForecastsController < ApplicationController
       format.turbo_stream { render :create }
       format.html { render :index }
     end
-  end
-
-  private
-  def forecast_params
-    params.permit(:query, :refresh)
   end
 end
