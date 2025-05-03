@@ -23,9 +23,9 @@ module ForecastsHelper
   # Format cache status for display
   def cache_status(from_cache)
     if from_cache
-      content_tag(:span, "Cached", class: "text-xs font-semibold text-gray-500")
+      content_tag(:span, "CACHED", class: "text-xs font-semibold bg-blue-100 text-blue-800 rounded px-2 py-1")
     else
-      content_tag(:span, "Live", class: "text-xs font-semibold text-green-600")
+      content_tag(:span, "LIVE", class: "text-xs font-semibold bg-green-100 text-green-800 rounded px-2 py-1")
     end
   end
 

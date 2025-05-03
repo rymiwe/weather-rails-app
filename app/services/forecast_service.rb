@@ -40,9 +40,17 @@ class ForecastService
   private
 
   def create_result_from_cache(cached_forecast, location_name, units)
+    # Ensure the cached_at timestamp is present and valid
+    if cached_forecast.is_a?(Forecast) && cached_forecast.raw_data.is_a?(Hash) && !cached_forecast.raw_data.has_key?("cached_at")
+      cached_forecast.raw_data["cached_at"] = (Time.current - 1.minute).iso8601
+    end
+    
+    # Log that we're using cached data
+    Rails.logger.info("Using cached forecast for #{location_name}")
+    
     ForecastResult.new(
       forecast: cached_forecast,
-      from_cache: true,
+      from_cache: true, # Explicitly set this flag to true
       location_name: location_name,
       units: units
     )

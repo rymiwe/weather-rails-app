@@ -18,17 +18,30 @@ class ForecastCacheService
   def read(lat, lon)
     key = key_for(lat, lon)
     result = Rails.cache.read(key)
-    Rails.logger.debug("CACHE READ: Key #{key}, Hit: #{!!result}") if Rails.env.development?
+    if result
+      # Always log cache hits in all environments, not just development
+      Rails.logger.info("CACHE HIT: Key #{key}")
+    else
+      Rails.logger.debug("CACHE MISS: Key #{key}")
+    end
     result
   end
 
   # Writes weather data to cache
   def write(lat, lon, weather)
     key = key_for(lat, lon)
-    if weather.is_a?(Hash)
+    
+    # Add timestamp to forecast object's raw_data
+    if weather.is_a?(Forecast) && weather.raw_data.is_a?(Hash)
+      weather.raw_data["cached_at"] = Time.current.iso8601
+    elsif weather.is_a?(Hash)
       weather = weather.merge("cached_at" => Time.current.iso8601)
     end
-    Rails.logger.debug("CACHE WRITE: Key #{key}, Type: #{weather.class.name}") if Rails.env.development?
+    
+    # Log in all environments, not just development
+    Rails.logger.info("CACHE WRITE: Key #{key}, Type: #{weather.class.name}")
+    
+    # Cache the data
     Rails.cache.write(key, weather, expires_in: EXPIRY)
   end
 
