@@ -4,9 +4,6 @@ class ForecastCacheService
   # Cache expiry in minutes, configurable via WEATHER_CACHE_EXPIRY_MINUTES env variable (default: 30)
   EXPIRY = ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i * 60 # seconds
 
-  # Log Redis configuration on startup
-  Rails.logger.info("REDIS CONFIG: URL=#{ENV['REDIS_URL'] || 'not set'}, CACHE_STORE=#{Rails.application.config.cache_store.inspect}")
-
   # Use Rails' built-in delegation instead of manually defining class methods
   class << self
     delegate :key_for, :read, :write, :delete, to: :new
@@ -21,12 +18,7 @@ class ForecastCacheService
   def read(lat, lon)
     key = key_for(lat, lon)
     result = Rails.cache.read(key)
-    if result
-      # Always log cache hits in all environments, not just development
-      Rails.logger.info("CACHE HIT: Key #{key}")
-    else
-      Rails.logger.debug("CACHE MISS: Key #{key}")
-    end
+    Rails.logger.debug("CACHE READ: Key #{key}, Hit: #{!!result}") if Rails.env.development?
     result
   end
 
@@ -41,10 +33,8 @@ class ForecastCacheService
       weather = weather.merge("cached_at" => Time.current.iso8601)
     end
 
-    # Log in all environments, not just development
-    Rails.logger.info("CACHE WRITE: Key #{key}, Type: #{weather.class.name}")
-
-    # Cache the data
+    # Cache the data with debug logging in development
+    Rails.logger.debug("CACHE WRITE: Key #{key}, Type: #{weather.class.name}") if Rails.env.development?
     Rails.cache.write(key, weather, expires_in: EXPIRY)
   end
 

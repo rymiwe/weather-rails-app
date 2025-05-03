@@ -135,12 +135,12 @@ sequenceDiagram
     ForecastCacheService-->>ForecastService: nil
     ForecastService->>PirateWeatherClient: fetch_forecast(lat, lon, units)
     PirateWeatherClient-->>ForecastService: raw forecast data
-    ForecastService->>Note: Create Forecast object
+    Note over ForecastService: Create Forecast object
     ForecastService->>ForecastCacheService: write(lat, lon, forecast)
     ForecastCacheService-->>ForecastService: OK
     ForecastService-->>Controller: ForecastResult(forecast, from_cache: false)
   end
-  Controller->>Note: Extract data from ForecastResult
+  Note over Controller: Extract data from ForecastResult
   Controller-->>UI: Render forecast with cache indicator if applicable
   UI-->>User: Display forecast with cache badge if cached
 ```

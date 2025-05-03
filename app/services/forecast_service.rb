@@ -30,11 +30,7 @@ class ForecastService
     # Try to fetch from cache first if not refreshing
     cached = ForecastCacheService.read(lat, lon)
 
-    # Log explicit caching information to debug Heroku caching issues
-    Rails.logger.info("CACHE CHECK: lat=#{lat}, lon=#{lon}, refresh=#{refresh}, found=#{!cached.nil?}, type=#{cached.class.name if cached}")
-
     if cached.is_a?(Forecast) && !refresh
-      Rails.logger.info("USING CACHED FORECAST: Will return with from_cache=true")
       return create_result_from_cache(cached, location_name, units)
     end
 
