@@ -67,7 +67,7 @@ RSpec.describe "Forecasts", type: :request do
     it "shows error for malicious input" do
       # Invalid query should return nil from GeocodingService
       allow_any_instance_of(GeocodingService).to receive(:lookup).with("New York, NY; DROP TABLE users; --").and_return(nil)
-      
+
       post "/forecasts", params: { query: "New York, NY; DROP TABLE users; --" }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response.body).not_to include("exception")
@@ -78,7 +78,7 @@ RSpec.describe "Forecasts", type: :request do
     it "shows error for extremely long input" do
       long_query = "A" * 300
       allow_any_instance_of(GeocodingService).to receive(:lookup).with(long_query).and_return(nil)
-      
+
       post "/forecasts", params: { query: long_query }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response.body).to include('Could not geocode query').or include('not found').or include('error')
@@ -87,7 +87,7 @@ RSpec.describe "Forecasts", type: :request do
     it "shows error for script injection attempts" do
       script_query = "<script>alert('x')</script>"
       allow_any_instance_of(GeocodingService).to receive(:lookup).with(script_query).and_return(nil)
-      
+
       post forecasts_path, params: { query: script_query }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response.body).to include('Could not geocode query').or include('not found').or include('error')
