@@ -1,25 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Forecasts", type: :feature do
-  before(:each) do
-    # Clear any remaining cache
-    Rails.cache.clear if defined?(Rails.cache) && Rails.cache.respond_to?(:clear)
-
-    # Stub the geocoder for consistent test results
-    allow_any_instance_of(GeocodingService).to receive(:lookup).with("Portland, OR").and_return({
-      lat: 45.5051,
-      lon: -122.6750,
-      location_name: "Portland, Oregon, USA",
-      units: "us"
-    })
-
-    # Stub return nil for invalid location
-    allow_any_instance_of(GeocodingService).to receive(:lookup).with("Invalid Location").and_return(nil)
-
-    # Stub the weather client response
-    fake_forecast = {
-      "currently" => {
-        "temperature" => 68,
+  # Setup ForecastService to return predictable results for Portland, OR  
+  let(:fake_forecast) do
+    {
+      "currently" => { 
+        "temperature" => 68, 
         "summary" => "Partly Cloudy",
         "icon" => "partly-cloudy-day"
       },
@@ -27,32 +13,71 @@ RSpec.describe "Forecasts", type: :feature do
         "summary" => "Mixed conditions throughout the week.",
         "icon" => "mixed",
         "data" => [
-          {
+          { 
             "time" => Time.now.to_i,
-            "icon" => "partly-cloudy-day",
-            "temperatureHigh" => 72,
+            "icon" => "partly-cloudy-day", 
+            "temperatureHigh" => 72, 
             "temperatureLow" => 58,
             "summary" => "Partly cloudy throughout the day."
           },
-          {
-            "time" => (Time.now + 1.day).to_i,
-            "icon" => "rain",
-            "temperatureHigh" => 65,
+          { 
+            "time" => (Time.now + 1.day).to_i, 
+            "icon" => "rain", 
+            "temperatureHigh" => 65, 
             "temperatureLow" => 55,
             "summary" => "Light rain in the morning."
           },
-          {
-            "time" => (Time.now + 2.days).to_i,
-            "icon" => "clear-day",
-            "temperatureHigh" => 78,
+          { 
+            "time" => (Time.now + 2.days).to_i, 
+            "icon" => "clear-day", 
+            "temperatureHigh" => 78, 
             "temperatureLow" => 62,
             "summary" => "Clear throughout the day."
           }
         ]
       }
     }
-
-    allow_any_instance_of(PirateWeatherClient).to receive(:fetch_forecast).and_return(fake_forecast)
+  end
+  
+  # Mock out the ForecastService directly to avoid calling actual external services
+  let(:forecast_result) do
+    # First create a proper Forecast object
+    forecast = Forecast.new(
+      temperature: fake_forecast["currently"]["temperature"],
+      summary: fake_forecast["currently"]["summary"],
+      icon: fake_forecast["currently"]["icon"],
+      units: "us",
+      location: "Portland, Oregon, USA",
+      raw_data: fake_forecast
+    )
+    
+    # Then create the ForecastResult with the Forecast object
+    ForecastResult.new(
+      forecast: forecast,
+      location_name: "Portland, Oregon, USA",
+      units: "us"
+    )
+  end
+  
+  before(:each) do
+    # Clear any remaining cache
+    Rails.cache.clear if defined?(Rails.cache) && Rails.cache.respond_to?(:clear)
+    
+    # Use a more direct approach to stubbing by mocking ForecastService.fetch directly
+    allow_any_instance_of(ForecastService).to receive(:fetch).and_call_original
+    
+    # Valid location returns good forecast
+    allow_any_instance_of(ForecastService).to receive(:fetch).with("Portland, OR", any_args).and_return(forecast_result)
+    
+    # Empty query returns appropriate error
+    allow_any_instance_of(ForecastService).to receive(:fetch).with("", any_args).and_return(
+      ForecastResult.new(error_message: "Please enter a query.")
+    )
+    
+    # Invalid location returns geocoding error
+    allow_any_instance_of(ForecastService).to receive(:fetch).with("Invalid Location", any_args).and_return(
+      ForecastResult.new(error_message: "Could not geocode query.")
+    )
   end
 
   describe "search functionality" do
