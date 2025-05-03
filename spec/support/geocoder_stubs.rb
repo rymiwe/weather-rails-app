@@ -8,10 +8,11 @@ Geocoder::Lookup::Test.add_stub(
     {
       'latitude'     => 40.7128,
       'longitude'    => -74.0060,
-      'address'      => "New York, NY, USA",
-      'city'         => "New York",
-      'state'        => "NY",
-      'country'      => "US",
+      'address'      => {
+        'city'    => "New York",
+        'state'   => "NY",
+        'country' => "United States"
+      },
       'country_code' => "US"
     }
   ]
@@ -23,10 +24,11 @@ Geocoder::Lookup::Test.add_stub(
     {
       'latitude'     => 51.5074,
       'longitude'    => -0.1278,
-      'address'      => "London, England, United Kingdom",
-      'city'         => "London",
-      'state'        => "England",
-      'country'      => "United Kingdom",
+      'address'      => {
+        'city'    => "London",
+        'state'   => "England",
+        'country' => "United Kingdom"
+      },
       'country_code' => "GB"
     }
   ]
@@ -38,19 +40,21 @@ Geocoder::Lookup::Test.add_stub(
     {
       'latitude'     => 37.7749,
       'longitude'    => -122.4194,
-      'address'      => "San Francisco, CA, USA",
-      'city'         => "San Francisco",
-      'state'        => "CA",
-      'country'      => "US",
+      'address'      => {
+        'city'    => "San Francisco",
+        'state'   => "CA",
+        'country' => "US"
+      },
       'country_code' => "US"
     },
     {
       'latitude'     => 51.5074,
       'longitude'    => -0.1278,
-      'address'      => "London, England, United Kingdom",
-      'city'         => "London",
-      'state'        => "England",
-      'country'      => "United Kingdom",
+      'address'      => {
+        'city'    => "London",
+        'state'   => "England",
+        'country' => "United Kingdom"
+      },
       'country_code' => "GB"
     }
   ]
@@ -62,10 +66,11 @@ Geocoder::Lookup::Test.add_stub(
     {
       'latitude'     => 10.0,
       'longitude'    => 10.0,
-      'address'      => "Nowhere",
-      'city'         => nil,
-      'state'        => nil,
-      'country'      => nil,
+      'address'      => {
+        'city'    => nil,
+        'state'   => nil,
+        'country' => nil
+      },
       'country_code' => 'US'
     }
   ]
@@ -77,10 +82,11 @@ Geocoder::Lookup::Test.add_stub(
     {
       'latitude'     => 45.5152,
       'longitude'    => -122.6784,
-      'address'      => "Portland, OR, USA",
-      'city'         => "Portland",
-      'state'        => "OR",
-      'country'      => "US",
+      'address'      => {
+        'city'    => "Portland",
+        'state'   => "OR",
+        'country' => "United States"
+      },
       'country_code' => "US"
     }
   ]
@@ -88,6 +94,39 @@ Geocoder::Lookup::Test.add_stub(
 
 # Unknown Place (returns empty array)
 Geocoder::Lookup::Test.add_stub("Unknown Place", [])
+Geocoder::Lookup::Test.add_stub("Invalid Query", [])
+
+# ZIP code example
+Geocoder::Lookup::Test.add_stub(
+  "10001", [
+    {
+      'latitude'     => 40.7508,
+      'longitude'    => -73.9973,
+      'address'      => {
+        'city'    => "New York",
+        'state'   => "NY",
+        'country' => "United States"
+      },
+      'country_code' => "US"
+    }
+  ]
+)
+
+# Incomplete Address example
+Geocoder::Lookup::Test.add_stub(
+  "Incomplete Address", [
+    {
+      'latitude'     => 40.7128,
+      'longitude'    => -74.006,
+      'address'      => {
+        'city'    => nil,
+        'state'   => nil,
+        'country' => nil
+      },
+      'country_code' => 'US'
+    }
+  ]
+)
 
 # Malformed or malicious input (returns empty array)
 Geocoder::Lookup::Test.add_stub("<script>alert('x')</script>", [])

@@ -23,77 +23,7 @@ RSpec.describe ForecastService, type: :service do
 
   before do
     Rails.cache.clear
-    # Geocoder test stubs for all queries used in tests
-    Geocoder::Lookup::Test.add_stub(
-      "New York, NY", [
-        {
-          'latitude'     => 40.7128,
-          'longitude'    => -74.006,
-          'address'      => {
-            'city'    => 'New York',
-            'state'   => 'NY',
-            'country' => 'US'
-          },
-          'country_code' => 'US'
-        }
-      ]
-    )
-    Geocoder::Lookup::Test.add_stub(
-      "London", [
-        {
-          'latitude'     => 51.5074,
-          'longitude'    => -0.1278,
-          'address'      => {
-            'city'    => 'London',
-            'state'   => 'England',
-            'country' => 'United Kingdom'
-          },
-          'country_code' => 'GB'
-        }
-      ]
-    )
-    Geocoder::Lookup::Test.add_stub(
-      "Ambiguous", [
-        {
-          'latitude'     => 37.7749,
-          'longitude'    => -122.4194,
-          'address'      => {
-            'city'    => 'San Francisco',
-            'state'   => 'CA',
-            'country' => 'US'
-          },
-          'country_code' => 'US'
-        },
-        {
-          'latitude'     => 51.5074,
-          'longitude'    => -0.1278,
-          'address'      => {
-            'city'    => 'London',
-            'state'   => 'England',
-            'country' => 'United Kingdom'
-          },
-          'country_code' => 'GB'
-        }
-      ]
-    )
-    Geocoder::Lookup::Test.add_stub(
-      "Nowhere", [
-        {
-          'latitude'     => 10.0,
-          'longitude'    => 10.0,
-          'address'      => {
-            'city'    => nil,
-            'state'   => nil,
-            'country' => nil
-          },
-          'country_code' => 'US'
-        }
-      ]
-    )
-    Geocoder::Lookup::Test.add_stub("Unknown Place", [])
-    Geocoder::Lookup::Test.add_stub("New York, NY; DROP TABLE users; --", [])
-    Geocoder::Lookup::Test.add_stub("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", [])
-    Geocoder::Lookup::Test.add_stub("<script>alert('x')</script>", [])
+    # No need to define geocoder stubs here, they're already defined in spec/support/geocoder_stubs.rb
 
     # Default Pirate Weather API stub as a fallback
     WebMock.stub_request(:get, /api\.pirateweather\.net/).
