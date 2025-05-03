@@ -277,5 +277,47 @@ expect(result.forecast.temperature).to eq(75)
       expect(result.forecast.raw_data).to eq({})
       expect(result.error_message).to be_nil
     end
+    
+    it 'handles nil response from weather client' do
+      # Create a mock client that returns nil
+      mock_client = double("PirateWeatherClient")
+      allow(mock_client).to receive(:fetch_forecast).and_return(nil)
+
+      # Use the mock client explicitly
+      result = described_class.fetch(query, weather_client: mock_client)
+
+      # Nil response should result in error message
+      expect(result.forecast).to be_nil
+      expect(result.error_message).to eq("Could not retrieve forecast data.")
+      expect(result.location_name).to include("New York")
+    end
+    
+    it 'handles different weather client types correctly' do
+      # Test with an instance (direct use)
+      mock_instance = instance_double("PirateWeatherClient")
+      allow(mock_instance).to receive(:is_a?).with(Class).and_return(false)
+      allow(mock_instance).to receive(:fetch_forecast).and_return(fake_forecast)
+      
+      result = described_class.fetch(query, weather_client: mock_instance)
+      expect(result.forecast).to be_a(Forecast)
+      expect(result.error_message).to be_nil
+
+      # For testing a class, we can use a custom test class
+      test_client_class = Class.new do
+        def fetch_forecast(*args)
+          {
+            "currently" => { "temperature" => 75 },
+            "daily" => {
+              "summary" => "Sunny", 
+              "icon" => "clear-day"
+            }
+          }
+        end
+      end
+      
+      result = described_class.fetch(query, weather_client: test_client_class)
+      expect(result.forecast).to be_a(Forecast)
+      expect(result.error_message).to be_nil
+    end
   end
 end
