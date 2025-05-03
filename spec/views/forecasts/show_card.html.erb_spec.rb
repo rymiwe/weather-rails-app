@@ -139,7 +139,7 @@ RSpec.describe "forecasts/_show_card.html.erb", type: :view do
     )
 
     render partial: "forecasts/show_card", locals: { forecast: forecast, location_name: "Portland, OR", from_cache: true }
-    expect(rendered).to include("Cached")
+    expect(rendered).to include("CACHED")
     expect(rendered).to include("expires in")
   end
 

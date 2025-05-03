@@ -119,10 +119,12 @@ expect(result.forecast.temperature).to eq(75)
       # Use the mock client explicitly
       result = described_class.fetch(query, weather_client: mock_client)
 
-      # An empty JSON object should be parsed as an empty hash
+      # An empty JSON object should be parsed as an empty hash (except for cached_at timestamp)
       expect(result.forecast).to be_a(Forecast)
       expect(result.forecast.temperature).to be_nil
-      expect(result.forecast.raw_data).to eq({})
+      # We now expect a cached_at timestamp to be present
+      expect(result.forecast.raw_data.keys).to include("cached_at")
+      expect(result.forecast.raw_data.except("cached_at")).to eq({})
       expect(result.error_message).to be_nil
     end
 
@@ -204,7 +206,10 @@ expect(result.forecast.temperature).to eq(75)
       # An empty hash should be handled properly
       expect(result.forecast).to be_a(Forecast)
       expect(result.forecast.temperature).to be_nil
-      expect(result.forecast.raw_data).to eq({})
+      
+      # We now expect a cached_at timestamp to be present
+      expect(result.forecast.raw_data.keys).to include("cached_at")
+      expect(result.forecast.raw_data.keys.length).to eq(1) # Only the cached_at key
       expect(result.error_message).to be_nil
     end
 

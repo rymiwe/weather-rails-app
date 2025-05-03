@@ -96,14 +96,16 @@ RSpec.describe ForecastsHelper, type: :helper do
   describe "#cache_status" do
     it "returns cached indicator when forecast is from cache" do
       result = helper.cache_status(true)
-      expect(result).to include("Cached")
-      expect(result).to include("text-gray-500")
+      expect(result).to include("CACHED")
+      expect(result).to include("bg-blue-100")
+      expect(result).to include("text-blue-800")
     end
 
     it "returns live indicator when forecast is not from cache" do
       result = helper.cache_status(false)
-      expect(result).to include("Live")
-      expect(result).to include("text-green-600")
+      expect(result).to include("LIVE")
+      expect(result).to include("bg-green-100")
+      expect(result).to include("text-green-800")
     end
   end
 
