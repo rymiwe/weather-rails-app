@@ -30,26 +30,8 @@ class Forecast
     units == "si"
   end
 
-  # Support for Marshal serialization
-  def marshal_dump
-    {
-      temperature: @temperature,
-      summary: @summary,
-      icon: @icon,
-      units: @units,
-      location: @location,
-      raw_data: @raw_data
-    }
-  end
-
-  def marshal_load(data)
-    @temperature = data[:temperature]
-    @summary = data[:summary]
-    @icon = data[:icon]
-    @units = data[:units]
-    @location = data[:location]
-    @raw_data = data[:raw_data]
-  end
+  # Ruby can automatically serialize this simple value object
+  # No custom marshal_dump/marshal_load needed
 
   # Add more helper methods as needed
 end

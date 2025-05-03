@@ -80,8 +80,8 @@ This application uses Redis for all data persistence, with a two-layer caching s
 
 Both caches are independent, so a hit in one does not guarantee a hit in the other. This layered approach maximizes efficiency and reliability.
 
-### Forecast Serialization
-The `Forecast` class implements `marshal_dump` and `marshal_load` methods to ensure proper serialization when storing in Redis. This approach maintains object integrity while allowing efficient storage and retrieval.
+### Simple Value Objects
+The `Forecast` class is designed as a simple value object that can be automatically serialized by Ruby's Marshal module when storing in Redis. This keeps the code clean and DRY while ensuring proper cache storage and retrieval.
 
 ### Result Wrapper Pattern
 We use a `ForecastResult` wrapper object that encapsulates:
@@ -153,7 +153,7 @@ sequenceDiagram
 - **Redis-Based Caching**: Both geocoding results and weather forecasts are cached independently using Redis. This two-layer approach ensures minimal redundant API calls and optimal performance.
 - **Result Wrapper Pattern**: Uses a `ForecastResult` object to wrap the actual `Forecast` data along with metadata about the operation (from cache, errors, etc.), providing a clean and consistent API between services and controllers.
 - **Service Objects with Instance Methods**: `ForecastService`, `GeocodingService`, and `ForecastCacheService` use instance methods with class delegators, improving testability and maintainability.
-- **Serialization Support**: The `Forecast` class implements custom Marshal methods to ensure proper serialization when storing in Redis.
+- **Simple Value Objects**: Using plain Ruby objects with minimal code for automatic serialization in Redis, keeping the codebase DRY and maintainable.
 - **Visual Cache Indicators**: The UI clearly shows when results come from cache with a badge and expiry countdown, improving transparency.
 - **API Client Encapsulation**: All communication with the Pirate Weather API is handled by a dedicated `PirateWeatherClient` class, ensuring single responsibility.
 - **Dependency Injection**: External services are injected into service objects, allowing for robust, isolated tests without global stubs or HTTP requests.

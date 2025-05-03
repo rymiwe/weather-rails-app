@@ -1,22 +1,15 @@
 # IMPORTANT: This application does not use a database.
 # It uses Redis exclusively for caching weather data.
-# This is a null configuration to prevent database creation in CI environments.
 
-# Define an adapter that won't attempt to connect to any database
-default: &default
-  adapter: nulldb
-  encoding: unicode
-  pool: 5
-  timeout: 5000
+# Since ActiveRecord is not loaded (commented out in application.rb),
+# we only need an empty configuration file to satisfy Rails conventions.
+# No database will be created or used in any environment.
 
 development:
-  <<: *default
-  database: non_existent_db
+  adapter: none
 
-# Used for running tests - no actual database is created
 test:
-  <<: *default
-  database: non_existent_db
+  adapter: none
 
 # Production also doesn't use a database
 production:

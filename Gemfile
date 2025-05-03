@@ -4,8 +4,7 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2"
 gem "redis", "~> 5.0"          # Redis for caching
 
-# Using Redis directly for caching, no traditional database needed
-gem "activerecord-nulldb-adapter" # Prevent database creation in CI environments
+# Using Redis directly for caching, no traditional database or ActiveRecord needed
 
 gem "propshaft"              # Modern asset pipeline
 
