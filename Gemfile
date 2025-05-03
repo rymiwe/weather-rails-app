@@ -14,7 +14,7 @@ gem "hotwire-rails"           # Modern, HTML-driven frontend
 
 # --- API & Services ---
 gem "geocoder", ">= 1.6"      # Geocoding service integration
-gem "faraday", "~> 2.0"       # HTTP client for API requests
+gem "faraday", "~> 2.13"      # HTTP client for API requests
 
 # --- Development & Test Groups ---
 group :development, :test do
