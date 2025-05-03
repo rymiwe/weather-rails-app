@@ -11,17 +11,15 @@
   <% cache_info = {minutes_left: minutes_left} %>
 <% end %>
 
-<% # Check both instance variable and local variable for location_name %>
+<% # Get location using local or instance variable %>
 <% display_location = (defined?(location_name) && location_name.present?) ? location_name : (defined?(@location_name) && @location_name.present? ? @location_name : nil) %>
 <% if display_location %>
   <div class="flex items-center justify-between mb-2">
     <div class="font-semibold text-blue-900 flex items-center gap-1">
-      <%= display_location %>
+      <%= format_location(display_location) %>
     </div>
-    <% if cache_info %>
-      <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full font-medium">
-        <i class="fas fa-database mr-1"></i>Cached
-      </span>
+    <% if is_cached %>
+      <%= cache_status(is_cached) %>
     <% end %>
   </div>
 <% end %>
@@ -60,7 +58,11 @@
             <span class="font-bold"><%= format_temperature(day["temperatureLow"], @units) %></span>
           <% end %>
         </div>
-        <div class="text-xs text-blue-600"><%= day["summary"]&.chomp('.') %></div>
+        <% if day["summary"] %>
+          <div class="<%= weather_condition_classes(day["summary"]) %> text-xs">
+            <%= day["summary"]&.chomp('.') %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
