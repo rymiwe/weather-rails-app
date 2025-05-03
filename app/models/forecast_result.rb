@@ -16,6 +16,9 @@ class ForecastResult
     @error_message = error_message
     @location_name = location_name
     @units = units
+
+    # Log creation of ForecastResult to help debug caching issues
+    Rails.logger.info("CREATING FORECAST_RESULT: from_cache=#{from_cache}, location=#{location_name}, has_error=#{error?}")
   end
 
   # Helper to check if there is a valid forecast

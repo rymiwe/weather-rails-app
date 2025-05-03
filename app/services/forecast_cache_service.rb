@@ -4,6 +4,9 @@ class ForecastCacheService
   # Cache expiry in minutes, configurable via WEATHER_CACHE_EXPIRY_MINUTES env variable (default: 30)
   EXPIRY = ENV.fetch("WEATHER_CACHE_EXPIRY_MINUTES", 30).to_i * 60 # seconds
 
+  # Log Redis configuration on startup
+  Rails.logger.info("REDIS CONFIG: URL=#{ENV['REDIS_URL'] || 'not set'}, CACHE_STORE=#{Rails.application.config.cache_store.inspect}")
+
   # Use Rails' built-in delegation instead of manually defining class methods
   class << self
     delegate :key_for, :read, :write, :delete, to: :new
