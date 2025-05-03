@@ -44,7 +44,13 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use Redis for caching instead of in-process memory
-  config.cache_store = :redis_cache_store, { url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } }
+  config.cache_store = :redis_cache_store, {
+    url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" },
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }, # Skip SSL verification for Heroku Redis
+    error_handler: ->(method:, returning:, exception:) {
+      Rails.logger.error "Redis error: #{exception.message}"
+    }
+  }
 
   # Active Job not needed for this Redis-based caching application
   # config.active_job.queue_adapter = :async
