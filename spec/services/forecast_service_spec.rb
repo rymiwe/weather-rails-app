@@ -206,7 +206,7 @@ expect(result.forecast.temperature).to eq(75)
       # An empty hash should be handled properly
       expect(result.forecast).to be_a(Forecast)
       expect(result.forecast.temperature).to be_nil
-      
+
       # We now expect a cached_at timestamp to be present
       expect(result.forecast.raw_data.keys).to include("cached_at")
       expect(result.forecast.raw_data.keys.length).to eq(1) # Only the cached_at key
