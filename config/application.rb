@@ -28,8 +28,7 @@ module WeatherRailsApp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[tasks])
 
-    # Autoload app/constants for custom constants like WeatherIconMap
-    config.autoload_paths << Rails.root.join("app/constants")
+    # Constants in app/constants (like WeatherIconMap) are autoloaded by default in Rails 8
 
     # Configuration for the application, engines, and railties goes here.
     #
