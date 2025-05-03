@@ -71,4 +71,31 @@ RSpec.configure do |config|
       example.run
     end
   end
+  
+  # System tests configuration
+  config.before(:each, type: :system) do
+    # Clear Redis cache before each test
+    Rails.cache.clear if defined?(Rails.cache) && Rails.cache.respond_to?(:clear)
+  end
+
+  config.after(:each, type: :system) do
+    Capybara.reset_sessions!
+  end
 end
+
+# Configure Capybara for system tests
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+# Use Puma as the server for Capybara tests with a single thread
+Capybara.server = :puma, { Silent: true, Threads: '1:1' }
+
+# Let Capybara find an available port automatically
+Capybara.server_port = nil
+Capybara.always_include_port = true
