@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 # --- Core Framework ---
 gem "rails", "~> 8.0.2"         # Rails framework
-gem "redis", "~> 5.0"          # Redis for caching
+gem "redis", "~> 5.4"          # Redis for caching
 gem "puma", ">= 5.0"          # Web server
 gem "bootsnap", require: false # Speed up boot time
 
