@@ -118,7 +118,7 @@ jobs:
 
       - name: Upload Rails test log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: rails-test-log
           path: log/test.log
@@ -126,7 +126,7 @@ jobs:
 
       - name: Upload forecast debug log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: forecast-debug-log
           path: tmp/forecast_debug.log
@@ -134,7 +134,7 @@ jobs:
 
       - name: Upload RSpec debug log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: rspec-debug-log
           path: tmp/rspec_debug.log
@@ -147,7 +147,7 @@ jobs:
           fail_ci_if_error: true
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: screenshots
